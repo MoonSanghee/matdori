@@ -1,11 +1,16 @@
 from django.shortcuts import redirect, render
-from matdori.posts.forms import PostForm
+from .forms import PostForm, ReviewForm
+from .models import Post, Review
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
 
 # Create your views here.
 
 def index(request):
-    return render(request, '')
+    return render(request, 'posts/index.html')
 
+@login_required
 def create(request):
     if request.method == 'POST':
         post_form = PostForm(request.POST, request.FILES)
@@ -13,4 +18,39 @@ def create(request):
             post = post_form.save(commit=False)
             post.user = request.user
             post.save()
-            return redirect('')
+            return redirect('posts:index')
+    else:
+        post_form = PostForm()
+    context = {
+        'post_form': post_form
+    }
+    return render(request, 'posts/form.html', context)
+
+@login_required
+def update(request, pk):
+    post = Post.objects.get(pk=pk)
+    if request.user == post.user:
+        if request.method == 'POST':
+            post_form = PostForm(request.POST, request.FILES, instance=post)
+            if post_form.is_valid():
+                post_form.save()
+                return redirect('posts:detail', post.pk)
+        else:
+            post_form = PostForm(instance=post)
+        context = {
+            'post_form':post_form
+        }
+        return render(request, 'posts/form.html', context)
+    else:
+        messages.warning(request, '작성자만 수정할 수 있습니다.')
+        return redirect('reviews:detail', post.pk)
+
+def detail(request, pk):
+    post = Post.objects.get(pk=pk)
+    reviewsform = ReviewForm()
+    context = {
+        'post':post,
+        'reviews':post.review_set.all(),
+        'reviewsform':reviewsform
+    }
+    return render(request, 'posts/detail.html', context)
