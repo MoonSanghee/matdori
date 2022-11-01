@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 
-{% block body %}
+{% block content %}
   <h1>프로필 업데이트</h1>
-  {{form.as_p}}
-
-{% endblock body %}
+  <form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+  </form>
+{% endblock content %}
