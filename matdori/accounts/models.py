@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from imagekit.models import ProcessedImageField
+from imagekit.processors import ResizeToFill
 
 # Create your models here.
 
@@ -10,7 +12,7 @@ class User(AbstractUser):
     )
     nickname = models.CharField(max_length=80)
     image = ProcessedImageField(
-        upload_to="images/",
+        upload_to="accounts/images/",
         blank=True,
         processors=[ResizeToFill(100, 100)],
         format="JPEG",
