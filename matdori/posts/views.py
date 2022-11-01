@@ -1,8 +1,10 @@
-from django.shortcuts import redirect, render
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, redirect, render
 from .forms import PostForm, ReviewForm
 from .models import Post, Review
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 
 
 # Create your views here.
@@ -54,3 +56,14 @@ def detail(request, pk):
         'reviewsform':reviewsform
     }
     return render(request, 'posts/detail.html', context)
+
+def likes(request, posts_pk):
+    post = get_object_or_404(Post, pk=posts_pk)
+    if request.user in post.like_user.all():
+        post.like_user.remove(request.user)
+        is_liked = False
+    else:
+        post.like_user.add(request.user)
+        is_liked = True
+    context = {'isLiked': is_liked, 'likeCount': post.like_user.count()}
+    return JsonResponse(context)
