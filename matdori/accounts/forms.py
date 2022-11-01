@@ -29,9 +29,11 @@ class CustomUserChangeForm(UserChangeForm):
         fields = (
             "nickname",
             "email",
+            "image",
         )
         label = {
             "nickname": "닉네임",
             "email": "이메일",
             "password2": "비밀번호 확인",
+            "image": "프로필 이미지",
         }
