@@ -16,7 +16,7 @@ def index(request):
     context = {
         'posts':posts
     }
-    return render(request, 'posts/index.html')
+    return render(request, 'posts/index.html', context)
 
 @login_required
 def create(request):
@@ -73,6 +73,7 @@ def detail(request, pk):
     }
     return render(request, 'posts/detail.html', context)
 
+@login_required
 def likes(request, posts_pk):
     post = get_object_or_404(Post, pk=posts_pk)
     if request.user in post.like_user.all():
@@ -100,6 +101,7 @@ def review_create(request, pk):
     }
     return JsonResponse(context)
 
+@login_required
 def review_delete(request, post_pk, review_pk):
     review = Review.objects.get(pk=review_pk)
     if review.user == request.user:
