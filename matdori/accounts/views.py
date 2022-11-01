@@ -36,6 +36,7 @@ def signup(request):
     return render(request, "accounts/signup.html", context)
 
 
+@login_required
 def update(request):
     # 유효성 검사
     if request.method == "POST":
