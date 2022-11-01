@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block body %}
+  <h1>마이페이지</h1>
+  {% if user.image %}
+    <img src="{{user.image.url}}">
+    <br>
+  {% else %}
+    <img src="https://dummyimage.com/100x100/000/fff">
+    <br>
+  {% endif %}
+  <h2>{{user.username}}
+    님의 프로필</h2>
+
+  <p>닉네임 :
+    {{user.nickname}}</p>
+  <p>이메일 :
+    {{user.nickname}}</p>
+  <a href="{%url 'accounts:update' %}">프로필 수정</a>
+  {% csrf_token %}
+
+{% endblock body %}

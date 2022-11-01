@@ -12,9 +12,9 @@ from .forms import CustomUserCreationForm, CustomUserChangeForm
 def login(request):
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
-        if form.is_vaild():
+        if form.is_valid():
             auth_login(request, form.get_user())
-            return redirect("articles:index")
+            return redirect("posts:index")
     else:
         form = AuthenticationForm()
     context = {
@@ -29,7 +29,7 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             auth_login(request, user)  # 자동 로그인
-            return redirect("articles:index")
+            return redirect("posts:index")
     else:
         form = CustomUserCreationForm()
     context = {"form": form}
@@ -49,3 +49,11 @@ def update(request):
         "form": form,
     }
     return render(request, "accounts/update.html", context)
+
+
+def detail(request, pk):
+    user = get_object_or_404(get_user_model(), pk=pk)
+    context = {
+        "user": user,
+    }
+    return render(request, "accounts/detail.html", context)
