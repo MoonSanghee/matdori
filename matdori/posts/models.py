@@ -3,15 +3,15 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.conf import settings
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
+from traitlets import default
 # Create your models here.
 
 class Post(models.Model):
     title = models.CharField(max_length=20)
     address = models.CharField(max_length=50)
     sectors = models.CharField(max_length=20)
-    phonenumber = models.CharField(max_length=30)
-    glade = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)])
-    characteristic = models.CharField(max_length=50)
+    phonenumber = models.CharField(max_length=30, blank=True)
+    characteristic = models.CharField(max_length=50, blank=True)
     image = ProcessedImageField(upload_to='images/', blank=True,
                                 format='JPEG',
     )
@@ -24,6 +24,7 @@ class Post(models.Model):
 class Review(models.Model):
     content = models.TextField()
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    glade = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)], default=None)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     image = ProcessedImageField(upload_to='images/', blank=True,
                                 format='JPEG',
