@@ -19,7 +19,7 @@ class Post(models.Model):
                                 processors=[ResizeToFill(400, 240)],
                                 format='JPEG',
                                 options={'quality': 100})
-    like_user = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_articles')
+    like_user = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='likes')
 
 class Review(models.Model):
     content = models.TextField()
