@@ -12,7 +12,7 @@ class User(AbstractUser):
     )
     nickname = models.CharField(max_length=80)
     image = ProcessedImageField(
-        upload_to="accounts/images/",
+        upload_to="images/",
         blank=True,
         processors=[ResizeToFill(100, 100)],
         format="JPEG",
