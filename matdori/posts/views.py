@@ -67,3 +67,19 @@ def likes(request, posts_pk):
         is_liked = True
     context = {'isLiked': is_liked, 'likeCount': post.like_user.count()}
     return JsonResponse(context)
+
+@login_required
+def review_create(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    reviewform = ReviewForm(request.POST, request.FILES)
+    if reviewform.isvalid():
+        review = reviewform.save(commit=False)
+        review.post = post
+        review.user = request.user
+        review.save()
+    context = {
+        'content': review.content,
+        'username': review.user.username,
+        'review_image':review.image
+    }
+    return JsonResponse(context)
