@@ -36,6 +36,7 @@ def signup(request):
     return render(request, "accounts/signup.html", context)
 
 
+@login_required
 def update(request):
     # 유효성 검사
     if request.method == "POST":
@@ -63,3 +64,18 @@ def logout(request):
     auth_logout(request)
     messages.warning(request, "로그아웃 하였습니다.")
     return redirect("posts:index")
+
+
+def follow(request, pk):
+    user = get_object_or_404(get_user_model(), pk=pk)
+    # 스스로를 팔로우하려는 경우
+    if request.user == user:
+        messages.warning(request, "스스로 팔로우 할 수 없습니다.")
+        return redirect("accounts:detail", pk)
+    # 팔로우하고 있는 상태인 경우
+    if request.user in user.folloewers.all():
+        user.followers.remove(request.user)
+    # 팔로우하고 있지 않았을때
+    else:
+        user.followers.add(request.user)
+    return redirect("accounts:detail", pk)

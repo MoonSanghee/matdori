@@ -9,13 +9,15 @@ class CustomUserCreationForm(UserCreationForm):
         fields = (
             "username",
             "nickname",
+            "email",
             "password1",
             "password2",
             "image",
         )
         labels = {
-            "username": "id",
+            "username": "아이디",
             "nickname": "닉네임",
+            "email": "이메일",
             "password1": "비밀번호",
             "password2": "비밀번호 확인",
             "image": "프로필 이미지",
@@ -23,6 +25,8 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 class CustomUserChangeForm(UserChangeForm):
+    password = None
+
     class Meta:
         model = get_user_model()
         fields = (
