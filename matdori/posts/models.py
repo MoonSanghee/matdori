@@ -11,7 +11,7 @@ class Post(models.Model):
     sectors = models.CharField(max_length=20)
     phonenumber = models.CharField(max_length=30)
     glade = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)])
-    Characteristic = models.CharField(max_length=50)
+    characteristic = models.CharField(max_length=50)
     image = ProcessedImageField(upload_to='images/', blank=True,
                                 format='JPEG',
     )
