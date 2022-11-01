@@ -57,3 +57,9 @@ def detail(request, pk):
         "user": user,
     }
     return render(request, "accounts/detail.html", context)
+
+
+def logout(request):
+    auth_logout(request)
+    messages.warning(request, "로그아웃 하였습니다.")
+    return redirect("posts:index")
