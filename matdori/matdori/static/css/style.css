@@ -12,6 +12,10 @@
 }
 
 .wrapper {
-  height: 1000px;
+  height: 1200px;
 }
 
+.footer_image {
+  width: 110px;
+  height: 60px;
+}
