@@ -5,14 +5,12 @@
   <h1>마이페이지</h1>
 
   {% if user.image %}
-    <a><img src="{{user.image.url}}">
-    </a>
     <div class="box">
-      <img class="profile" src="https://i.esdrop.com/d/t/bvRLlOwptP/Ug84j6LNz9.jpg">
-  </div>
+      <img class="profile" src="{{user.image.url}}">
+    </div>
     <br>
   {% else %}
-    <img src="https://dummyimage.com/100x100/000/fff">
+    <img src="https://i.esdrop.com/d/t/bvRLlOwptP/Ug84j6LNz9.jpg">
     <br>
   {% endif %}
   <h2>{{user.username}}
