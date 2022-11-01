@@ -1,25 +1,30 @@
 {% extends 'base.html' %}
+{% load django_bootstrap5 %}
 
 {% block content %}
-
-  <h1>마이페이지</h1>
-
+{% load static %}
+  <h2>마이페이지</h2>
+  <br>
   {% if user.image %}
     <div class="box">
-      <img class="profile" src="{{user.image.url}}">
+      <img class="profile" src="{{ user.image.url }}">
     </div>
     <br>
   {% else %}
-    <img src="https://i.esdrop.com/d/t/bvRLlOwptP/Ug84j6LNz9.jpg">
+    <div class="box">
+      <img class="profile" src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg">
+    </div>
+
     <br>
   {% endif %}
-  <h2>{{user.username}}
-    님의 프로필</h2>
+  <h3>{{user.username}}
+    님의 프로필</h3>
 
   <p>닉네임 :
     {{user.nickname}}</p>
   <p>이메일 :
-    {{user.email}}</p>
-  <a href="{%url 'accounts:update' %}">프로필 수정</a>
+    {{user.nickname}}</p>
+    <button type="button" class="btn btn-primary"><a href="{%url 'accounts:update' %}">프로필 수정</a></button>
+  {% csrf_token %}
 
 {% endblock content %}
