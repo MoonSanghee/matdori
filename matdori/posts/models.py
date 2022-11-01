@@ -3,7 +3,6 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.conf import settings
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
-from traitlets import default
 # Create your models here.
 
 class Post(models.Model):
@@ -12,6 +11,7 @@ class Post(models.Model):
     sectors = models.CharField(max_length=20)
     phonenumber = models.CharField(max_length=30, blank=True)
     characteristic = models.CharField(max_length=50, blank=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default='')
     image = ProcessedImageField(upload_to='images/', blank=True,
                                 format='JPEG',
     )

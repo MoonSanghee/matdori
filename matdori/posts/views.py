@@ -58,7 +58,7 @@ def delete(request, pk):
     post = Post.objects.get(pk=pk)
     if request.user == post.user:
         post.delete()
-        return redirect('post:index')
+        return redirect('posts:index')
     else:
         messages.warning(request, '작성자만 삭제할 수 있습니다.')
         return redirect('reviews:detail', post.pk)

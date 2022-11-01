@@ -1,0 +1,5 @@
+<a href="{% url 'posts:update' post.pk %}">가게 정보 수정</a>
+{% if post.image %}
+  <img src="{{ post.image.url }}" alt="{{ post.image }}">
+{% endif %}
+<a href="{% url 'posts:delete' post.pk %}">삭제</a>
