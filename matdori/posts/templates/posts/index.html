@@ -2,8 +2,15 @@
 {% load django_bootstrap5 %}
 
 {% block content %}
-  {% for post in posts%}
-  <div>{{ post.title }}</div>
-  {% endfor %}
-  <a href="{% url 'posts:create' %}">글 작성</a>
+  <div class="row">
+    {% for post in posts%}
+    <div class="card col-4">
+      <a class="text-decoration-none text-black" href="{% url 'posts:detail' post.pk %}">
+        {{ post.title }}
+      </a>
+    </div>
+    {% endfor %}
+    <a href="{% url 'posts:create' %}">글 작성</a>
+
+  </div>
 {% endblock content %}
