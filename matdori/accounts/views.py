@@ -34,3 +34,18 @@ def signup(request):
         form = CustomUserCreationForm()
     context = {"form": form}
     return render(request, "accounts/signup.html", context)
+
+
+def update(request):
+    # 유효성 검사
+    if request.method == "POST":
+        form = CustomUserChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect("accounts:detail", request.user.pk)
+    else:
+        form = CustomUserChangeForm(instance=request.user)
+    context = {
+        "form": form,
+    }
+    return render(request, "accounts/update.html", context)
