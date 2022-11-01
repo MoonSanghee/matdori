@@ -5,12 +5,18 @@ from .models import Post, Review
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+from django.db.models import Q
+
 
 
 # Create your views here.
 
 def index(request):
-    return render(request, 'posts/index.html')
+    posts = Post.objects.order_by('-pk')
+    context = {
+        'posts':posts
+    }
+    return render(request, 'posts/index.html', context)
 
 @login_required
 def create(request):
@@ -47,6 +53,16 @@ def update(request, pk):
         messages.warning(request, '작성자만 수정할 수 있습니다.')
         return redirect('reviews:detail', post.pk)
 
+@login_required
+def delete(request, pk):
+    post = Post.objects.get(pk=pk)
+    if request.user == post.user:
+        post.delete()
+        return redirect('post:index')
+    else:
+        messages.warning(request, '작성자만 삭제할 수 있습니다.')
+        return redirect('reviews:detail', post.pk)
+
 def detail(request, pk):
     post = Post.objects.get(pk=pk)
     reviewsform = ReviewForm()
@@ -57,6 +73,7 @@ def detail(request, pk):
     }
     return render(request, 'posts/detail.html', context)
 
+@login_required
 def likes(request, posts_pk):
     post = get_object_or_404(Post, pk=posts_pk)
     if request.user in post.like_user.all():
@@ -72,7 +89,7 @@ def likes(request, posts_pk):
 def review_create(request, pk):
     post = get_object_or_404(Post, pk=pk)
     reviewform = ReviewForm(request.POST, request.FILES)
-    if reviewform.isvalid():
+    if reviewform.is_valid():
         review = reviewform.save(commit=False)
         review.post = post
         review.user = request.user
@@ -83,3 +100,40 @@ def review_create(request, pk):
         'review_image':review.image
     }
     return JsonResponse(context)
+
+@login_required
+def review_delete(request, post_pk, review_pk):
+    review = Review.objects.get(pk=review_pk)
+    if review.user == request.user:
+        review.delete()
+        return redirect('posts:detail', post_pk)
+    messages.warning(request, '작성자만 삭제할 수 있습니다.')
+    return redirect('posts:detail', post_pk)
+
+def search(requset):
+    searched = requset.GET.get('searched', False)
+    field = requset.GET.get('field')
+    if field == '1':
+        posts = Post.objects.filter(Q(title__contains=searched) | Q(address__contains=searched) | Q(sectors__username__contains=searched) | Q(characteristic__username__contains=searched)).order_by('-pk')
+    elif field == '2':
+        posts = Post.objects.filter(Q(title__contains=searched)).order_by('-pk')
+    elif field == '3':
+        posts = Post.objects.filter(Q(adress__contains=searched)).order_by('-pk')
+    elif field == '4':
+        posts = Post.objects.filter(Q(sectors__contains=searched)).order_by('-pk')
+    elif field == '5':
+        posts = Post.objects.filter(Q(characteristic__contains=searched)).order_by('-pk')
+    if not searched:
+        posts = []
+        text = '검색어를 입력해 주세요.'
+    elif not len(posts):
+        text = '검색 결과가 없습니다.'
+    else:
+        text = ''
+    context = {
+        'posts':posts,
+        'text':text,
+        'searched':searched,
+        'field':field
+    }
+    return render(requset, 'posts/search/', context)

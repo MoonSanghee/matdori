@@ -1,4 +1,3 @@
-from email.mime import image
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth import get_user_model
 from django import forms
@@ -14,7 +13,7 @@ class CustomUserCreationForm(UserCreationForm):
             "password2",
             "image",
         )
-        label = {
+        labels = {
             "username": "id",
             "nickname": "닉네임",
             "password1": "비밀번호",
@@ -31,9 +30,8 @@ class CustomUserChangeForm(UserChangeForm):
             "email",
             "image",
         )
-        label = {
+        labels = {
             "nickname": "닉네임",
             "email": "이메일",
-            "password2": "비밀번호 확인",
             "image": "프로필 이미지",
         }
