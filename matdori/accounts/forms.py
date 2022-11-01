@@ -13,7 +13,7 @@ class CustomUserCreationForm(UserCreationForm):
             "password2",
             "image",
         )
-        label = {
+        labels = {
             "username": "id",
             "nickname": "닉네임",
             "password1": "비밀번호",
@@ -30,7 +30,7 @@ class CustomUserChangeForm(UserChangeForm):
             "email",
             "image",
         )
-        label = {
+        labels = {
             "nickname": "닉네임",
             "email": "이메일",
             "image": "프로필 이미지",
