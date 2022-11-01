@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+  {% for post in posts%}
+  <div>{{ post.title }}</div>
+  {% endfor %}
+  <a href="{% url 'posts:create' %}">글 작성</a>
+{% endblock content %}
