@@ -40,3 +40,6 @@ class CustomUserChangeForm(UserChangeForm):
             "email": "이메일",
             "profile_image": "프로필 이미지",
         }
+        widgets = {
+            
+        }

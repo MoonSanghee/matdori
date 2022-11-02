@@ -37,11 +37,11 @@
 }
 
 
-.profile-box{
-  width:150px;
-  height:150px;
-  border-radius:70%;
-  overflow:hidden;
+.profile-box {
+  width: 150px;
+  height: 150px;
+  border-radius: 70%;
+  overflow: hidden;
 }
 .box {
   width: 150px;
@@ -60,6 +60,7 @@
 a {
   text-decoration: none;
 }
+
 .title > a {
   color: white;
 }
@@ -95,7 +96,26 @@ a {
   font-size: 35px;
 }
 
-.nav-container{
+.post-input {
+  width: 500px;
+  height: 50px;
+  border-radius: 0.375rem;
+  border-width: 0;
+  margin-bottom: 40px;
+}
+
+.post-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.post-color {
+  color: rgb(245, 132, 12);
+}
+
+.nav-container {
   --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 0;
   width: 65%;
@@ -104,20 +124,26 @@ a {
   margin-right: 250px;
   margin-left: 90px;
 }
+
 .container{
   background-color: bisque;
 } 
+
 .posts_search_img{
   width:900;
   height:450;
   padding:20px
 }
+
 .card-text{
   color:black
 }
+
 .ul_com{
   list-style:none;
 }
+
 .li_com{
   list-style:none;
 }
+
