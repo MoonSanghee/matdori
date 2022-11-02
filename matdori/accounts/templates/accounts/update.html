@@ -3,7 +3,7 @@
 
 {% block content %}
   <h1>프로필 업데이트</h1>
-  <form action="" method="POST">
+  <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <a class="btn btn-outline-primary me-2" href="{%  url 'accounts:change_password' %}">비밀번호 변경</a>
