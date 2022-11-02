@@ -3,15 +3,18 @@
 
 {% block content %}
 {% load static %}
+<div class="d-flex">
+<div class="flex">
   <h2>마이페이지</h2>
   <br>
   {% if user.image %}
-    <div class="box">
+    <div class="profile-box">
       <img class="profile" src="{{ user.image.url }}">
     </div>
     <br>
+
   {% else %}
-    <div class="box">
+    <div class="profile-box">
       <img class="profile" src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg">
     </div>
 
@@ -19,20 +22,22 @@
   {% endif %}
   <h3>{{user.username}}
     님의 프로필</h3>
-
+<br>
 
   <p>이메일 :
 
     {{user.email}}</p>
 
-    {{user.nickname}}</p>
-    <button type="button" class="btn btn-primary"><a href="{%url 'accounts:update' %}">프로필 수정</a></button>
+  <p>닉네임 : {{user.nickname}}</p>
   {% csrf_token %}
-
-
-  <p>팔로우
+ 
+<button type="button" class="btn" style="background-color: rgb(245, 132, 12);"><div class=title><a href="{%url 'accounts:update' %}">프로필 수정</a></div></button>
+</div>
+<div class="d-flex">
+  
+  <p><br><br><br><br><br>Follow    
     <a href="#">{{user.followings.count}}</a>
-    | 팔로워
+    <br> Follower    
     <a href="#">{{user.followers.count}}</a>
   </p>
   {% if request.user != user %}
@@ -44,4 +49,6 @@
       {% endif %}
     </a>
   {% endif %}
+</div>
+</div>
 {% endblock content %}
