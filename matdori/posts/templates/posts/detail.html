@@ -4,18 +4,18 @@
 
 {% block content %}
 <div class="row">
-<form class="d-flex col-4 my-3" role="search" method='GET' action="{% url 'posts:search' %}">
-  <select class="select border rounded" aria-label="Default select example" name='field'>
-  <option value="1">전체</option>
-  <option value="2">가게 이름</option>
-  <option value="3">주소</option>
-  <option value="4">음식 종류</option>
-  <option value="5">특징</option>
-  </select>
-  <input class="form-control me-2" type="search" placeholder="게시글 검색" name='searched'>
+  <form class="d-flex col-4 my-3" role="search" method='GET' action="{% url 'posts:search' %}">
+    <select class="select border rounded" aria-label="Default select example" name='field'>
+      <option value="1">전체</option>
+      <option value="2">가게 이름</option>
+      <option value="3">주소</option>
+      <option value="4">음식 종류</option>
+      <option value="5">특징</option>
+    </select>
+    <input class="form-control me-2" type="search" placeholder="게시글 검색" name='searched'>
 
-  <button class="btn btn-outline-success me-2" type="submit" style="width: 7rem;">검색</button>
-</form>
+    <button class="btn btn-outline-success me-2" type="submit" style="width: 7rem;">검색</button>
+  </form>
 </div>
 <div class="row">
   <!-- 왼쪽 구역 -->
@@ -35,6 +35,7 @@
         <a class="ms-3" href="{% url 'posts:review_create' post.pk%}">리뷰작성</a>
       </span>
     </h1>
+
     <div>
       <span>리뷰</span>
       <span>{{ post.review_set.count }}</span>
@@ -67,6 +68,7 @@
             <div id="follow-btn" data-post-id="{{ post.user.pk }}" class="btn btn-primary" type="submit">팔로우</div>
           {% endif %}
         {% endif %}
+
       </div>
     </div>
   </div>
@@ -76,7 +78,8 @@
       <a class="my-3 mx-2 btn btn-primary" href="{% url 'posts:update' post.pk %}">가게 정보 수정</a>
       <a class="my-3 mx-2 btn btn-danger" href="{% url 'posts:delete' post.pk %}">삭제</a>
     </div>
-    <img class="my-3" src="https://img.apti.co.kr/aptHome/images/sub/album_noimg.gif" style="width: 520px; height: 400px;" alt="지도">
+    <img class="my-3" src="https://img.apti.co.kr/aptHome/images/sub/album_noimg.gif"
+      style="width: 520px; height: 400px;" alt="지도">
     <div class="mb-3">주소 : {{ post.address }}</div>
     {% if post.review_set.count %}
     <div class="mb-3">평점 : {{ points }}</div>
@@ -108,7 +111,8 @@
       </div>
       {% else %}
       <div class="col-1">
-        <a class="text-decoration-none text-danger" href="{% url 'posts:review_delete' post.pk review.pk %}" aria-disabled="true">삭제</a>
+        <a class="text-decoration-none text-danger" href="{% url 'posts:review_delete' post.pk review.pk %}"
+          aria-disabled="true">삭제</a>
       </div>
       {% endif %}
     </div>
