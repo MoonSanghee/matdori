@@ -42,7 +42,7 @@
   height:150px;
   border-radius:70%;
   overflow:hidden;
-
+}
 .box {
   width: 150px;
   height: 150px;
@@ -93,5 +93,15 @@ a {
 .login-text {
   color: rgba(204, 18, 18, 0.108);
   font-size: 35px;
+}
+
+.nav-container{
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  width: 67%;
+  padding-right: calc(var(--bs-gutter-x) * .5);
+  padding-left: calc(var(--bs-gutter-x) * .5);
+  margin-right: 250px;
+  margin-left: 90px;
 }
 
