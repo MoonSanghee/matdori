@@ -1,26 +1,28 @@
-from multiprocessing import context
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, update_session_auth_hash
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 
 
 def login(request):
-    if request.method == "POST":
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            auth_login(request, form.get_user())
-            return redirect("posts:index")
+    if request.user.is_anonymous:
+        if request.method == "POST":
+            form = AuthenticationForm(request, data=request.POST)
+            if form.is_valid():
+                auth_login(request, form.get_user())
+                return redirect("posts:index")
+        else:
+            form = AuthenticationForm()
+        context = {
+            "form": form,
+        }
+        return render(request, "accounts/login.html", context)
     else:
-        form = AuthenticationForm()
-    context = {
-        "form": form,
-    }
-    return render(request, "accounts/login.html", context)
+        return redirect("accounts:index")
 
 
 def signup(request):
@@ -66,6 +68,7 @@ def logout(request):
     return redirect("posts:index")
 
 
+@login_required
 def follow(request, pk):
     user = get_object_or_404(get_user_model(), pk=pk)
     # 스스로를 팔로우하려는 경우
@@ -79,3 +82,53 @@ def follow(request, pk):
     else:
         user.followers.add(request.user)
     return redirect("accounts:detail", pk)
+
+
+@login_required
+# 내가 팔로잉하고 있는 사람들 목록
+def following(request, pk):
+    user = get_object_or_404(get_user_model(), pk=pk)
+    users = user.followings.order_by("-pk")
+    context = {
+        "user": user,  # 해당유저
+        "users": users,  # 해당 유저가 follow하고 있는 사람들
+    }
+    return render(request, "accounts/following.html", context)
+
+
+@login_required
+# 나를 팔로잉하고 있는 사람들 목록
+def follower(request, pk):
+    user = get_object_or_404(get_user_model(), pk=pk)
+    users = user.followers.order_by("-pk")
+    context = {
+        "user": user,  # 해당유저
+        "users": users,  # 해당유저를 follow하고 있는 사람들
+    }
+    return render(request, "accounts/follower.html", context)
+
+
+@login_required
+def change_password(request):
+    if request.method == "POST":
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            messages.success(request, "비밀번호를 변경했습니다.")
+            return redirect("accounts:index")
+        else:
+            messages.error(request, "비밀번호 변경에 실패했습니다.")
+    else:
+        form = PasswordChangeForm(request.user)
+    context = {
+        "form": form,
+    }
+    return render(request, "accounts/change_password.html", context)
+
+
+@login_required
+def delete(request):
+    request.user.delete()
+    auth_logout(request)
+    return redirect("posts:index")

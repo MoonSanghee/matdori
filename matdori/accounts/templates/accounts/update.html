@@ -6,6 +6,8 @@
   <form action="" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
+    <a class="btn btn-outline-primary me-2" href="{%  url 'accounts:change_password' %}">비밀번호 변경</a>
+    <a class="btn btn-outline-danger" href="{%  url 'accounts:delete' %}">회원탈퇴</a>
     <button type="submmit" class="btn btn-primary">수정 완료</button>
   </form>
 
