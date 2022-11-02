@@ -4,23 +4,24 @@
 
 {% block content %}
 <div class="row">
-<form class="d-flex col-4 my-3" role="search" method='GET' action="{% url 'posts:search' %}">
-  <select class="select border rounded" aria-label="Default select example" name='field'>
-  <option value="1">전체</option>
-  <option value="2">가게 이름</option>
-  <option value="3">주소</option>
-  <option value="4">음식 종류</option>
-  <option value="5">특징</option>
-  </select>
-  <input class="form-control me-2" type="search" placeholder="게시글 검색" name='searched'>
+  <form class="d-flex col-4 my-3" role="search" method='GET' action="{% url 'posts:search' %}">
+    <select class="select border rounded" aria-label="Default select example" name='field'>
+      <option value="1">전체</option>
+      <option value="2">가게 이름</option>
+      <option value="3">주소</option>
+      <option value="4">음식 종류</option>
+      <option value="5">특징</option>
+    </select>
+    <input class="form-control me-2" type="search" placeholder="게시글 검색" name='searched'>
 
-  <button class="btn btn-outline-success me-2" type="submit" style="width: 7rem;">검색</button>
-</form>
+    <button class="btn btn-outline-success me-2" type="submit" style="width: 7rem;">검색</button>
+  </form>
 </div>
 <div class="row">
   <!-- 왼쪽 구역 -->
   <div class="col-7">
-    <h1 class="d-flex">{{ post.title }} <span class="ms-auto"><a href="{% url 'posts:review_create' post.pk%}">리뷰작성</a></span></h1>
+    <h1 class="d-flex">{{ post.title }} <span class="ms-auto"><a
+          href="{% url 'posts:review_create' post.pk%}">리뷰작성</a></span></h1>
     <div>
       <span>리뷰</span>
       <span>{{ post.review_set.count }}</span>
@@ -35,6 +36,7 @@
       {% endif %}
       <!-- 좋아요 -->
       {% if request.user.is_authenticated %}
+
         {% if request.user in post.like_user.all %}
           <i id="like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart-fill fs-1" style="position: absolute;top: 10.5rem;left: 43%;"></i>
         {% else %}
@@ -42,6 +44,7 @@
         {% endif %}
       {% else %}
         <i class="bi bi-balloon-heart fs-1" style="position: absolute;top: 10.5rem;left: 43%;"></i>
+
       {% endif %}
       <!-- 글쓴이 정보 -->
       <div class="mt-3" style="display: flex;align-items: center;">
@@ -51,8 +54,8 @@
         <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg"
           style="width: 120px; height: 120px; border-radius: 50%;">
         {% endif %}
-        <a class="fs-3 ms-3 text-decoration-none text-black" href="{% url 'accounts:detail' post.user.pk %}">{{
-          post.user.nickname }}</a>
+        <a class="fs-3 ms-3 text-decoration-none text-black" href="{% url 'accounts:detail' post.user.pk %}">
+          {{post.user.nickname }}</a>
         <div>Follow</div>
       </div>
     </div>
@@ -63,7 +66,8 @@
       <a class="my-3 mx-2 btn btn-primary" href="{% url 'posts:update' post.pk %}">가게 정보 수정</a>
       <a class="my-3 mx-2 btn btn-danger" href="{% url 'posts:delete' post.pk %}">삭제</a>
     </div>
-    <img class="my-3" src="https://img.apti.co.kr/aptHome/images/sub/album_noimg.gif" style="width: 520px; height: 400px;" alt="지도">
+    <img class="my-3" src="https://img.apti.co.kr/aptHome/images/sub/album_noimg.gif"
+      style="width: 520px; height: 400px;" alt="지도">
     <div class="mb-3">주소 : {{ post.address }}</div>
     {% if post.review_set.count %}
     <div class="mb-3">평점 : </div>
@@ -95,7 +99,8 @@
       </div>
       {% else %}
       <div class="col-1">
-        <a class="text-decoration-none text-danger" href="{% url 'posts:review_delete' post.pk review.pk %}" aria-disabled="true">삭제</a>
+        <a class="text-decoration-none text-danger" href="{% url 'posts:review_delete' post.pk review.pk %}"
+          aria-disabled="true">삭제</a>
       </div>
       {% endif %}
     </div>
