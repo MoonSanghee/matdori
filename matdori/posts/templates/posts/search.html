@@ -6,8 +6,145 @@
 <div>{{ post.title }}</div>
 {% endfor %}
 <a href="{% url 'posts:create' %}">글 작성</a>
+
+<div class="posts_search_contain">
+<div class="d-flex">
+    <div class="container">
+        <br><br>
+        <h1 style="text-align:center">라멘 맛집</h1><br>
+        <ul class="ul_com" list-style="none">
+            <li class="li_com">
+                <div>
+                    <a class="posts_search_img" href="{% url 'posts:index' %}">
+                        <div class="card mb-3" style="max-width: 1500px;">
+                            <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="https://i.esdrop.com/d/t/bvRLlOwptP/Ug84j6LNz9.jpg" class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                <h5 class="card-title">오레노라멘</h5>
+                                <p class="card-text">라멘이 따끈따근 맛이 좋다.
+                                </p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </li>
+            <li class="li_com">
+                <div>
+                    <a class="posts_search_img" href="{% url 'posts:index' %}">
+                        <div class="card mb-3" style="max-width: 1500px;">
+                            <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="https://i.esdrop.com/d/t/bvRLlOwptP/Ug84j6LNz9.jpg" class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                <h5 class="card-title">오레노라멘</h5>
+                                <p class="card-text">라멘이 따끈따근 맛이 좋다.
+                                </p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </li>
+            <li class="li_com">
+                <div>
+                    <a class="posts_search_img" href="{% url 'posts:index' %}">
+                        <div class="card mb-3" style="max-width: 1500px;">
+                            <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="https://i.esdrop.com/d/t/bvRLlOwptP/Ug84j6LNz9.jpg" class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                <h5 class="card-title">오레노라멘</h5>
+                                <p class="card-text">라멘이 따끈따근 맛이 좋다.
+                                </p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </li>
+            <li class="li_com">
+                <div>
+                    <a class="posts_search_img" href="{% url 'posts:index' %}">
+                        <div class="card mb-3" style="max-width: 1500px;">
+                            <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="https://i.esdrop.com/d/t/bvRLlOwptP/Ug84j6LNz9.jpg" class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                <h5 class="card-title">오레노라멘</h5>
+                                <p class="card-text">라멘이 따끈따근 맛이 좋다.{{ comment }}
+                                </p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </li>
+            <li class="li_com">
+                <div>
+                    <a class="posts_search_img" href="{% url 'posts:index' %}">
+                        <div class="card mb-3" style="max-width: 1500px;">
+                            <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="https://i.esdrop.com/d/t/bvRLlOwptP/Ug84j6LNz9.jpg" class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                <h5 class="card-title">오레노라멘</h5>
+                                <p class="card-text">라멘이 따끈따근 맛이 좋다.
+                                </p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </li>
+                   
+            {% comment %} <a class="posts_search_img" href="{% url 'posts:index' %}">
+            <div class="card" style="width: 25rem;">
+                <img src="https://i.esdrop.com/d/t/bvRLlOwptP/Ug84j6LNz9.jpg" class="card-img-top" alt="카테고리에 따른 맛집">
+            <div class="card-body">
+            <p class="card-text"><h5>오레노라멘</h5>아주 따땃한 라멘이다</p>
+            </div>
+        </div>
+        <div>
+            <a class="posts_search_img" href="{% url 'posts:index' %}">
+            <div class="card" style="width: 25rem;">
+                <img src="https://i.esdrop.com/d/t/bvRLlOwptP/Ug84j6LNz9.jpg" class="card-img-top" alt="카테고리에 따른 맛집">
+            <div class="card-body">
+            <p class="card-text"><h5>오레노라멘</h5>아주 따땃한 라멘이다</p>
+            </div>
+        </div>
+        <div>
+            <a class="posts_search_img" href="{% url 'posts:index' %}">
+            <div class="card" style="width: 25rem;">
+                <img src="https://i.esdrop.com/d/t/bvRLlOwptP/Ug84j6LNz9.jpg" class="card-img-top" alt="카테고리에 따른 맛집">
+            <div class="card-body">
+            <p class="card-text"><h5>오레노라멘</h5>아주 따땃한 라멘이다</p>
+            </div>
+        </div>
+    </div>
+</div> {% endcomment %}
+</a>
+</div>
+
 {% endblock content %}
-.container{
-    margin-right: 250px;
-    margin-left: 90px;
-}
