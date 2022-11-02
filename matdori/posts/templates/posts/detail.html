@@ -20,8 +20,22 @@
 <div class="row">
   <!-- 왼쪽 구역 -->
   <div class="col-7">
-    <h1 class="d-flex">{{ post.title }} <span class="ms-auto"><a
-          href="{% url 'posts:review_create' post.pk%}">리뷰작성</a></span></h1>
+    <h1 class="d-flex">{{ post.title }} 
+      <span class="ms-auto">
+        <!-- 좋아요 -->
+        {% if request.user.is_authenticated %}
+          {% if request.user in post.like_user.all %}
+            <i id="like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart-fill" style="position: relative;top: 0;left: 0;"></i>
+          {% else %}
+            <i id="like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart" style="position: relative;top: 0;left: 0;"></i>
+          {% endif %}
+        {% else %}
+          <i class="bi bi-balloon-heart" style="position: relative;top: 0;left: 0;"></i>
+        {% endif %}
+        <a class="ms-3" href="{% url 'posts:review_create' post.pk%}">리뷰작성</a>
+      </span>
+    </h1>
+
     <div>
       <span>리뷰</span>
       <span>{{ post.review_set.count }}</span>
@@ -34,18 +48,7 @@
       {% else %}
       <img src="https://img.apti.co.kr/aptHome/images/sub/album_noimg.gif" style="width: 720px; height: 480px;">
       {% endif %}
-      <!-- 좋아요 -->
-      {% if request.user.is_authenticated %}
 
-        {% if request.user in post.like_user.all %}
-          <i id="like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart-fill fs-1" style="position: absolute;top: 10.5rem;left: 43%;"></i>
-        {% else %}
-          <i id="like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart fs-1" style="position: absolute;top: 10.5rem;left: 43%;"></i>
-        {% endif %}
-      {% else %}
-        <i class="bi bi-balloon-heart fs-1" style="position: absolute;top: 10.5rem;left: 43%;"></i>
-
-      {% endif %}
       <!-- 글쓴이 정보 -->
       <div class="mt-3" style="display: flex;align-items: center;">
         {% if post.image %}
@@ -55,8 +58,17 @@
           style="width: 120px; height: 120px; border-radius: 50%;">
         {% endif %}
         <a class="fs-3 ms-3 text-decoration-none text-black" href="{% url 'accounts:detail' post.user.pk %}">
-          {{post.user.nickname }}</a>
-        <div>Follow</div>
+          {{ post.user.nickname }}
+        </a>
+        <!-- 팔로우 -->
+        {% if request.user != post.user %}
+          {% if request.user in post.user.followers.all %}
+            <div id="follow-btn" data-post-id="{{ post.user.pk }}" class="btn btn-danger" type="submit">팔로우 취소</div>
+          {% else %}
+            <div id="follow-btn" data-post-id="{{ post.user.pk }}" class="btn btn-primary" type="submit">팔로우</div>
+          {% endif %}
+        {% endif %}
+
       </div>
     </div>
   </div>
@@ -70,7 +82,7 @@
       style="width: 520px; height: 400px;" alt="지도">
     <div class="mb-3">주소 : {{ post.address }}</div>
     {% if post.review_set.count %}
-    <div class="mb-3">평점 : </div>
+    <div class="mb-3">평점 : {{ points }}</div>
     {% else %}
     <div class="mb-3">평점 : 아직 평가가 없습니다.</div>
     {% endif %}
@@ -109,6 +121,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!-- 좋아요 -->
 <script>
   const likeBtn = document.querySelector('#like-btn')
   likeBtn.addEventListener('click', function (event) {
@@ -131,5 +144,30 @@
         likeCount.innerText = response.data.likeCount
       })
   })
+</script>
+<!-- 팔로우 -->
+<script>
+  const followBtn = document.querySelector('#follow-btn')
+  followBtn.addEventListener('click', function (event) {
+    console.log(event.target.dataset)
+    axios({
+      method: 'get',
+      url: `/accounts/follow/${event.target.dataset.postId}/`
+    })
+    .then(response => {
+      console.log(event.target.dataset)
+      console.log(response.data)
+      if (response.data.is_followed === true) {
+        event.target.classList.add('btn-danger')
+        event.target.classList.remove('btn-primary')
+        followBtn.innerText = "팔로우 취소"
+      } else {
+        event.target.classList.add('btn-primary')
+        event.target.classList.remove('btn-danger')
+        followBtn.innerText = "팔로우"
+      }
+    })
+  })
+  
 </script>
 {% endblock content %}
