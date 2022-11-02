@@ -107,7 +107,7 @@ def follower(request, pk):
     }
     return render(request, "accounts/follower.html", context)
 
-
+# 비밀번호 변경
 @login_required
 def change_password(request):
     if request.method == "POST":
@@ -126,7 +126,7 @@ def change_password(request):
     }
     return render(request, "accounts/change_password.html", context)
 
-
+# 회원탈퇴
 @login_required
 def delete(request):
     request.user.delete()
