@@ -9,11 +9,24 @@
       <h1 class="text-center post-color pb-4">
         맛 등록
       </h1>
-      {% else %}
+      {% elif request.resolver_match.url_name == 'update' %}
       <h1 class="text-center post-color">
         맛 수정
       </h1>
+      {% else %}
+      <h1 class="text-center post-color">
+        리뷰 등록
+      </h1>
       {% endif %}
+      {% if request.resolver_match.url_name == 'review_create' %}
+      <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form post_form %}
+        <div class="text-end">
+          <input type="submit" value="완료" class="btn btn-primary btn-md">
+        </div>
+      </form>
+      {% else %}
       <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <input type="hidden" value="sKamNRYFlzwN3DJz2RLxynbU43ADkT9WdpbcrKBiuuZZ7K8vtULVyrb5yFsuU94z">
@@ -44,8 +57,8 @@
           <button type="submit" class="btn btn btn-warning">수정 완료</button>
         </div>
         {% endif %}
-
       </form>
+      {% endif %}
     </div>
   </div>
 </div>
