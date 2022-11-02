@@ -21,12 +21,14 @@ class Post(models.Model):
         blank=True,
         format="JPEG",
     )
+
     thumbnail = ProcessedImageField(
         upload_to="images/",
         blank=True,
         processors=[ResizeToFill(400, 240)],
         format="JPEG",
         options={"quality": 100},)
+
 
     like_user = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="likes")
 
