@@ -37,11 +37,13 @@
             name="thumbnail" accept="image/*" class="form-control" id="id_thumbnail"></div>
         {% if request.resolver_match.url_name == 'create' %}
         <div class="d-grid gap-2">
-          <button type="submit" class="btn btn btn-warning">등록 하기</button>
+          <button type="submit" class="btn" style="background-color: rgb(245, 132, 12); color: white;">맛 등록하기
+          </button>
         </div>
         {% else %}
         <div class="d-grid gap-2">
-          <button type="submit" class="btn btn btn-warning">수정 완료</button>
+          <button type="submit" class="btn" style="background-color: rgb(245, 132, 12); color: white;">맛 수정하기
+          </button>
         </div>
         {% endif %}
 
