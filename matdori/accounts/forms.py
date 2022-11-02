@@ -12,7 +12,7 @@ class CustomUserCreationForm(UserCreationForm):
             "email",
             "password1",
             "password2",
-            "image",
+            "profile_image",
         )
         labels = {
             "username": "아이디",
@@ -20,7 +20,7 @@ class CustomUserCreationForm(UserCreationForm):
             "email": "이메일",
             "password1": "비밀번호",
             "password2": "비밀번호 확인",
-            "image": "프로필 이미지",
+            "profile_image": "프로필 이미지",
         }
 
 
@@ -32,10 +32,10 @@ class CustomUserChangeForm(UserChangeForm):
         fields = (
             "nickname",
             "email",
-            "image",
+            "profile_image",
         )
         labels = {
             "nickname": "닉네임",
             "email": "이메일",
-            "image": "프로필 이미지",
+            "profile_image": "프로필 이미지",
         }

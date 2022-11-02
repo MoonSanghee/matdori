@@ -5,9 +5,9 @@
   {% load static %}
   <h2>마이페이지</h2>
   <br>
-  {% if user.image %}
+  {% if user.profile_image %}
     <div class="box">
-      <img class="profile" src="{{ user.image.url }}">
+      <img class="profile" src="{{ user.profile_image.url }}">
     </div>
     <br>
   {% else %}
