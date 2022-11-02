@@ -2,6 +2,7 @@
 {% load django_bootstrap5 %}
 
 {% block content %}
+
 {% load static %}
 <div class="wrapper">
   <div class="my-5">
@@ -10,10 +11,11 @@
     {% if user.profile_image %}
     <div class="box">
       <img class="profile" src="{{ user.profile_image.url }}">
+
     </div>
     <br>
-    {% else %}
-    <div class="box">
+  {% else %}
+    <div class="profile-box">
       <img class="profile" src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg">
     </div>
 
@@ -22,24 +24,31 @@
     <h3>{{user.username}}
       님의 프로필</h3>
 
-    <p>이메일 :
+
+
+  <p>이메일 :
+
 
       {{user.email}}</p>
 
-    {{user.nickname}}</p>
-    <button type="button" class="btn btn-primary">
-      <a href="{%url 'accounts:update' %}">프로필 수정</a>
-    </button>
-    {% csrf_token %}
 
-    <p>팔로우
-      <a href="{% url 'accounts:following' user.pk%}">{{user.followings.count}}</a>
-      | 팔로워
-      <a href="{% url 'accounts:follower' user.pk%}">{{user.followers.count}}</a>
-    </p>
-    {% if request.user != user %}
-    <a href="{%url 'accounts:follow' user.pk%}">
-      {% if request.user in user.followers.all %}
+  <p>닉네임 : {{user.nickname}}</p>
+  {% csrf_token %}
+ 
+<button type="button" class="btn" style="background-color: rgb(245, 132, 12);"><div class=title><a href="{%url 'accounts:update' %}">프로필 수정</a></div></button>
+</div>
+<div class="d-flex">
+  {% csrf_token %}
+  
+  <p><br><br><br><br><br>Follow   
+  <a href="{% url 'accounts:following' user.pk%}">{{user.followings.count}}</a>
+  <br> 팔로워
+  <a href="{% url 'accounts:follower' user.pk%}">{{user.followers.count}}</a>
+</p>
+{% if request.user != user %}
+  <a href="{%url 'accounts:follow' user.pk%}">
+    {% if request.user in user.followers.all %}
+
       팔로우 취소
       {% else %}
       팔로우
@@ -50,3 +59,5 @@
   </div>
 </div>
 {% endblock content %}
+
+

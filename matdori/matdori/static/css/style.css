@@ -36,6 +36,14 @@
   justify-content: space-between;
 }
 
+
+.profile-box{
+  width:150px;
+  height:150px;
+  border-radius:70%;
+  overflow:hidden;
+}
+
 .box {
   width: 150px;
   height: 150px;
@@ -49,6 +57,13 @@
   object-fit: cover;
 }
 
+a {
+  text-decoration: none;
+}
+
+.title > a {
+  color: white;
+}
 
 .login-card {
   color: white;
@@ -79,6 +94,7 @@
   font-size: 35px;
 }
 
+
 .post-input {
   width: 500px;
   height: 50px;
@@ -97,3 +113,15 @@
 .post-color {
   color: rgb(245, 132, 12);
 }
+
+.nav-container{
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  width: 67%;
+  padding-right: calc(var(--bs-gutter-x) * .5);
+  padding-left: calc(var(--bs-gutter-x) * .5);
+  margin-right: 250px;
+  margin-left: 90px;
+}
+
+
