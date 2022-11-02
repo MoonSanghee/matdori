@@ -3,6 +3,7 @@
 
 {% block content %}
 
+
   {% load static %}
   <div class="d-flex">
     <div class="flex">
@@ -47,6 +48,7 @@
         </button>
       {% endif %}
     </div>
+
     <div class="d-flex">
       {% csrf_token %}
 
@@ -66,6 +68,7 @@
           {% endif %}
         </form>
       {% endif %}
+
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -120,3 +123,5 @@
   </script>
 
 {% endblock content %}
+
+

@@ -136,4 +136,4 @@ def search(requset):
         'searched':searched,
         'field':field
     }
-    return render(requset, 'posts/search/', context)
+    return render(requset, 'posts/search.html', context)
