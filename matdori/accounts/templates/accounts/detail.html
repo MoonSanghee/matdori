@@ -4,33 +4,33 @@
 {% block content %}
 
 {% load static %}
-<div class="d-flex">
-<div class="flex">
-
-  {% load static %}
-  <h2>마이페이지</h2>
-  <br>
-  {% if user.profile_image %}
+<div class="wrapper">
+  <div class="my-5">
+    <h2>마이페이지</h2>
+    <br>
+    {% if user.profile_image %}
     <div class="box">
       <img class="profile" src="{{ user.profile_image.url }}">
 
     </div>
     <br>
-
   {% else %}
     <div class="profile-box">
       <img class="profile" src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg">
     </div>
 
     <br>
-  {% endif %}
-  <h3>{{user.username}}
-    님의 프로필</h3>
+    {% endif %}
+    <h3>{{user.username}}
+      님의 프로필</h3>
+
 
 
   <p>이메일 :
 
-    {{user.email}}</p>
+
+      {{user.email}}</p>
+
 
   <p>닉네임 : {{user.nickname}}</p>
   {% csrf_token %}
@@ -48,12 +48,16 @@
 {% if request.user != user %}
   <a href="{%url 'accounts:follow' user.pk%}">
     {% if request.user in user.followers.all %}
+
       팔로우 취소
-    {% else %}
+      {% else %}
       팔로우
+      {% endif %}
+    </a>
     {% endif %}
-  </a>
-{% endif %}
-</div>
+
+  </div>
 </div>
 {% endblock content %}
+
+
