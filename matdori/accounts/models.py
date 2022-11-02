@@ -11,7 +11,7 @@ class User(AbstractUser):
         "self", symmetrical=False, related_name="followers"
     )
     nickname = models.CharField(max_length=80)
-    image = ProcessedImageField(
+    profile_image = ProcessedImageField(
         upload_to="images/",
         blank=True,
         processors=[ResizeToFill(100, 100)],
