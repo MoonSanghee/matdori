@@ -34,6 +34,7 @@
   flex-wrap: inherit;
   align-items: center;
   justify-content: space-between;
+}
 
 .box {
   width: 150px;
@@ -41,6 +42,7 @@
   border-radius: 70%;
   overflow: hidden;
 }
+
 .profile {
   width: 100%;
   height: 100%;
