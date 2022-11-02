@@ -6,8 +6,20 @@
 <div>{{ post.title }}</div>
 {% endfor %}
 <a href="{% url 'posts:create' %}">글 작성</a>
+
+<div class="posts_search_contain">
+    <br>
+    <h1 style="text-align:center">당신이 선택한 맛집</h1>
+    <br>
+<div class="d-flex">
+<a class="posts_search_img" href="{% url 'posts:index' %}">
+    <div class="card" style="width: 18rem;">
+        <img src="https://i.esdrop.com/d/t/bvRLlOwptP/Ug84j6LNz9.jpg" class="card-img-top" alt="카테고리에 따른 맛집">
+        <div class="card-body">
+          <p class="card-text"><h5>오레노라멘</h5>아주 따땃한 라멘이다</p>
+        </div>
+      </div>
+</a>
+</div>
+
 {% endblock content %}
-.container{
-    margin-right: 250px;
-    margin-left: 90px;
-}
