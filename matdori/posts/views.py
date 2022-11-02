@@ -51,7 +51,7 @@ def update(request, pk):
         return render(request, 'posts/form.html', context)
     else:
         messages.warning(request, '작성자만 수정할 수 있습니다.')
-        return redirect('reviews:detail', post.pk)
+        return redirect('posts:detail', post.pk)
 
 @login_required
 def delete(request, pk):
@@ -74,8 +74,8 @@ def detail(request, pk):
     return render(request, 'posts/detail.html', context)
 
 @login_required
-def likes(request, posts_pk):
-    post = get_object_or_404(Post, pk=posts_pk)
+def likes(request, pk):
+    post = get_object_or_404(Post, pk=pk)
     if request.user in post.like_user.all():
         post.like_user.remove(request.user)
         is_liked = False
