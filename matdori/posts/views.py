@@ -69,7 +69,7 @@ def detail(request, pk):
     context = {
         'post':post,
         'reviews':post.review_set.all(),
-        'reviewsform':reviewsform
+        'reviewsform':reviewsform,
     }
     return render(request, 'posts/detail.html', context)
 
@@ -88,18 +88,6 @@ def likes(request, pk):
 @login_required
 def review_create(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    # reviewform = ReviewForm(request.POST, request.FILES)
-    # if reviewform.is_valid():
-    #     review = reviewform.save(commit=False)
-    #     review.post = post
-    #     review.user = request.user
-    #     review.save()
-    # context = {
-    #     'content': review.content,
-    #     'username': review.user.username,
-    #     'review_image':review.image
-    # }
-    # return JsonResponse(context)
     if request.method == 'POST':
         post_form = ReviewForm(request.POST, request.FILES)
         if post_form.is_valid():
