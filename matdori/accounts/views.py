@@ -8,21 +8,19 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 
 
-def login(request):
-    if request.user.is_anonymous:
-        if request.method == "POST":
-            form = AuthenticationForm(request, data=request.POST)
-            if form.is_valid():
-                auth_login(request, form.get_user())
-                return redirect("posts:index")
-        else:
-            form = AuthenticationForm()
-        context = {
-            "form": form,
-        }
-        return render(request, "accounts/login.html", context)
+def login(request): 
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            auth_login(request, form.get_user())
+            return redirect("posts:index")
     else:
-        return redirect("accounts:index")
+        form = AuthenticationForm()
+    context = {
+        "form": form,
+    }
+    return render(request, "accounts/login.html", context)
+
 
 
 def signup(request):
