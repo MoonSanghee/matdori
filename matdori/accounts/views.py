@@ -8,24 +8,25 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 
 
-def login(request): 
-    if request.method == "POST":
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            auth_login(request, form.get_user())
-            return redirect("posts:index")
-    else:
-        form = AuthenticationForm()
-    context = {
-        "form": form,
-    }
-    return render(request, "accounts/login.html", context)
+def login(request):
+ 
+        if request.method == "POST":
+            form = AuthenticationForm(request, data=request.POST)
+            if form.is_valid():
+                auth_login(request, form.get_user())
+                return redirect("posts:index")
+        else:
+            form = AuthenticationForm()
+        context = {
+            "form": form,
+        }
+        return render(request, "accounts/login.html", context)
 
 
 
 def signup(request):
     if request.method == "POST":
-        form = CustomUserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST,request.FILES)
         if form.is_valid():
             user = form.save()
             auth_login(request, user)  # 자동 로그인
@@ -40,7 +41,7 @@ def signup(request):
 def update(request):
     # 유효성 검사
     if request.method == "POST":
-        form = CustomUserChangeForm(request.POST, instance=request.user)
+        form = CustomUserChangeForm(request.POST,request.FILES ,instance=request.user)
         if form.is_valid():
             form.save()
             return redirect("accounts:detail", request.user.pk)
