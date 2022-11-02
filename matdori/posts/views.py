@@ -88,18 +88,32 @@ def likes(request, pk):
 @login_required
 def review_create(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    reviewform = ReviewForm(request.POST, request.FILES)
-    if reviewform.is_valid():
-        review = reviewform.save(commit=False)
-        review.post = post
-        review.user = request.user
-        review.save()
+    # reviewform = ReviewForm(request.POST, request.FILES)
+    # if reviewform.is_valid():
+    #     review = reviewform.save(commit=False)
+    #     review.post = post
+    #     review.user = request.user
+    #     review.save()
+    # context = {
+    #     'content': review.content,
+    #     'username': review.user.username,
+    #     'review_image':review.image
+    # }
+    # return JsonResponse(context)
+    if request.method == 'POST':
+        post_form = ReviewForm(request.POST, request.FILES)
+        if post_form.is_valid():
+            review = post_form.save(commit=False)
+            review.user = request.user
+            review.post = Post.objects.get(pk=pk)
+            review.save()
+            return redirect('posts:detail', pk)
+    else:
+        post_form = ReviewForm()
     context = {
-        'content': review.content,
-        'username': review.user.username,
-        'review_image':review.image
+        'post_form': post_form
     }
-    return JsonResponse(context)
+    return render(request, 'posts/form.html', context)
 
 @login_required
 def review_delete(request, post_pk, review_pk):
@@ -107,7 +121,8 @@ def review_delete(request, post_pk, review_pk):
     if review.user == request.user:
         review.delete()
         return redirect('posts:detail', post_pk)
-    messages.warning(request, '작성자만 삭제할 수 있습니다.')
+    else:
+        messages.warning(request, '작성자만 삭제할 수 있습니다.')
     return redirect('posts:detail', post_pk)
 
 def search(requset):
@@ -136,4 +151,4 @@ def search(requset):
         'searched':searched,
         'field':field
     }
-    return render(requset, 'posts/search/', context)
+    return render(requset, 'posts/search.html', context)

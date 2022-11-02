@@ -7,9 +7,13 @@
     <h1>
       가게 등록
     </h1>
-  {% else %}
+  {% elif request.resolver_match.url_name == 'update' %}
     <h1>
       가게 정보 수정
+    </h1>
+  {% else %}
+    <h1>
+      리뷰작성
     </h1>
   {% endif %}
 
