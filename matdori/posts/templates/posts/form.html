@@ -2,26 +2,65 @@
 {% load django_bootstrap5 %}
 
 {% block content %}
-
-  {% if request.resolver_match.url_name == 'create' %}
-    <h1>
-      가게 등록
-    </h1>
-  {% elif request.resolver_match.url_name == 'update' %}
-    <h1>
-      가게 정보 수정
-    </h1>
-  {% else %}
-    <h1>
-      리뷰작성
-    </h1>
-  {% endif %}
-
-  <form action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% bootstrap_form post_form %}
-    <div class="text-end">
-      <input type="submit" value="완료" class="btn btn-primary btn-md">
+<div class="wrapper">
+  <div class="post-wrap d-flex flex-column">
+    <div class="my-5">
+      {% if request.resolver_match.url_name == 'create' %}
+      <h1 class="text-center post-color pb-4">
+        맛 등록
+      </h1>
+      {% elif request.resolver_match.url_name == 'update' %}
+      <h1 class="text-center post-color">
+        맛 수정
+      </h1>
+      {% else %}
+      <h1 class="text-center post-color">
+        리뷰 등록
+      </h1>
+      {% endif %}
+      {% if request.resolver_match.url_name == 'review_create' %}
+      <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form post_form %}
+        <div class="text-end">
+          <input type="submit" value="완료" class="btn btn-primary btn-md">
+        </div>
+      </form>
+      {% else %}
+      <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" value="sKamNRYFlzwN3DJz2RLxynbU43ADkT9WdpbcrKBiuuZZ7K8vtULVyrb5yFsuU94z">
+        <div class="post-input"><label class="form-label post-color" for="id_address">상호명</label>
+          <input type="text" name="title" maxlength="20" class="form-control" placeholder="상호명" required id="id_title">
+        </div>
+        <div class="post-input"><label class="form-label post-color" for="id_address">주소</label><input type="text"
+            name="address" maxlength="50" class="form-control " placeholder="주소" required id="id_address"></div>
+        <div class="post-input"><label class="form-label post-color" for="id_sectors">음식 종류</label><input type="text"
+            name="sectors" maxlength="20" class="form-control" placeholder="음식 종류" required id="id_sectors"></div>
+        <div class="post-input"><label class="form-label post-color" for="id_phonenumber">전화번호</label><input type="text"
+            name="phonenumber" maxlength="30" class="form-control" placeholder="전화번호" id="id_phonenumber">
+        </div>
+        <div class="post-input"><label class="form-label post-color" for="id_characteristic">특징</label><input
+            type="text" name="characteristic" maxlength="50" class="form-control" placeholder="특징"
+            id="id_characteristic">
+        </div>
+        <div class="post-input"><label class="form-label post-color" for="id_image">이미지</label><input type="file"
+            name="image" accept="image/*" class="form-control" id="id_image"></div>
+        <div class="post-input"><label class="form-label post-color" for="id_thumbnail">썸네일</label><input type="file"
+            name="thumbnail" accept="image/*" class="form-control" id="id_thumbnail"></div>
+        {% if request.resolver_match.url_name == 'create' %}
+        <div class="d-grid gap-2">
+          <button type="submit" class="btn btn btn-warning">등록 하기</button>
+        </div>
+        {% else %}
+        <div class="d-grid gap-2">
+          <button type="submit" class="btn btn btn-warning">수정 완료</button>
+        </div>
+        {% endif %}
+      </form>
+      {% endif %}
     </div>
-  </form>
+  </div>
+</div>
+</div>
 {% endblock %}
