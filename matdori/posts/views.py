@@ -66,10 +66,15 @@ def delete(request, pk):
 def detail(request, pk):
     post = Post.objects.get(pk=pk)
     reviewsform = ReviewForm()
+    reviews = post.review_set.all()
+    points = 0
+    for review in reviews:
+        points += review.glade
     context = {
         'post':post,
         'reviews':post.review_set.all(),
         'reviewsform':reviewsform,
+        'points': round(points/len(reviews), 1)
     }
     return render(request, 'posts/detail.html', context)
 
