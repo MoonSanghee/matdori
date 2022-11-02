@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div>
+    <h1>{{ user.username }}님이 팔로우한 회원</h1>
+  </div>
+  <div>
+    {% for user in users %}
+      <img src="{{user.image.url}}">
+      <a href="{% url 'accounts:detail' user.pk %}">{{ user.username }}</a>
+    {% endfor %}
+  </div>
+{% endblock content %}

@@ -20,6 +20,22 @@
     {{user.nickname}}</p>
   <p>이메일 :
     {{user.email}}</p>
-  <a href="{%url 'accounts:update' %}">프로필 수정</a>
+  {% if request.user == article.user %}
+    <a href="{%url 'accounts:update' %}">프로필 수정</a>
+  {% endif %}
 
+  <p>팔로우
+    <a href="#">{{user.followings.count}}</a>
+    | 팔로워
+    <a href="#">{{user.followers.count}}</a>
+  </p>
+  {% if request.user != user %}
+    <a href="{%url 'accounts:follow' user.pk%}">
+      {% if request.user in user.followers.all %}
+        팔로우 취소
+      {% else %}
+        팔로우
+      {% endif %}
+    </a>
+  {% endif %}
 {% endblock content %}
