@@ -6,6 +6,7 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from .forms import CustomUserCreationForm, CustomUserChangeForm
+from django.http import JsonResponse
 
 
 def login(request):
@@ -20,6 +21,7 @@ def login(request):
         context = {
             "form": form,
         }
+        messages.warning(request, "아이디와 비밀번호를 확인해주세요")
         return render(request, "accounts/login.html", context)
 
 
@@ -75,12 +77,19 @@ def follow(request, pk):
         messages.warning(request, "스스로 팔로우 할 수 없습니다.")
         return redirect("accounts:detail", pk)
     # 팔로우하고 있는 상태인 경우
-    if request.user in user.folloewers.all():
+    if request.user in user.followers.all():
         user.followers.remove(request.user)
+        is_followed = False
     # 팔로우하고 있지 않았을때
     else:
         user.followers.add(request.user)
-    return redirect("accounts:detail", pk)
+        is_followed = True
+    context = {
+                'is_followed': is_followed,
+                'followers_count': user.followers.count(),
+                'followings_count': user.followings.count(),
+            }
+    return JsonResponse(context)
 
 
 @login_required
@@ -114,8 +123,10 @@ def change_password(request):
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, form.user)
-            messages.success(request, "비밀번호를 변경했습니다.")
-            return redirect("accounts:index")
+            messages.success(request,
+                             '비밀번호를 변경했습니다.',
+                             extra_tags='alert-success')
+            return redirect("posts:index")
         else:
             messages.error(request, "비밀번호 변경에 실패했습니다.")
     else:
