@@ -104,8 +104,7 @@ a {
   margin-right: 250px;
   margin-left: 90px;
 }
-.posts_search_contain{
-  width: 1400px;
+.container{
   background-color: bisque;
 } 
 .posts_search_img{
@@ -115,4 +114,10 @@ a {
 }
 .card-text{
   color:black
+}
+.ul_com{
+  list-style:none;
+}
+.li_com{
+  list-style:none;
 }
