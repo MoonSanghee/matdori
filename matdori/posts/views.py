@@ -124,7 +124,7 @@ def search(requset):
     searched = requset.GET.get('searched', False)
     field = requset.GET.get('field')
     if field == '1':
-        posts = Post.objects.filter(Q(title__contains=searched) | Q(address__contains=searched) | Q(sectors__username__contains=searched) | Q(characteristic__username__contains=searched)).order_by('-pk')
+        posts = Post.objects.filter(Q(title__contains=searched) | Q(address__contains=searched) | Q(sectors__contains=searched) | Q(characteristic__contains=searched)).order_by('-pk')
     elif field == '2':
         posts = Post.objects.filter(Q(title__contains=searched)).order_by('-pk')
     elif field == '3':

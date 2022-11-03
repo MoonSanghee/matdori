@@ -5,7 +5,7 @@
 }
 
 .body {
-  background-color: rgb(244, 242, 246);
+  background-color: rgb(251, 243, 217);
   margin: 0;
   padding: 0;
   height: 100%;
@@ -126,7 +126,7 @@ a {
 }
 
 
-.container{
+.back-search{
   background-color: bisque;
 } 
 
@@ -146,6 +146,10 @@ a {
 
 .li_com{
   list-style:none;
+}
+.search_card{
+  width:1200px;
+  height:300px;
 }
 
 
