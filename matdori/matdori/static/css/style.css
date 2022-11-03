@@ -229,6 +229,24 @@ a {
   margin-left: 10px;
 }
 
+
 .search-box {
   width: 100%;
 }
+
+.follow{
+  background-color:rgb(247, 204, 112);
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 30px / 40px;
+}
+.follow_profile{
+  display: flex;
+  flex-direction:row;
+  align-items: center;
+  justify-content: space-around;
+}
+.follow_img{
+  border-radius: 50%;
+}
+
