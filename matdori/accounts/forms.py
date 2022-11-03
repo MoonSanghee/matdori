@@ -30,16 +30,13 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = get_user_model()
         fields = (
-            "profile_image",
             "nickname",
             "email",
-            
+            "profile_image",
         )
         labels = {
             "nickname": "닉네임",
             "email": "이메일",
             "profile_image": "프로필 이미지",
         }
-        widgets = {
-            
-        }
+        widgets = {}

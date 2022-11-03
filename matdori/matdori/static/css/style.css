@@ -12,7 +12,7 @@
 }
 
 .wrapper {
-  height: 1000px;
+  height: 1200px;
 }
 
 .footer_image {
@@ -43,12 +43,12 @@
   border-radius: 70%;
   overflow: hidden;
 }
-
 .box {
   width: 150px;
   height: 150px;
   border-radius: 70%;
   overflow: hidden;
+
 }
 
 .profile {
@@ -61,9 +61,11 @@ a {
   text-decoration: none;
 }
 
-.title>a {
+.title > a {
   color: white;
 }
+
+
 
 .login-card {
   color: white;
@@ -94,7 +96,6 @@ a {
   font-size: 35px;
 }
 
-
 .post-input {
   width: 500px;
   height: 50px;
@@ -117,9 +118,34 @@ a {
 .nav-container {
   --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 0;
-  width: 67%;
+  width: 65%;
   padding-right: calc(var(--bs-gutter-x) * .5);
   padding-left: calc(var(--bs-gutter-x) * .5);
   margin-right: 250px;
   margin-left: 90px;
 }
+
+
+.container{
+  background-color: bisque;
+} 
+
+.posts_search_img{
+  width:900;
+  height:450;
+  padding:20px
+}
+
+.card-text{
+  color:black
+}
+
+.ul_com{
+  list-style:none;
+}
+
+.li_com{
+  list-style:none;
+}
+
+

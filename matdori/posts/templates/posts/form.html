@@ -29,25 +29,7 @@
       {% else %}
       <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <input type="hidden" value="sKamNRYFlzwN3DJz2RLxynbU43ADkT9WdpbcrKBiuuZZ7K8vtULVyrb5yFsuU94z">
-        <div class="post-input"><label class="form-label post-color" for="id_address">상호명</label>
-          <input type="text" name="title" maxlength="20" class="form-control" placeholder="상호명" required id="id_title">
-        </div>
-        <div class="post-input"><label class="form-label post-color" for="id_address">주소</label><input type="text"
-            name="address" maxlength="50" class="form-control " placeholder="주소" required id="id_address"></div>
-        <div class="post-input"><label class="form-label post-color" for="id_sectors">음식 종류</label><input type="text"
-            name="sectors" maxlength="20" class="form-control" placeholder="음식 종류" required id="id_sectors"></div>
-        <div class="post-input"><label class="form-label post-color" for="id_phonenumber">전화번호</label><input type="text"
-            name="phonenumber" maxlength="30" class="form-control" placeholder="전화번호" id="id_phonenumber">
-        </div>
-        <div class="post-input"><label class="form-label post-color" for="id_characteristic">특징</label><input
-            type="text" name="characteristic" maxlength="50" class="form-control" placeholder="특징"
-            id="id_characteristic">
-        </div>
-        <div class="post-input"><label class="form-label post-color" for="id_image">이미지</label><input type="file"
-            name="image" accept="image/*" class="form-control" id="id_image"></div>
-        <div class="post-input"><label class="form-label post-color" for="id_thumbnail">썸네일</label><input type="file"
-            name="thumbnail" accept="image/*" class="form-control" id="id_thumbnail"></div>
+        {% bootstrap_form post_form %}
         {% if request.resolver_match.url_name == 'create' %}
         <div class="d-grid gap-2">
           <button type="submit" class="btn" style="background-color: rgb(245, 132, 12); color: white;">맛 등록하기

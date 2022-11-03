@@ -3,19 +3,47 @@
 
 {% block content %}
 
-  <div class="wrapper">
-    <div class="login-wrap d-flex flex-column">
-      <div class="my-5">
-        <h1 class="text-center post-color pb-4">회원가입</h1>
-        <form active="" method="POST" enctype="multipart/form-data">
-          {% csrf_token %}
-          {% bootstrap_form form %}
-          <div class="d-grid gap-2">
-            <button type="submit" class="btn" style="background-color: rgb(245, 132, 12); color: white;">회원가입
-            </button>
+
+<div class="wrapper">
+  <div class="login-wrap d-flex flex-column">
+    <div class="my-5">
+      <h1 class="text-center post-color pb-4">회원가입</h1>
+      <form active="" method="POST">
+        {% csrf_token %}
+        <input type="hidden" value="8t2uZRGwWKkSCXFNplgjuCOfWbnLDWvMtwHSDMNX0OVUPWFMxOiQEVg3hWxCFwa5">
+        <div class="mb-3"><input type="text" name="username" maxlength="150" autofocus class="form-control"
+            placeholder="아이디" required id="id_username">
+          <div class="form-text">150자 이하 문자, 숫자 그리고 @/./+/-/_만 가능합니다.</div>
+        </div>
+        <div class="mb-3"><input type="text" name="nickname" maxlength="80" class="form-control" placeholder="닉네임"
+            required id="id_nickname"></div>
+        <div class="mb-3"><input type="email" name="email" maxlength="254" class="form-control" placeholder="이메일"
+            id="id_email"></div>
+        <div class="mb-3"><input type="password" name="password1" autocomplete="new-password" class="form-control"
+            placeholder="비밀번호" required id="id_password1">
+          <div class="form-text">
+            <ul>
+              <li>다른 개인 정보와 유사한 비밀번호는 사용할 수 없습니다.</li>
+              <li>비밀번호는 최소 8자 이상이어야 합니다.</li>
+              <li>통상적으로 자주 사용되는 비밀번호는 사용할 수 없습니다.</li>
+              <li>숫자로만 이루어진 비밀번호는 사용할 수 없습니다.</li>
+            </ul>
           </div>
-        </form>
-      </div>
+        </div>
+        <div class="mb-3"><input type="password" name="password2" autocomplete="new-password" class="form-control"
+            placeholder="비밀번호 확인" required id="id_password2">
+          <div class="form-text">확인을 위해 이전과 동일한 비밀번호를 입력하세요. </div>
+        </div>
+        <div class="mb-3"><label class="post-color form-label" for="id_profile_image">프로필 이미지</label><input type="file"
+            name="profile_image" accept="image/*" class="form-control" id="id_profile_image"></div>
+        <div class="d-grid gap-2">
+          <button type="submit" class="btn" style="background-color: rgb(245, 132, 12); color: white;">회원가입
+          </button>
+        </div>
+      </form>
     </div>
+  </div>
+</div>
+
 
   {% endblock content %}
