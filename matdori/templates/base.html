@@ -25,7 +25,7 @@
           <li class="nav-item">
             {% if request.user.is_authenticated %}
             <a class="nav-link" href="{% url 'posts:create' %}">
-              <strong>가게 등록</strong>
+              <h5>가게 등록</h5>
             </a>
             {% endif %}
           </li>
@@ -42,23 +42,23 @@
           {% if request.user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'accounts:logout' %}">
-              <strong>로그아웃</strong>
+              <h5>로그아웃</h5>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'accounts:detail' request.user.pk %}">
-              <strong>마이페이지</strong>
+              <h5>마이페이지&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h5>
             </a>
           </li>
           {% else %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'accounts:login' %}">
-              <strong>로그인</strong>
+              <h5>로그인</h5>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'accounts:signup' %}">
-              <strong>회원가입</strong>
+              <h5>회원가입&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h5>
             </a>
           </li>
           {% endif %}
@@ -101,22 +101,22 @@
           <h4 class="text-uppercase mb-4 login-color">About our Team</h4>
           <div class="d-flex justify-content-evenly">
             <div>
-              <a class="mx-1" href="#!"><img class="footer_profile mx-auto rounded-circle"
+              <a class="mx-1" href="https://github.com/MoonSanghee"><img class="footer_profile mx-auto rounded-circle"
                   src="{% static 'images/3.jpg' %}" alt="..." /></a>
               <p>문상희</p>
             </div>
             <div>
-              <a class="mx-1" href="#!"><img class="footer_profile mx-auto rounded-circle"
+              <a class="mx-1" href="https://github.com/myeonghwan57"><img class="footer_profile mx-auto rounded-circle"
                   src="{% static 'images/3.jpg' %}" alt="..." /></a>
               <p>김명환</p>
             </div>
             <div>
-              <a class="mx-1" href="#!"><img class="footer_profile mx-auto rounded-circle"
+              <a class="mx-1" href="https://github.com/mororong9"><img class="footer_profile mx-auto rounded-circle"
                   src="{% static 'images/오리.png' %}" alt="..." /></a>
               <p>강문주</p>
             </div>
             <div>
-              <a class="mx-1" href="#!"><img class="footer_profile mx-auto rounded-circle"
+              <a class="mx-1" href="https://github.com/suyoung049"><img class="footer_profile mx-auto rounded-circle"
                   src="{% static 'images/기니피그.png' %}" alt="..." /></a>
               <p>이수영</p>
             </div>
