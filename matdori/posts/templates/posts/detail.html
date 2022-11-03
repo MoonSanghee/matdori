@@ -3,7 +3,7 @@
 
 
 {% block content %}
-<div class="row d-flex">
+<div class="row">
   <form class="d-flex col-4 my-3" role="search" method='GET' action="{% url 'posts:search' %}">
     <select class="select border rounded" aria-label="Default select example" name='field'>
       <option value="1">전체</option>
@@ -55,6 +55,7 @@
         {% if post.user.profile_image %}
         <img src="{{ post.user.profile_image.url }}" style="width: 120px; height: 120px; border-radius: 50%;">
         {% else %}
+
         <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg"
           style="width: 120px; height: 120px; border-radius: 50%;">
         {% endif %}
@@ -69,7 +70,6 @@
         <div id="follow-btn" data-post-id="{{ post.user.pk }}" class="btn btn-primary" type="submit">팔로우</div>
         {% endif %}
         {% endif %}
-
       </div>
     </div>
   </div>
@@ -115,6 +115,7 @@
         <a class="text-decoration-none text-danger" href="{% url 'posts:review_delete' post.pk review.pk %}"
           aria-disabled="true">삭제</a>
       </div>
+
       {% endif %}
     </div>
     {% endfor %}
@@ -145,7 +146,9 @@
         likeCount.innerText = response.data.likeCount
       })
   })
+
 </script>
+
 <!-- 팔로우 -->
 <script>
   const followBtn = document.querySelector('#follow-btn')
