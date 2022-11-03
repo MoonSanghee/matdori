@@ -24,14 +24,12 @@
         <!-- 좋아요 -->
         {% if request.user.is_authenticated %}
         {% if request.user in post.like_user.all %}
-        <i id="like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart-fill"
-          style="position: relative;top: 0;left: 0;"></i>
+        <i id="like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart-fill likes_color""></i>
         {% else %}
-        <i id="like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart"
-          style="position: relative;top: 0;left: 0;"></i>
+        <i id="like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart likes_color""></i>
         {% endif %}
         {% else %}
-        <i class="bi bi-balloon-heart" style="position: relative;top: 0;left: 0;"></i>
+        <i class="bi bi-balloon-heart likes_color"></i>
         {% endif %}
         <a class="ms-3" href="{% url 'posts:review_create' post.pk%}">리뷰작성</a>
       </span>
@@ -65,9 +63,9 @@
         <!-- 팔로우 -->
         {% if request.user != post.user %}
         {% if request.user in post.user.followers.all %}
-        <div id="follow-btn" data-post-id="{{ post.user.pk }}" class="btn btn-danger" type="submit">팔로우 취소</div>
+        <div id="follow-btn" data-post-id="{{ post.user.pk }}" class="ms-3 btn btn-danger" type="submit">팔로우 취소</div>
         {% else %}
-        <div id="follow-btn" data-post-id="{{ post.user.pk }}" class="btn btn-primary" type="submit">팔로우</div>
+        <div id="follow-btn" data-post-id="{{ post.user.pk }}" class="ms-3 btn btn-primary" type="submit">팔로우</div>
         {% endif %}
         {% endif %}
       </div>
@@ -94,6 +92,7 @@
   </div>
   <!-- 리뷰 -->
   <div class="my-5">
+    <h1>리뷰</h1>
     {% for review in reviews %}
     <div class="row border-bottom border-3 py-3">
       <div class="col-11">
@@ -146,6 +145,7 @@
         likeCount.innerText = response.data.likeCount
       })
   })
+
 
 </script>
 

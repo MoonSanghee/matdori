@@ -1,40 +1,83 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
+
+
 {% block content %}
+{% if not posts %}
+<div class="wrapper">
+  <div class="login-wrap">
+    <div class="my-5 d-flex flex-column">
+      <h1 class="text-center post-color pb-4">게시물이 없습니다.</h1>
+      <div>
+        <form class="search-box d-flex col-4 my-3" role="search" method='GET' action="{% url 'posts:search' %}">
+          <select class="post-color select border rounded mx-1" aria-label="Default select example" name='field'>
+            <option value="1">전체</option>
+            <option value="2">가게 이름</option>
+            <option value="3">주소</option>
+            <option value="4">음식 종류</option>
+            <option value="5">특징</option>
+          </select>
+          <input class="form-control me-2" type="search" placeholder="게시글 검색" name='searched'>
+          <button class="btn" type="submit"
+            style="background-color: rgb(245, 132, 12); color: white; width: 7rem;">검색</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% else %}
 
 
-<div class="d-flex">
-
-  <ul class="ul_com" list-style="none">
-
-    <h1 style="text-align:center" margin="50px"><br>맛도리검색</h1><br>
-    {% for post in posts%}
-
-    <li class="li_com">
-      <div class=search_card>
-        <a class="posts_search_img" href="{% url 'posts:detail' post.pk %}">
-          <div class="card mb-3" style="width: 1000px; ">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="{{ post.thumbnail.url }}" class="img-fluid rounded-start"
-                  alt="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body"><br>
-                  <h4 class="card-title">{{ post.title }}</h4><br>
-                  <p class="card-text">{{ post.address}}>
-                  </p>
+<div class="my-5">
+  <h1 class="login-color" style="text-align:center" margin="50px"><br>맛도리검색</h1><br>
+  <div class="d-flex justify-content-center">
+    <div class="ul_com" list-style="none">
+      {% for post in posts%}
+      <div class="li_com">
+        <div class="py-0 my-0">
+          <a class="posts_search_img" href="{% url 'posts:detail' post.pk %}">
+            <div class="card mb-3 d-flex">
+              <div class="row g-0" style="width: 800px;">
+                <div class="col-md-4">
+                  {% if post.thumbnail %}
+                  <img src="{{ post.thumbnail.url }}" class="img-fluid rounded-start"
+                    alt="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg">
+                  {% else %}
+                  <img src="https://img.apti.co.kr/aptHome/images/sub/album_noimg.gif"
+                    style="width: 265px; height: 160px;">
+                  {% endif %}
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body"><br>
+                    <h4 class="login-color card-title">{{ post.title }}</h4><br>
+                    <p class="card-text">{{ post.address}}>
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </a>
+          </a>
+        </div>
       </div>
-    </li>
-
-    </a>
-    {% endfor %}
+      {% endfor %}
+      <div>
+        <form class="search-box d-flex col-4 my-3" role="search" method='GET' action="{% url 'posts:search' %}">
+          <select class="post-color select border rounded mx-1" aria-label="Default select example" name='field'>
+            <option value="1">전체</option>
+            <option value="2">가게 이름</option>
+            <option value="3">주소</option>
+            <option value="4">음식 종류</option>
+            <option value="5">특징</option>
+          </select>
+          <input class="form-control me-2" type="search" placeholder="게시글 검색" name='searched'>
+          <button class="btn" type="submit"
+            style="background-color: rgb(245, 132, 12); color: white; width: 7rem;">검색</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
+{% endif %}
 
 {% endblock content %}
