@@ -12,7 +12,7 @@
 }
 
 .wrapper {
-  height: 1500px;
+  height: 1000px;
 }
 
 .footer_image {
@@ -136,18 +136,20 @@ a {
 .ul_com {
   list-style: none;
 }
-.li_com{
-  list-style:none;
+
+.li_com {
+  list-style: none;
 }
-.search_card{
-  width:1200px;
-  height:250px;
+
+.search_card {
+  width: 1200px;
+  height: 250px;
 }
 
 .home_search {
-  height: 25rem; 
-  width: 100%; 
-  background-color:bisque;
+  height: 25rem;
+  width: 100%;
+  background-color: bisque;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -172,48 +174,61 @@ a {
   width: 1200px;
   height: 300px;
 }
+
 .likes_color {
   color: rgb(212, 16, 16);
 }
-.mypage{
+
+.mypage {
   display: flex;
   flex-direction: column;
   margin: 60px auto 10px;
   width: 550px;
   height: 500px;
-  background-color:rgb(245, 132, 12);
+  background-color: rgb(245, 132, 12);
   border-radius: 100px / 80px;
-  padding-top:40px;
+  padding-top: 40px;
   color: beige;
 }
-.mypage_profile{
+
+.mypage_profile {
   display: flex;
   flex-direction: column;
   margin: 30px auto;
   align-items: center;
 }
-.mypage_img{
+
+.mypage_img {
   padding-bottom: 40px;
 }
-.mypage_follow{
+
+.mypage_follow {
   display: flex;
-  flex-direction:row;
+  flex-direction: row;
   justify-content: space-around;
   margin-top: 20px;
 }
-.mypage_btn{
+
+.mypage_btn {
   text-align: center;
 }
-.mypage_review{
-  background-color:white;
+
+.mypage_review {
+  background-color: white;
   padding: 20px;
   border-radius: 30px / 40px;
 }
-.mypage_review_title{
+
+.mypage_review_title {
   display: flex;
-  flex-direction:row;
+  flex-direction: row;
 }
-.mypage_score{
+
+.mypage_score {
   margin-top: 7px;
   margin-left: 10px;
+}
+
+.search-box {
+  width: 100%;
 }
