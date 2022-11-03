@@ -2,34 +2,33 @@
 {% load django_bootstrap5 %}
 
 {% block content %}
-<div class="wrapper">
-  <div class="login-wrap d-flex flex-column">
-    <div class="my-5">
-      <h1 class="text-center post-color pb-4">프로필 업데이트</h1>
-      <form action="" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="hidden" value="Dcg5dJKsusBRcGYGCXwsaOkxJ7XGypIF95Bj2UvehknuNQsylD2vvnpDlwkOjRAQ">
-        <div class="mb-3"><label class="login-color form-label" for="id_nickname">닉네임</label><input type="text"
-            name="nickname" value="삼겹살" maxlength="80" class="form-control" placeholder="닉네임" required id="id_nickname">
-        </div>
-        <div class="mb-3"><label class="login-color form-label" for="id_email">이메일</label><input type="email"
-            name="email" value="suyoung049@gmail.com" maxlength="254" class="form-control" placeholder="이메일"
-            id="id_email"></div>
-        <div class="mb-3"><label class="login-color form-label" for="id_profile_image">프로필 이미지</label><input type="file"
-            name="profile_image" accept="image/*" class="form-control" id="id_profile_image"></div>
-        <div class="d-grid gap-2 py-2">
-          <button type="submit" class="btn" style="background-color: rgb(245, 132, 12); color: white;">수정완료
-          </button>
-        </div>
-        <div class="d-grid gap-2 py-2">
-          <a class="btn btn-outline-primary " href="/accounts/password/">비밀번호 변경</a>
-        </div>
-        <div class="d-grid gap-2 py-2">
-          <a class="btn btn-outline-danger" href="/accounts/delete/">회원탈퇴</a>
-        </div>
-      </form>
+  <div class="wrapper">
+    <div class="login-wrap d-flex flex-column">
+      <div class="my-5">
+        <h1 class="text-center post-color pb-4">프로필 업데이트</h1>
+        <form action="" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <input type="hidden" value="Dcg5dJKsusBRcGYGCXwsaOkxJ7XGypIF95Bj2UvehknuNQsylD2vvnpDlwkOjRAQ">
+          <div class="mb-3">
+            <label class="login-color form-label" for="id_nickname">닉네임</label><input type="text" name="nickname" maxlength="80" class="form-control" placeholder="닉네임" required="required" id="id_nickname">
+          </div>
+          <div class="mb-3">
+            <label class="login-color form-label" for="id_email">이메일</label><input type="email" name="email" maxlength="254" class="form-control" placeholder="이메일" id="id_email"></div>
+          <div class="mb-3">
+            <label class="login-color form-label" for="id_profile_image">프로필 이미지</label><input type="file" name="profile_image" accept="image/*" class="form-control" id="id_profile_image"></div>
+          <div class="d-grid gap-2 py-2">
+            <button type="submit" class="btn" style="background-color: rgb(245, 132, 12); color: white;">수정완료
+            </button>
+          </div>
+          <div class="d-grid gap-2 py-2">
+            <a class="btn btn-outline-primary " href="/accounts/password/">비밀번호 변경</a>
+          </div>
+          <div class="d-grid gap-2 py-2">
+            <a class="btn btn-outline-danger" href="/accounts/delete/">회원탈퇴</a>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 
 {% endblock content %}

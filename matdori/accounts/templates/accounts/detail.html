@@ -2,18 +2,9 @@
 {% load django_bootstrap5 %}
 {% load static %}
 {% block content %}
-
-  <div>
-    <div>
-      <div>
-       {% if request.user != user %}
-          <h2>{{user.username}}
-            님의 페이지</h2>
-        {% else %}
-          <h2>마이페이지</h2>
-        {% endif %}
-      </div>
-      <div>
+  <div class="mypage">
+    <div class='mypage_profile'>
+      <div class='mypage_img'>
         {% if user.profile_image %}
           <div class="box">
             <img class="profile" src="{{ user.profile_image.url }}">
@@ -25,58 +16,67 @@
         {% endif %}
       </div>
       <div>
-        <h3> {{user.username}} 님의 프로필</h3>
-        <p>이메일 : {{user.email}}</p>
-        <p>닉네임 : {{user.nickname}}</p>
+        <h3>
+          {{user.username}}
+          님의 프로필</h3>
+        <p>이메일 :
+          {{user.email}}</p>
+        <p>닉네임 :
+          {{user.nickname}}</p>
       </div>
-      <div>
-        {% if request.user == user %}
-          <button type="button" class="btn" style="background-color: rgb(245, 132, 12);">
-            <div class="title">
-              <a href="{%url 'accounts:update' %}">프로필 수정</a>
-            </div>
-          </button>
-        {% endif %}
-      </div>  
-      <div>
-        <div>
-          팔로잉
-          <a id="following-count" href="{% url 'accounts:following' user.pk%}">{{user.followings.count}}</a>
-        </div>
-        <div>
-          팔로워
-          <a id="follower-count" href="{% url 'accounts:follower' user.pk%}">{{user.followers.count}}</a>
-        </div>
-        <div>
-          {% if request.user != user %}
-          {% csrf_token %}
-          <form id="follow-form" data-user-id="{{ user.pk }}">
-            {% if request.user in user.followers.all %}
-              <button id="follow-btn" class="btn btn-primary form-control" type="submit">팔로우 취소</button>
-            {% else %}
-              <button id="follow-btn" class="btn btn-outline-primary form-control" type="submit">팔로우</button>
-            {% endif %}
-          </form>
-          {% endif %}
-      </div>        
     </div>
-  </div> 
-  <div> 
-    <div>
-      <h3>작성글</h3>
-      <p>{{ user.review_set.count }}개를 작성했습니다.</p>
-      <div>
-        {% for review in user.review_set.all %}
-          <p>
-            {{ forloop.counter }}
-            <a href="{%url 'posts:detail' review.post.pk %}">
-              {{review.post.title}}</a> | 평점 : {{review.glade}}
-          </p>
-          <p><a href="{% url 'posts:detail' review.pk %}">{{ review.content }}</a></p>
-        {% endfor %}
-      </div>
+    <div class="mypage_follow">
+      <p>팔로잉
+        <a id="following-count" href="{% url 'accounts:following' user.pk%}">
+          {{user.followings.count}}</a>
+      </p>
+      <p>팔로워
+        <a id="follower-count" href="{% url 'accounts:follower' user.pk%}">
+          {{user.followers.count}}</a>
+      </p>
     </div>
   </div>
+  <div class='mypage_btn'>
+    {% if request.user != user %}
+      {% csrf_token %}
+      <form id="follow-form" data-user-id="{{ user.pk }}">
+        {% if request.user in user.followers.all %}
+          <button id="follow-btn" class="btn btn-primary form-control" type="submit" style='width:10%'>팔로우 취소</button>
+        {% else %}
+          <button id="follow-btn" class="btn btn-outline-primary form-control" type="submit" style='width:50%'>팔로우 취소>팔로우</button>
+        {% endif %}
+      </form>
+    {% else %}
+      <button type="button" class="btn" style="width:10%; background-color: rgb(245, 132, 12);">
+        <div class="title">
+          <a href="{%url 'accounts:update' %}">프로필 수정</a>
+        </div>
+      </button>
+    {% endif %}
+  </div>
+  <hr>
+  <div>
+    <h3>작성글</h3>
+    <p>{{ user.review_set.count }}개를 작성했습니다.</p>
+    {% for review in user.review_set.all %}
+      <div class='mypage_review'>
+        <div class='mypage_review_title'>
+          <h3>
+            <a href="{%url 'posts:detail' review.post.pk %}">
+              {{review.post.title}}</a>
+            |
+          </h3>
+          <p class='mypage_score'>
+            평점 :
+            {{review.glade}}
+          </p>
+        </div>
+        <a href="{% url 'posts:detail' review.pk %}">{{ review.content }}</a>
+      </div>
+      <hr>
+    {% endfor %}
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
     const followUrl = "{% url 'accounts:follow' user.pk %}";
