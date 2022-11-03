@@ -116,15 +116,6 @@ a {
   color: rgb(245, 132, 12);
 }
 
-.nav-container {
-  --bs-gutter-x: 1.5rem;
-  --bs-gutter-y: 0;
-  width: 65%;
-  padding-right: calc(var(--bs-gutter-x) * .5);
-  padding-left: calc(var(--bs-gutter-x) * .5);
-  margin-right: 250px;
-  margin-left: 90px;
-}
 
 
 .back-search {
@@ -141,15 +132,88 @@ a {
   color: black
 }
 
+
 .ul_com {
   list-style: none;
+}
+.li_com{
+  list-style:none;
+}
+.search_card{
+  width:1200px;
+  height:250px;
+}
+
+.home_search {
+  height: 25rem; 
+  width: 100%; 
+  background-color:bisque;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.detail_image {
+  width: 100%;
+}
+
+.profile_image {
+  width: 100px;
+  border-radius: 50%;
+
 }
 
 .li_com {
   list-style: none;
 }
 
+
 .search_card {
   width: 1200px;
   height: 300px;
+}
+.likes_color {
+  color: rgb(212, 16, 16);
+}
+.mypage{
+  display: flex;
+  flex-direction: column;
+  margin: 60px auto 10px;
+  width: 550px;
+  height: 500px;
+  background-color:rgb(245, 132, 12);
+  border-radius: 100px / 80px;
+  padding-top:40px;
+  color: beige;
+}
+.mypage_profile{
+  display: flex;
+  flex-direction: column;
+  margin: 30px auto;
+  align-items: center;
+}
+.mypage_img{
+  padding-bottom: 40px;
+}
+.mypage_follow{
+  display: flex;
+  flex-direction:row;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+.mypage_btn{
+  text-align: center;
+}
+.mypage_review{
+  background-color:white;
+  padding: 20px;
+  border-radius: 30px / 40px;
+}
+.mypage_review_title{
+  display: flex;
+  flex-direction:row;
+}
+.mypage_score{
+  margin-top: 7px;
+  margin-left: 10px;
 }
