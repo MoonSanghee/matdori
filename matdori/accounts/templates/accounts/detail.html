@@ -2,17 +2,18 @@
 {% load django_bootstrap5 %}
 {% load static %}
 {% block content %}
+<div class="container">
   <div class="mypage">
     <div class='mypage_profile'>
       <div class='mypage_img'>
         {% if user.profile_image %}
-          <div class="box">
-            <img class="profile" src="{{ user.profile_image.url }}">
-          </div>
+        <div class="box">
+          <img class="profile" src="{{ user.profile_image.url }}">
+        </div>
         {% else %}
-          <div class="profile-box">
-            <img class="profile" src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg">
-          </div>
+        <div class="profile-box">
+          <img class="profile" src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg">
+        </div>
         {% endif %}
       </div>
       <div>
@@ -38,20 +39,20 @@
   </div>
   <div class='mypage_btn'>
     {% if request.user != user %}
-      {% csrf_token %}
-      <form id="follow-form" data-user-id="{{ user.pk }}">
-        {% if request.user in user.followers.all %}
-          <button id="follow-btn" class="btn btn-primary form-control" type="submit" style='width:10%'>팔로우 취소</button>
-        {% else %}
-          <button id="follow-btn" class="btn btn-outline-primary form-control" type="submit" style='width:10%'>팔로우</button>
-        {% endif %}
-      </form>
+    {% csrf_token %}
+    <form id="follow-form" data-user-id="{{ user.pk }}">
+      {% if request.user in user.followers.all %}
+      <button id="follow-btn" class="btn btn-primary form-control" type="submit" style='width:10%'>팔로우 취소</button>
+      {% else %}
+      <button id="follow-btn" class="btn btn-outline-primary form-control" type="submit" style='width:10%'>팔로우</button>
+      {% endif %}
+    </form>
     {% else %}
-      <button type="button" class="btn" style="width:10%; background-color: rgb(245, 132, 12);">
-        <div class="title">
-          <a href="{%url 'accounts:update' %}">프로필 수정</a>
-        </div>
-      </button>
+    <button type="button" class="btn" style="width:10%; background-color: rgb(245, 132, 12);">
+      <div class="title">
+        <a href="{%url 'accounts:update' %}">프로필 수정</a>
+      </div>
+    </button>
     {% endif %}
   </div>
   <hr>
@@ -59,73 +60,74 @@
     <h3>작성글</h3>
     <p>{{ user.review_set.count }}개를 작성했습니다.</p>
     {% for review in user.review_set.all %}
-      <div class='mypage_review'>
-        <div class='mypage_review_title'>
-          <h3>
-            <a href="{%url 'posts:detail' review.post.pk %}">
-              {{review.post.title}}</a>
-            |
-          </h3>
-          <p class='mypage_score'>
-            평점 :
-            {{review.glade}}
-          </p>
-        </div>
-        <a href="{% url 'posts:detail' review.pk %}">{{ review.content }}</a>
+    <div class='mypage_review'>
+      <div class='mypage_review_title'>
+        <h3>
+          <a href="{%url 'posts:detail' review.post.pk %}">
+            {{review.post.title}}</a>
+          |
+        </h3>
+        <p class='mypage_score'>
+          평점 :
+          {{review.glade}}
+        </p>
       </div>
-      <hr>
+      <a href="{% url 'posts:detail' review.pk %}">{{ review.content }}</a>
+    </div>
+    <hr>
     {% endfor %}
   </div>
+</div>
 
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script>
-    const followUrl = "{% url 'accounts:follow' user.pk %}";
-  </script>
-  <script>
-    const followForm = document.querySelector("#follow-form")
-    const csrftoken = document
-      .querySelector('[name=csrfmiddlewaretoken]')
-      .value
-      followForm
-      .addEventListener("submit", function (event) {
-        event.preventDefault()
-        axios({
-          method: "POST",
-          url: followUrl,
-          headers: {
-            'X-CSRFToken': csrftoken
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  const followUrl = "{% url 'accounts:follow' user.pk %}";
+</script>
+<script>
+  const followForm = document.querySelector("#follow-form")
+  const csrftoken = document
+    .querySelector('[name=csrfmiddlewaretoken]')
+    .value
+  followForm
+    .addEventListener("submit", function (event) {
+      event.preventDefault()
+      axios({
+        method: "POST",
+        url: followUrl,
+        headers: {
+          'X-CSRFToken': csrftoken
+        }
+      })
+        .then(response => {
+          const isFollowed = response.data.is_followed
+          const followBtn = document.querySelector('#follow-form > #follow-btn')
+          const followerCountTag = document.querySelector('#follower-count')
+          const followingCountTag = document.querySelector('#following-count')
+
+          if (isFollowed) {
+            followBtn
+              .classList
+              .add("btn-primary")
+            followBtn
+              .classList
+              .remove("btn-outline-primary")
+            followBtn.innerText = "팔로우 취소"
+          } else {
+            followBtn
+              .classList
+              .add("btn-outline-primary")
+            followBtn
+              .classList
+              .remove("btn-primary")
+            followBtn.innerText = "팔로우"
           }
+          followerCountTag.innerText = response.data.followers_count
+          followingCountTag.innerText = response.data.followings_count
         })
-          .then(response => {
-            const isFollowed = response.data.is_followed
-            const followBtn = document.querySelector('#follow-form > #follow-btn')
-            const followerCountTag = document.querySelector('#follower-count')
-            const followingCountTag = document.querySelector('#following-count')
-
-            if (isFollowed) {
-              followBtn
-                .classList
-                .add("btn-primary")
-              followBtn
-                .classList
-                .remove("btn-outline-primary")
-              followBtn.innerText = "팔로우 취소"
-            } else {
-              followBtn
-                .classList
-                .add("btn-outline-primary")
-              followBtn
-                .classList
-                .remove("btn-primary")
-              followBtn.innerText = "팔로우"
-            }
-            followerCountTag.innerText = response.data.followers_count
-            followingCountTag.innerText = response.data.followings_count
-          })
-          .catch(error => {
-            console.log(error.response)
-          })
+        .catch(error => {
+          console.log(error.response)
         })
-  </script>
+    })
+</script>
 
 {% endblock content %}
