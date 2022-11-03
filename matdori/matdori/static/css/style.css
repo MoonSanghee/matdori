@@ -148,4 +148,24 @@ a {
   list-style:none;
 }
 
+.home_search {
+  height: 25rem; 
+  width: 100%; 
+  background-color:bisque;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.detail_image {
+  width: 100%;
+}
+
+.profile_image {
+  width: 100px;
+  border-radius: 50%;
+}
+
+.likes_color {
+  color: rgb(212, 16, 16);
+}
