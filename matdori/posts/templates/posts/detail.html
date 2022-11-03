@@ -3,7 +3,7 @@
 
 
 {% block content %}
-<div class="row">
+<div class="row d-flex">
   <form class="d-flex col-4 my-3" role="search" method='GET' action="{% url 'posts:search' %}">
     <select class="select border rounded" aria-label="Default select example" name='field'>
       <option value="1">전체</option>
@@ -13,24 +13,25 @@
       <option value="5">특징</option>
     </select>
     <input class="form-control me-2" type="search" placeholder="게시글 검색" name='searched'>
-
     <button class="btn btn-outline-success me-2" type="submit" style="width: 7rem;">검색</button>
   </form>
 </div>
 <div class="row">
   <!-- 왼쪽 구역 -->
   <div class="col-7">
-    <h1 class="d-flex">{{ post.title }} 
+    <h1 class="d-flex">{{ post.title }}
       <span class="ms-auto">
         <!-- 좋아요 -->
         {% if request.user.is_authenticated %}
-          {% if request.user in post.like_user.all %}
-            <i id="like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart-fill" style="position: relative;top: 0;left: 0;"></i>
-          {% else %}
-            <i id="like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart" style="position: relative;top: 0;left: 0;"></i>
-          {% endif %}
+        {% if request.user in post.like_user.all %}
+        <i id="like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart-fill"
+          style="position: relative;top: 0;left: 0;"></i>
         {% else %}
-          <i class="bi bi-balloon-heart" style="position: relative;top: 0;left: 0;"></i>
+        <i id="like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart"
+          style="position: relative;top: 0;left: 0;"></i>
+        {% endif %}
+        {% else %}
+        <i class="bi bi-balloon-heart" style="position: relative;top: 0;left: 0;"></i>
         {% endif %}
         <a class="ms-3" href="{% url 'posts:review_create' post.pk%}">리뷰작성</a>
       </span>
@@ -62,11 +63,11 @@
         </a>
         <!-- 팔로우 -->
         {% if request.user != post.user %}
-          {% if request.user in post.user.followers.all %}
-            <div id="follow-btn" data-post-id="{{ post.user.pk }}" class="btn btn-danger" type="submit">팔로우 취소</div>
-          {% else %}
-            <div id="follow-btn" data-post-id="{{ post.user.pk }}" class="btn btn-primary" type="submit">팔로우</div>
-          {% endif %}
+        {% if request.user in post.user.followers.all %}
+        <div id="follow-btn" data-post-id="{{ post.user.pk }}" class="btn btn-danger" type="submit">팔로우 취소</div>
+        {% else %}
+        <div id="follow-btn" data-post-id="{{ post.user.pk }}" class="btn btn-primary" type="submit">팔로우</div>
+        {% endif %}
         {% endif %}
 
       </div>
@@ -154,20 +155,20 @@
       method: 'get',
       url: `/accounts/follow/${event.target.dataset.postId}/`
     })
-    .then(response => {
-      console.log(event.target.dataset)
-      console.log(response.data)
-      if (response.data.is_followed === true) {
-        event.target.classList.add('btn-danger')
-        event.target.classList.remove('btn-primary')
-        followBtn.innerText = "팔로우 취소"
-      } else {
-        event.target.classList.add('btn-primary')
-        event.target.classList.remove('btn-danger')
-        followBtn.innerText = "팔로우"
-      }
-    })
+      .then(response => {
+        console.log(event.target.dataset)
+        console.log(response.data)
+        if (response.data.is_followed === true) {
+          event.target.classList.add('btn-danger')
+          event.target.classList.remove('btn-primary')
+          followBtn.innerText = "팔로우 취소"
+        } else {
+          event.target.classList.add('btn-primary')
+          event.target.classList.remove('btn-danger')
+          followBtn.innerText = "팔로우"
+        }
+      })
   })
-  
+
 </script>
 {% endblock content %}

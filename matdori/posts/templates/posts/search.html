@@ -2,39 +2,45 @@
 {% load django_bootstrap5 %}
 {% block content %}
 
-
-<div class="d-flex">
-
-  <ul class="ul_com" list-style="none">
-
-    <h1 style="text-align:center" margin="50px"><br>맛도리검색</h1><br>
-    {% for post in posts%}
-
-    <li class="li_com">
-      <div class=search_card>
-        <a class="posts_search_img" href="{% url 'posts:detail' post.pk %}">
-          <div class="card mb-3" style="width: 1200px; ">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="{{ post.thumbnail.url }}" class="img-fluid rounded-start"
-                  alt="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body"><br>
-                  <h4 class="card-title">{{ post.title }}</h4><br>
-                  <p class="card-text">{{ post.address}}>
-                  </p>
+<div class="wrapper">
+  <h1 style="text-align:center" margin="50px"><br>맛도리검색</h1><br>
+  <div class="d-flex flex-column">
+    {% if not posts %}
+    <p>게시물이 없습니다</p>
+    {% else %}
+    <ul class="ul_com" list-style="none">
+      {% for post in posts%}
+      <li class="li_com">
+        <div class=search_card>
+          <a class="posts_search_img" href="{% url 'posts:detail' post.pk %}">
+            <div class="card mb-3" style="width: 1000px; ">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  {% if not post.thumbnail %}
+                  <img src="https://img.apti.co.kr/aptHome/images/sub/album_noimg.gif"
+                    style="width: 400px; height: 240px;">
+                  {% else %}
+                  <img src="{{ post.thumbnail.url }}" class="img-fluid rounded-start"
+                    alt="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg">
+                  {% endif %}
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body"><br>
+                    <h4 class="card-title">{{ post.title }}</h4><br>
+                    <p class="card-text">{{ post.address }}>
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </a>
-      </div>
-    </li>
-
-    </a>
+          </a>
+        </div>
+      </li>
+    </ul>
     {% endfor %}
+    {% endif %}
+  </div>
 </div>
-</div>
+
 
 {% endblock content %}
