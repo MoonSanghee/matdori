@@ -199,7 +199,7 @@ a {
   display: flex;
   flex-direction:row;
   justify-content: space-around;
-  margin-top: 20px;
+  margin-top: 30px ;
 }
 .mypage_btn{
   text-align: center;
@@ -231,4 +231,9 @@ a {
 }
 .follow_img{
   border-radius: 50%;
+}
+.follow_non_img{
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
 }
