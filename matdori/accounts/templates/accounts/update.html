@@ -10,12 +10,12 @@
           {% csrf_token %}
           <input type="hidden" value="Dcg5dJKsusBRcGYGCXwsaOkxJ7XGypIF95Bj2UvehknuNQsylD2vvnpDlwkOjRAQ">
           <div class="mb-3">
-            <label class="login-color form-label" for="id_nickname">닉네임</label><input type="text" name="nickname" maxlength="80" class="form-control" placeholder="닉네임" required="required" id="id_nickname">
+            <label class="login-color form-label" for="id_nickname">닉네임</label><input value='{{user.nickname}}' type="text" name="nickname" maxlength="80" class="form-control" required="required" id="id_nickname">
           </div>
           <div class="mb-3">
-            <label class="login-color form-label" for="id_email">이메일</label><input type="email" name="email" maxlength="254" class="form-control" placeholder="이메일" id="id_email"></div>
+            <label class="login-color form-label" for="id_email">이메일</label><input value='{{user.email}}' type="email" name="email" maxlength="254" class="form-control" id="id_email"></div>
           <div class="mb-3">
-            <label class="login-color form-label" for="id_profile_image">프로필 이미지</label><input type="file" name="profile_image" accept="image/*" class="form-control" id="id_profile_image"></div>
+            <label class="login-color form-label" for="id_profile_image">프로필 이미지</label><input vlaue='{{user.profile_image}}' type="file" name="profile_image" accept="image/*" class="form-control" id="id_profile_image"></div>
           <div class="d-grid gap-2 py-2">
             <button type="submit" class="btn" style="background-color: rgb(245, 132, 12); color: white;">수정완료
             </button>
