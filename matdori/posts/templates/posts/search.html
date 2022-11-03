@@ -1,29 +1,26 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
-
 {% block content %}
-{% for post in posts%}
-
-
-<div class="posts_search_contain">
 
 <div class="d-flex">
-    <div class="back-search">
-        <br><br>
-        <h1 style="text-align:center">{{ posts.title }}</h1><br>
-        <ul class="ul_com" list-style="none">
+
+    <ul class="ul_com" list-style="none">
+
+<h1 style="text-align:center" margin="50px"><br>맛도리검색</h1><br>
+{% for post in posts%}
+
             <li class="li_com">
-                <div>
-                    <a class="posts_search_img" href="">
-                        <div class="card mb-3" style="max-width: 1500px;">
+                <div class=search_card>
+                    <a class="posts_search_img" href="{% url 'posts:detail' post.pk %}">
+                        <div class="card mb-3" style="width: 1200px; ">
                             <div class="row g-0">
                             <div class="col-md-4">
-                                <img src="{{ post.thumbnail.url }}" class="img-fluid rounded-start" alt="...">
+                                <img src="{{ post.thumbnail.url }}" class="img-fluid rounded-start" alt="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg">
                             </div>
                             <div class="col-md-8">
-                                <div class="card-body">
-                                <h5 class="card-title">{{ posts.title }}</h5>
-                                <p class="card-text">{{ post.address}}
+                                <div class="card-body"><br>
+                                <h4 class="card-title">{{ post.title }}</h4><br>
+                                <p class="card-text">{{ post.address}}>
                                 </p>
                                 </div>
                             </div>
@@ -32,71 +29,9 @@
                     </a>
                 </div>
             </li>
-            {% endfor %}
-
-                   
-            {% comment %} <a class="posts_search_img" href="{% url 'posts:index' %}">
-            <div class="card" style="width: 25rem;">
-                <img src="https://i.esdrop.com/d/t/bvRLlOwptP/Ug84j6LNz9.jpg" class="card-img-top" alt="카테고리에 따른 맛집">
-            <div class="card-body">
-            <p class="card-text"><h5>오레노라멘</h5>아주 따땃한 라멘이다</p>
-            </div>
-        </div>
-        <div>
-
-            <a class="posts_search_img" href="{% url 'posts:index' %}">
-              <div class="card mb-3" style="max-width: 1500px;">
-                <div class="row g-0">
-                  <div class="col-md-4">
-                    <img src="https://i.esdrop.com/d/t/bvRLlOwptP/Ug84j6LNz9.jpg" class="img-fluid rounded-start"
-                      alt="...">
-                  </div>
-                  <div class="col-md-8">
-                    <div class="card-body">
-                      <h5 class="card-title">오레노라멘</h5>
-                      <p class="card-text">라멘이 따끈따근 맛이 좋다.
-                      </p>
-                      <p class="card-text"><small class="text-muted">Last updated 3 mins
-                          ago</small></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-        </li>
-
-        {% comment %} <a class="posts_search_img" href="{% url 'posts:index' %}">
-          <div class="card" style="width: 25rem;">
-            <img src="https://i.esdrop.com/d/t/bvRLlOwptP/Ug84j6LNz9.jpg" class="card-img-top" alt="카테고리에 따른 맛집">
-            <div class="card-body">
-              <p class="card-text">
-              <h5>오레노라멘</h5>아주 따땃한 라멘이다</p>
-            </div>
-          </div>
-          <div>
-            <a class="posts_search_img" href="{% url 'posts:index' %}">
-              <div class="card" style="width: 25rem;">
-                <img src="https://i.esdrop.com/d/t/bvRLlOwptP/Ug84j6LNz9.jpg" class="card-img-top" alt="카테고리에 따른 맛집">
-                <div class="card-body">
-                  <p class="card-text">
-                  <h5>오레노라멘</h5>아주 따땃한 라멘이다</p>
-                </div>
-              </div>
-              <div>
-                <a class="posts_search_img" href="{% url 'posts:index' %}">
-                  <div class="card" style="width: 25rem;">
-                    <img src="https://i.esdrop.com/d/t/bvRLlOwptP/Ug84j6LNz9.jpg" class="card-img-top"
-                      alt="카테고리에 따른 맛집">
-                    <div class="card-body">
-                      <p class="card-text">
-                      <h5>오레노라멘</h5>아주 따땃한 라멘이다</p>
-                    </div>
-                  </div>
-              </div>
-          </div> {% endcomment %}
+               
         </a>
-    </div>
+        {% endfor %} 
   </div>
 </div>
 
