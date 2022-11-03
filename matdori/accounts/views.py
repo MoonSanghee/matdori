@@ -10,19 +10,17 @@ from django.http import JsonResponse
 
 
 def login(request):
- 
-        if request.method == "POST":
-            form = AuthenticationForm(request, data=request.POST)
-            if form.is_valid():
-                auth_login(request, form.get_user())
-                return redirect("posts:index")
-        else:
-            form = AuthenticationForm()
-        context = {
-            "form": form,
-        }
-        messages.warning(request, "아이디와 비밀번호를 확인해주세요")
-        return render(request, "accounts/login.html", context)
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            auth_login(request, form.get_user())
+            return redirect("posts:index")
+    else:
+        form = AuthenticationForm()
+    context = {
+        "form": form,
+    }
+    return render(request, "accounts/login.html", context)
 
 
 
@@ -123,9 +121,7 @@ def change_password(request):
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, form.user)
-            messages.success(request,
-                             '비밀번호를 변경했습니다.',
-                             extra_tags='alert-success')
+            messages.success(request, '비밀번호를 변경했습니다.')
             return redirect("posts:index")
         else:
             messages.error(request, "비밀번호 변경에 실패했습니다.")
