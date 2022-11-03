@@ -70,11 +70,13 @@ def detail(request, pk):
     points = 0
     for review in reviews:
         points += review.glade
+    if len(reviews):
+        points = round(points/len(reviews), 1)
     context = {
         'post':post,
         'reviews':post.review_set.all(),
         'reviewsform':reviewsform,
-        'points': round(points/len(reviews), 1)
+        'points': points
     }
     return render(request, 'posts/detail.html', context)
 
