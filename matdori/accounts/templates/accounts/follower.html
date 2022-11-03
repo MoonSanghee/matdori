@@ -4,10 +4,17 @@
   <div>
     <h1>{{ user.username }}님을 팔로우한 회원</h1>
   </div>
-  <div>
-    {% for user in users %}
-      <img src="{{user.image.url}}">
-      <a href="{% url 'accounts:detail' user.pk %}">{{ user.username }}</a>
-    {% endfor %}
-  </div>
+  {% if user.followers.count == 0 %}
+    <p>{{ user.username }}
+      님을 팔로우하는 회원이 없습니다.</p>
+  {% else %}
+    <p>{{user.followers.count}}
+      명</p>
+    <div>
+      {% for user in users %}
+        <img src="{{user.profile_image.url}}">
+        <a href="{% url 'accounts:detail' user.pk %}">{{ user.username }}</a>
+      {% endfor %}
+    </div>
+  {% endif %}
 {% endblock content %}
