@@ -229,6 +229,12 @@ a {
   margin-left: 10px;
 }
 
+.index-title{
+  color:rgb(232, 224, 179);
+  text-align: center;
+}
+
+
 
 .search-box {
   width: 100%;
@@ -249,4 +255,5 @@ a {
 .follow_img{
   border-radius: 50%;
 }
+
 

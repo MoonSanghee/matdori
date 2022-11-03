@@ -3,23 +3,32 @@
 
 {% block content %}
 <!-- 검색창 -->
-<div class="" style="height: 25rem; width: 100%; background-color:bisque;display: flex;align-items: center;justify-content: center;">
-  <form class="d-flex col-4 my-3" role="search" method='GET' action="{% url 'posts:search' %}">
-    <select class="select border rounded" aria-label="Default select example" name='field'>
-      <option value="1">전체</option>
-      <option value="2">가게 이름</option>
-      <option value="3">주소</option>
-      <option value="4">음식 종류</option>
-      <option value="5">특징</option>
-    </select>
-    <input class="form-control me-2" type="search" placeholder="게시글 검색" name='searched'>
+<div class="" style="background-image: url('https://i.esdrop.com/d/t/bvRLlOwptP/929gZPPmQp.jpg'); background-size:cover; height:25rem; width: 100%; background-color:bisque;display: flex;align-items: center;justify-content: center;">
+<div class="d=flex">
+   <div><span class="d-flex"><h1 class="" style="color:rgb(203, 78, 43); background-color:rgb(232, 224, 179); text-align:center;">찾고 있는 맛도리를 검색</h1><br></span></div>
+   <div>
+    <form class="d-flex col-4 my-3" style="width:500px; height:50px" role="search" method='GET' action="{% url 'posts:search' %}">
+      
+      <select class="select border rounded" aria-label="Default select example" name='field'>
+        <option value="1">전체</option>
+        <option value="2">가게 이름</option>
+        <option value="3">주소</option>
+        <option value="4">음식 종류</option>
+        <option value="5">특징</option>
+      </select>
+      <input class="form-control me-2" type="search" placeholder="게시글 검색" name='searched'>
 
-    <button class="btn rounded-pill btn-outline-success me-2" type="submit" style="width: 7rem;">검색</button>
-  </form>
+      <button class="btn rounded-pill" type="submit" style="width: 7rem; background-color: rgb(245, 132, 12);">검색</button>
+      
+    </form>
+  </div>
 </div>
-
+</div>
 <!-- 추천 영역 -->
 
+{% for post in posts%}
+{{ post.characteristic }}
+{% endfor %}
 <div class="row">
   <div class="col-12 my-4">
     <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" style="height: 75px; border-radius: 50%;" alt="">
