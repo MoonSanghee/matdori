@@ -5,14 +5,18 @@
 }
 
 .body {
-  background-color: rgb(251, 243, 217);
+  background-color: rgb(255, 244, 232);
   margin: 0;
   padding: 0;
   height: 100%;
 }
 
 .wrapper {
-  height: 1000px;
+  height: 900px;
+}
+
+.wrapper_search {
+  height: 700px;
 }
 
 .footer_image {
@@ -139,6 +143,7 @@ a {
 
 .li_com {
   list-style: none;
+  height: 195px;
 }
 
 .search_card {
@@ -206,7 +211,7 @@ a {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin-top: 30px ;
+  margin-top: 30px;
 }
 
 .mypage_btn {
@@ -229,8 +234,8 @@ a {
   margin-left: 10px;
 }
 
-.index-title{
-  color:rgb(232, 224, 179);
+.index-title {
+  color: rgb(232, 224, 179);
   text-align: center;
 }
 
@@ -240,23 +245,51 @@ a {
   width: 100%;
 }
 
-.follow{
-  background-color:rgb(247, 204, 112);
+
+.search-box-index {
+  width: 700px;
+  height: 200px;
+}
+
+
+.follow {
+  background-color: rgb(247, 204, 112);
   margin: 30px auto;
   padding: 20px;
   border-radius: 30px / 40px;
 }
-.follow_profile{
+
+.follow_profile {
   display: flex;
-  flex-direction:row;
+  flex-direction: row;
   align-items: center;
   justify-content: space-around;
 }
-.follow_img{
+
+.follow_img {
   border-radius: 50%;
 }
-.follow_non_img{
+
+.follow_img {
+  border-radius: 50%;
+}
+
+.follow_non_img {
   border-radius: 50%;
   width: 100px;
   height: 100px;
+}
+
+.select_boder {
+  border-top-left-radius: 1.5rem;
+  border-bottom-left-radius: 1.5rem;
+  border-bottom-right-radius: 0.3rem;
+  border-top-right-radius: 0.3rem;
+}
+
+.button_boder {
+  border-top-left-radius: 0.3rem;
+  border-bottom-left-radius: 0.3rem;
+  border-bottom-right-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
 }

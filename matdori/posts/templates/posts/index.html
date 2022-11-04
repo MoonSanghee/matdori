@@ -3,78 +3,83 @@
 
 {% block content %}
 <!-- 검색창 -->
-<div class="" style="background-image: url('https://i.esdrop.com/d/t/bvRLlOwptP/929gZPPmQp.jpg'); background-size:cover; height:25rem; width: 100%; background-color:bisque;display: flex;align-items: center;justify-content: center;">
-<div class="d=flex">
-   <div><span class="d-flex"><h1 class="" style="color:rgb(203, 78, 43); background-color:rgb(232, 224, 179); text-align:center;">찾고 있는 맛도리를 검색</h1><br></span></div>
-   <div>
-    <form class="d-flex col-4 my-3" style="width:500px; height:50px" role="search" method='GET' action="{% url 'posts:search' %}">
-      
-      <select class="select border rounded" aria-label="Default select example" name='field'>
-        <option value="1">전체</option>
-        <option value="2">가게 이름</option>
-        <option value="3">주소</option>
-        <option value="4">음식 종류</option>
-        <option value="5">특징</option>
-      </select>
-      <input class="form-control me-2" type="search" placeholder="게시글 검색" name='searched'>
-
-      <button class="btn rounded-pill" type="submit" style="width: 7rem; background-color: rgb(245, 132, 12);">검색</button>
-      
-    </form>
+<div
+  style="background-image: linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) ), url('https://i.esdrop.com/d/t/bvRLlOwptP/PZUlrsk4ah.jpg'); background-size:cover; height:29rem; width: 100%; background-color:bisque;display: flex;align-items: center;justify-content: center;">
+  <div class="d=flex search-box-index">
+    <div>
+      <h1 class="" style="color:rgb(245, 132, 12); text-align:center;">찾고 있는 맛도리를
+        검색</h1><br>
+    </div>
+    <div style="height: 55px;">
+      <form style="height: 100%;" class="search-box d-flex col-4 my-3" role="search" method='GET'
+        action="{% url 'posts:search' %}">
+        <select class="post-color select_boder mx-1" aria-label="Default select example" name='field'>
+          <option value="1">전체</option>
+          <option value="2">가게 이름</option>
+          <option value="3">주소</option>
+          <option value="4">음식 종류</option>
+          <option value="5">특징</option>
+        </select>
+        <input class="form-control me-1" type="search" placeholder="게시글 검색" name='searched'>
+        <button class="btn button_boder" type="submit"
+          style="background-color: rgb(245, 132, 12); color: white; width: 7rem;">검색</button>
+      </form>
+    </div>
   </div>
-</div>
 </div>
 <!-- 추천 영역 -->
+<div class="container">
 
-{% for post in posts%}
-{{ post.characteristic }}
-{% endfor %}
-<div class="row">
-  <div class="col-12 my-4">
-    <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" style="height: 75px; border-radius: 50%;" alt="">
-    맛도리 추천
-  </div>
-  <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
-    <a class="text-decoration-none text-black" href="">베이커리</a>
-  </div>
-  <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
-    <a class="text-decoration-none text-black" href="">베이커리</a>
-  </div>
-  <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
-    <a class="text-decoration-none text-black" href="">베이커리</a>
-  </div>
-  <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
-    <a class="text-decoration-none text-black" href="">베이커리</a>
-  </div>
-  <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
-    <a class="text-decoration-none text-black" href="">베이커리</a>
-  </div>
-  <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
-    <a class="text-decoration-none text-black" href="">베이커리</a>
-  </div>
-</div>
-
-
-<!--  등록된 가게 정보  -->
-<div class="row">
   {% for post in posts%}
-  <div class="col-4 p-3">
-    <a class="text-decoration-none text-black" href="{% url 'posts:detail' post.pk %}">
-    {% if post.thumbnail %}
-    <img class="" src="{{ post.thumbnail.url }}" alt="{{ post.image }}" style="width: 100%;">
-    {% else %}
-    <img class="" src="https://img.apti.co.kr/aptHome/images/sub/album_noimg.gif" style="width: 100%;">
-    {% endif %}
-      <div>
-        {{ post.title }}
-      </div>
-      <div class="opacity-50">
-        {{ post.sectors }}
-      </div>
-    </a>
-  </div>
+
   {% endfor %}
+  <div class="row">
+    <div class="col-12 my-4">
+      <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" style="height: 75px; border-radius: 50%;" alt="">
+      맛도리 추천
+    </div>
+    <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
+      <a class="text-decoration-none text-black" href="">베이커리</a>
+    </div>
+    <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
+      <a class="text-decoration-none text-black" href="">베이커리</a>
+    </div>
+    <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
+      <a class="text-decoration-none text-black" href="">베이커리</a>
+    </div>
+    <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
+      <a class="text-decoration-none text-black" href="">베이커리</a>
+    </div>
+    <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
+      <a class="text-decoration-none text-black" href="">베이커리</a>
+    </div>
+    <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
+      <a class="text-decoration-none text-black" href="">베이커리</a>
+    </div>
+  </div>
 
 
+  <!--  등록된 가게 정보  -->
+  <div class="row">
+    {% for post in posts%}
+    <div class="col-4 p-3">
+      <a class="text-decoration-none text-black" href="{% url 'posts:detail' post.pk %}">
+        {% if post.thumbnail %}
+        <img class="" src="{{ post.thumbnail.url }}" alt="{{ post.image }}" style="width: 100%;">
+        {% else %}
+        <img class="" src="https://img.apti.co.kr/aptHome/images/sub/album_noimg.gif" style="width: 100%;">
+        {% endif %}
+        <div>
+          {{ post.title }}
+        </div>
+        <div class="opacity-50">
+          {{ post.sectors }}
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+
+
+  </div>
 </div>
 {% endblock content %}
