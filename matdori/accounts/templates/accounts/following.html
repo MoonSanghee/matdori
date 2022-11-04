@@ -14,24 +14,48 @@
           <p>{{user.followings.count}}
             명</p>
         </div>
-        <div>
+        <div style="overflow:auto;width:100%;height:100%;line-height:150%;">
           {% for user in users %}
             <div class='follow_profile'>
-              <img class='follow_img' src="{{user.profile_image.url}}">
-              <h4 class="mx-5">
-                <a href="{% url 'accounts:detail' user.pk %}">{{ user.username }}</a>
-              </h4>
-              <div>
-                {% if request.user != user %}
+              {% if request.user == user %}
+                {% if user.profile_image %}
+                  <img class='follow_img' src="{{user.profile_image.url}}">
+                {% else %}
+                  <img class='follow_non_img' src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg">
+                {% endif %}
+                <h4 class="mx-5">
+                  <a href="{% url 'accounts:detail' user.pk %}">{{ user.username }}</a>
+                </h4>
+              {% endif %}
+            </div>
+            {% if request.user == user %}
+              <hr>{% endif %}
+          {% endfor %}
+
+          {% for user in users %}
+            <div class='follow_profile'>
+              {% if request.user != user%}
+                {% if user.profile_image %}
+                  <img class='follow_img' src="{{user.profile_image.url}}">
+                {% else %}
+                  <img class='follow_non_img' src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg">
+                {% endif %}
+                <h4 class="mx-5">
+                  <a href="{% url 'accounts:detail' user.pk %}">{{ user.username }}</a>
+                </h4>
+              {% endif %}
+              {% if request.user != user %}
+                <div style="float:right;">
                   {% if request.user in user.followers.all %}
                     <div id="follow-btn" data-user-id="{{ user.pk }}" class="btn btn-danger" type="submit">팔로우 취소</div>
                   {% else %}
                     <div id="follow-btn" data-user-id="{{ user.pk }}" class="btn btn-primary" type="submit">팔로우</div>
                   {% endif %}
-                {% endif %}
-              </div>
+                </div>
+              {% endif %}
             </div>
-            <hr>
+            {% if request.user != user %}
+              <hr>{% endif %}
           {% endfor %}
         </div>
       {% endif %}

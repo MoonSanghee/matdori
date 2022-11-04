@@ -2,28 +2,30 @@
 {% load django_bootstrap5 %}
 
 {% block content %}
-  <div class="wrapper">
-    <div class="login-wrap d-flex flex-column">
-      <div>
-        <h1 class="login-color my-3 text-center">맛도리 찾도리</h1>
-        <p class="text-center login-text">맛 찾아 떠나는 여행</p>
-      </div>
-      <form action="" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="hidden" value="cD950Qzzu2Sk68NOc8CcsTTQI2tKIdwV7UKuWakqu1Q3BrxfqeStIMTKX4w1Bfeg">
-        <div class="my-4">
-          <input class="form-control" type="text" name="username" autofocus="autofocus" autocapitalize="none" autocomplete="username" maxlength="150" placeholder="아이디" required="required" id="id_username">
-        </div>
-        <div class="my-4">
-          <input class="form-control" type="password" name="password" autocomplete="current-password" placeholder="비밀번호" required="required" id="id_password">
-        </div>
-        <div class="d-grid gap-2">
-          <button type="submit" class="btn" style="background-color: rgb(245, 132, 12); color: white;">로그인 하기
-          </button>
-        </div>
-      </form>
+<div class="wrapper">
+  <div class="login-wrap d-flex flex-column">
+    <div>
+      <h1 class="login-color my-3 text-center">맛도리 찾도리</h1>
+      <p class="text-center login-text">맛 찾아 떠나는 여행</p>
     </div>
-
+    <form style="width: 25%; height:400px;" action="" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input type="hidden" value="cD950Qzzu2Sk68NOc8CcsTTQI2tKIdwV7UKuWakqu1Q3BrxfqeStIMTKX4w1Bfeg">
+      <div class="my-4">
+        <input class="form-control" type="text" name="username" autofocus="autofocus" autocapitalize="none"
+          autocomplete="username" maxlength="150" placeholder="아이디" required="required" id="id_username">
+      </div>
+      <div class="my-4">
+        <input class="form-control" type="password" name="password" autocomplete="current-password" placeholder="비밀번호"
+          required="required" id="id_password">
+      </div>
+      <div class="d-grid gap-2">
+        <button type="submit" class="btn" style="background-color: rgb(245, 132, 12); color: white;">로그인 하기
+        </button>
+      </div>
+    </form>
   </div>
+
+</div>
 </div>
 {% endblock content %}
