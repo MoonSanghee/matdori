@@ -67,7 +67,7 @@ def delete(request, pk):
 def detail(request, pk):
     post = Post.objects.get(pk=pk)
     reviewsform = ReviewForm()
-    reviews = post.review_set.all()
+    reviews = post.review_set.all().order_by('-pk')
     # =============페이지========
     page = request.GET.get('page',1)
     paginator=Paginator(reviews,4)
@@ -95,7 +95,7 @@ def detail(request, pk):
         points = round(points/len(reviews), 1)
     context = {
         'post':post,
-        'reviews':post.review_set.order_by('-pk'),
+        'reviews':reviews,
         'reviewsform':reviewsform,
         'points': points,
         # 페이지
