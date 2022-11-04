@@ -71,7 +71,7 @@
             {{review.glade}}
           </p>
         </div>
-        <a href="{% url 'posts:detail' review.pk %}">{{ review.content }}</a>
+        <a href="{% url 'posts:detail' review.post.pk %}">{{ review.content }}</a>
       </div>
       <hr>
     {% endfor %}

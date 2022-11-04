@@ -14,7 +14,7 @@
           <p>{{user.followings.count}}
             명</p>
         </div>
-        <div>
+        <div style="overflow:auto;width:100%;height:100%;line-height:150%;">
           {% for user in users %}
             <div class='follow_profile'>
               {% if request.user == user %}
