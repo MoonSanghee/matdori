@@ -14,7 +14,7 @@
           <p>{{user.followers.count}}
             명</p>
         </div>
-        <div style="overflow:auto;width:100%;height:700px;line-height:150%;">
+        <div style="overflow:auto;width:100%;height:700px;height:100%;line-height:150%;">
           {% for user in users %}
             <div class='follow_profile'>
               {% if request.user == user %}
@@ -47,9 +47,9 @@
               {% if request.user != user %}
                 <div style="float:right;">
                   {% if request.user in user.followers.all %}
-                    <div id="follow-btn" data-user-id="{{ user.pk }}" class="btn btn-danger" type="submit">팔로우 취소</div>
+                    <div name="user.pk" data-user-id="{{ user.pk }}" class="btn btn-danger">팔로우 취소</div>
                   {% else %}
-                    <div id="follow-btn" data-user-id="{{ user.pk }}" class="btn btn-primary" type="submit">팔로우</div>
+                    <div name="user.pk" data-user-id="{{ user.pk }}" class="btn btn-primary">팔로우</div>
                   {% endif %}
                 </div>
               {% endif %}
@@ -64,35 +64,7 @@
   </div>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
-    const followBtn = document.querySelector('#follow-btn')
-    followBtn.addEventListener('click', function (event) {
-      console.log(event.target.dataset)
-      axios({method: 'get', url: `/accounts/follow/${event.target.dataset.userId}/`}).then(response => {
-        console.log(event.target.dataset)
-        console.log(response.data)
-        if (response.data.is_followed === true) {
-          event
-            .target
-            .classList
-            .add('btn-danger')
-          event
-            .target
-            .classList
-            .remove('btn-primary')
-          followBtn.innerText = "팔로우 취소"
-        } else {
-          event
-            .target
-            .classList
-            .add('btn-primary')
-          event
-            .target
-            .classList
-            .remove('btn-danger')
-          followBtn.innerText = "팔로우"
-        }
-      })
-    })
+    
   </script>
 
 {% endblock content %}
