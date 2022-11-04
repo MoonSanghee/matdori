@@ -3,12 +3,12 @@
 
 {% block content %}
 <!-- 검색창 -->
+
 <div
   style="background-image: linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) ), url('https://i.esdrop.com/d/t/bvRLlOwptP/PZUlrsk4ah.jpg'); background-size:cover; height:29rem; width: 100%; background-color:bisque;display: flex;align-items: center;justify-content: center;">
   <div class="d=flex search-box-index">
     <div>
-      <h1 class="" style="color:rgb(245, 132, 12); text-align:center;">찾고 있는 맛도리를
-        검색</h1><br>
+      <h1 class="" style="color:white; text-align:center;">새로운 맛집을 찾아보세요</h1><br><br>
     </div>
     <div style="height: 55px;">
       <form style="height: 100%;" class="search-box d-flex col-4 my-3" role="search" method='GET'
@@ -25,6 +25,7 @@
           style="background-color: rgb(245, 132, 12); color: white; width: 7rem;">검색</button>
       </form>
     </div>
+
   </div>
 </div>
 <!-- 추천 영역 -->
@@ -57,8 +58,136 @@
       <a class="text-decoration-none text-black" href="">베이커리</a>
     </div>
   </div>
-
-
+{% comment %} 슬라이드 적용 {% endcomment %}
+<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-bs-interval="10000">
+      {% comment %} 6개로 나뉘는부분 시작 {% endcomment %}
+      <div class="row">
+        <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
+          <a class="navbar-brand fw-bold" href="{% url 'posts:index' %}">
+            <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" alt="matdori" width="350" height="300">
+            {% comment %} <span class="imtext">
+              <h3>slide label</h3>
+              <p>representative placeholder co.</p>
+            </span> {% endcomment %}
+          </a>
+        </div>
+        <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
+          <a class="navbar-brand fw-bold" href="{% url 'posts:index' %}">
+            <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" alt="matdori" width="350" height="300">
+          </a>
+        </div>
+        <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
+          <a class="navbar-brand fw-bold" href="{% url 'posts:index' %}">
+            <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" alt="matdori" width="350" height="300">
+          </a>
+        </div>
+        <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
+          <a class="navbar-brand fw-bold" href="{% url 'posts:index' %}">
+            <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" alt="matdori" width="350" height="300">
+          </a>
+        </div>
+        <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
+          <a class="navbar-brand fw-bold" href="{% url 'posts:index' %}">
+            <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" alt="matdori" width="350" height="300">
+          </a>
+        </div>
+        <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
+          <a class="navbar-brand fw-bold" href="{% url 'posts:index' %}">
+            <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" alt="matdori" width="350" height="300">
+          </a>
+        </div>
+      </div>
+      {% comment %} 6개 나뉘는 부분종료 {% endcomment %}
+    </div>
+    <div class="carousel-item" data-bs-interval="2000">
+      {% comment %} 6개로 나뉘는부분 시작 {% endcomment %}
+      <div class="row">
+        <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
+          <a class="navbar-brand fw-bold" href="{% url 'posts:index' %}">
+            <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" alt="matdori" width="350" height="300">
+          </a>
+        </div>
+        <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
+          <a class="navbar-brand fw-bold" href="{% url 'posts:index' %}">
+            <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" alt="matdori" width="350" height="300">
+          </a>
+        </div>
+        <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
+          <a class="navbar-brand fw-bold" href="{% url 'posts:index' %}">
+            <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" alt="matdori" width="350" height="300">
+          </a>
+        </div>
+        <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
+          <a class="navbar-brand fw-bold" href="{% url 'posts:index' %}">
+            <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" alt="matdori" width="350" height="300">
+          </a>
+        </div>
+        <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
+          <a class="navbar-brand fw-bold" href="{% url 'posts:index' %}">
+            <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" alt="matdori" width="350" height="300">
+          </a>
+        </div>
+        <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
+          <a class="navbar-brand fw-bold" href="{% url 'posts:index' %}">
+            <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" alt="matdori" width="350" height="300">
+          </a>
+        </div>
+      </div>
+      {% comment %} 6개 나뉘는 부분종료 {% endcomment %}
+    </div>
+    <div class="carousel-item">
+      {% comment %} 6개로 나뉘는부분 시작 {% endcomment %}
+      <div class="row">
+        <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
+          <a class="navbar-brand fw-bold" href="{% url 'posts:index' %}">
+            <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" alt="matdori" width="350" height="300">
+          </a>
+        </div>
+        <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
+          <a class="navbar-brand fw-bold" href="{% url 'posts:index' %}">
+            <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" alt="matdori" width="350" height="300">
+          </a>
+        </div>
+        <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
+          <a class="navbar-brand fw-bold" href="{% url 'posts:index' %}">
+            <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" alt="matdori" width="350" height="300">
+          </a>
+        </div>
+        <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
+          <a class="navbar-brand fw-bold" href="{% url 'posts:index' %}">
+            <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" alt="matdori" width="350" height="300">
+          </a>
+        </div>
+        <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
+          <a class="navbar-brand fw-bold" href="{% url 'posts:index' %}">
+            <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" alt="matdori" width="350" height="300">
+          </a>
+        </div>
+        <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
+          <a class="navbar-brand fw-bold" href="{% url 'posts:index' %}">
+            <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" alt="matdori" width="350" height="300">
+          </a>
+        </div>
+      </div>
+      {% comment %} 6개 나뉘는 부분종료 {% endcomment %}
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
   <!--  등록된 가게 정보  -->
   <div class="row">
     {% for post in posts%}

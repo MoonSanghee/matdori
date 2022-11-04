@@ -5,7 +5,7 @@
 }
 
 .body {
-  background-color: rgb(255, 244, 232);
+  background-color: rgb(250, 244, 244);
   margin: 0;
   padding: 0;
   height: 100%;
@@ -23,7 +23,9 @@
   width: 120px;
   height: 70px;
 }
-
+.nav-link{
+  color:white
+}
 .nav-link:hover {
   color: rgb(245, 132, 12);
 }
@@ -294,6 +296,7 @@ a {
   border-top-right-radius: 1.5rem;
 }
 
+
 .card_title {
   width: 215px;
 }
@@ -350,3 +353,16 @@ a {
   font-size: 38px;
   line-height: 38px;
 }
+
+/* .imtext{
+  text-align: center;
+  position:absolute;
+  top:90px;
+  left:20px;
+  z-index:1;
+  color:black;
+  font-size:20px;
+  width:50px;
+  font-weight:bold;
+} */
+
