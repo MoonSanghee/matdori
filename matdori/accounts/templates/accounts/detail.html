@@ -59,7 +59,7 @@
   <div>
     <h3>작성글</h3>
     <p>{{ user.review_set.count }}개를 작성했습니다.</p>
-    {% for review in user.review_set.all %}
+    {% for review in reviews %}
 
       <div class='mypage_review'>
         <div class='mypage_review_title'>

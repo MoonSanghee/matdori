@@ -55,8 +55,10 @@ def update(request):
 
 def detail(request, pk):
     user = get_object_or_404(get_user_model(), pk=pk)
+    reviews = user.review_set.order_by('-pk')
     context = {
         "user": user,
+        "reviews":reviews,
     }
     return render(request, "accounts/detail.html", context)
 
