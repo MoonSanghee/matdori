@@ -116,13 +116,12 @@
           <a class="text-decoration-none text-danger" href="{% url 'posts:review_delete' post.pk review.pk %}"
             aria-disabled="true">삭제</a>
         </div>
-
         {% endif %}
       </div>
+      {% empty %}
+      <p>아직 작성된 리뷰가 없어요.ㅜ</p>
+      {% endfor %}
     </div>
-    {% empty %}
-    <p>아직 작성된 리뷰가 없어요.ㅜ</p>
-    {% endfor %}
   </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
