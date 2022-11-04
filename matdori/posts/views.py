@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.db.models import Q
+from django.core.paginator import Paginator , PageNotAnInteger, EmptyPage
 
 
 
@@ -67,6 +68,26 @@ def detail(request, pk):
     post = Post.objects.get(pk=pk)
     reviewsform = ReviewForm()
     reviews = post.review_set.all()
+    # =============페이지========
+    page = request.GET.get('page',1)
+    paginator=Paginator(reviews,4)
+    page_obj=paginator.page(page)
+    try:
+        page_obj = paginator.page(page)     
+    except PageNotAnInteger :
+        page = 1
+        page_obj =paginator.page(page)
+    except EmptyPage:
+        page = paginator.num_pages
+        page_obj = paginator.page(page)
+    leftIndex =(int(page)-2)
+    if leftIndex < 1:
+        leftIndex = 1
+    rightIndex = (int(page) + 2)
+    if rightIndex>paginator.num_pages:
+        rightIndex = paginator.num_pages
+    custom_range = range(leftIndex,rightIndex+1)
+    # =============페이지========
     points = 0
     for review in reviews:
         points += review.glade
@@ -76,7 +97,11 @@ def detail(request, pk):
         'post':post,
         'reviews':post.review_set.order_by('-pk'),
         'reviewsform':reviewsform,
-        'points': points
+        'points': points,
+        # 페이지
+        'page_obj':page_obj,
+        'paginator':paginator,
+        'custom_range':custom_range,
     }
     return render(request, 'posts/detail.html', context)
 
