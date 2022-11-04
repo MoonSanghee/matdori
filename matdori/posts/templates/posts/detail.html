@@ -25,12 +25,12 @@
           <!-- 좋아요 -->
           {% if request.user.is_authenticated %}
           {% if request.user in post.like_user.all %}
-          <i id="like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart-fill likes_color""></i>
-        {% else %}
-        <i id=" like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart likes_color""></i>
-        {% endif %}
-        {% else %}
-        <i class=" bi bi-balloon-heart likes_color"></i>
+          <i id="like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart-fill likes_color"></i>
+          {% else %}
+          <i id="like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart likes_color"></i>
+          {% endif %}
+          {% else %}
+          <i class="bi bi-balloon-heart likes_color"></i>
           {% endif %}
           <a class="ms-3" href="{% url 'posts:review_create' post.pk%}">리뷰작성</a>
         </span>
@@ -54,11 +54,11 @@
           {% if post.user.profile_image %}
           <img src="{{ post.user.profile_image.url }}" style="width: 120px; height: 120px; border-radius: 50%;">
           {% else %}
-          
+
           <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg"
             style="width: 120px; height: 120px; border-radius: 50%;">
           {% endif %}
-          
+
           <a class="fs-3 ms-3 text-decoration-none text-black" href="{% url 'accounts:detail' post.user.pk %}">
             {{ post.user.nickname }}
           </a>
@@ -139,60 +139,48 @@
         console.log(response)
         console.log(response.data)
         if (response.data.isLiked === true) {
-          event
-            .target
-            .classList
-            .add('bi-balloon-heart-fill')
-          event
-            .target
-            .classList
-            .remove('bi-balloon-heart')
+          event.target.classList.add('bi-balloon-heart-fill')
+          event.target.classList.remove('bi-balloon-heart')
         } else {
-          event
-            .target
-            .classList
-            .add('bi-balloon-heart')
-          event
-            .target
-            .classList
-            .remove('bi-balloon-heart-fill')
+          event.target.classList.add('bi-balloon-heart')
+          event.target.classList.remove('bi-balloon-heart-fill')
         }
         const likeCount = document.querySelector('#like-count')
         likeCount.innerText = response.data.likeCount
       })
-    })
-  </script>
+  })
+</script>
 
-  <!-- 팔로우 -->
-  <script>
-    const followBtn = document.querySelector('#follow-btn')
-    followBtn.addEventListener('click', function (event) {
+<!-- 팔로우 -->
+<script>
+  const followBtn = document.querySelector('#follow-btn')
+  followBtn.addEventListener('click', function (event) {
+    console.log(event.target.dataset)
+    axios({ method: 'get', url: `/accounts/follow/${event.target.dataset.postId}/` }).then(response => {
       console.log(event.target.dataset)
-      axios({method: 'get', url: `/accounts/follow/${event.target.dataset.postId}/`}).then(response => {
-        console.log(event.target.dataset)
-        console.log(response.data)
-        if (response.data.is_followed === true) {
-          event
-            .target
-            .classList
-            .add('btn-danger')
-          event
-            .target
-            .classList
-            .remove('btn-primary')
-          followBtn.innerText = "팔로우 취소"
-        } else {
-          event
-            .target
-            .classList
-            .add('btn-primary')
-          event
-            .target
-            .classList
-            .remove('btn-danger')
-          followBtn.innerText = "팔로우"
-        }
-      })
+      console.log(response.data)
+      if (response.data.is_followed === true) {
+        event
+          .target
+          .classList
+          .add('btn-danger')
+        event
+          .target
+          .classList
+          .remove('btn-primary')
+        followBtn.innerText = "팔로우 취소"
+      } else {
+        event
+          .target
+          .classList
+          .add('btn-primary')
+        event
+          .target
+          .classList
+          .remove('btn-danger')
+        followBtn.innerText = "팔로우"
+      }
     })
-  </script>
+  })
+</script>
 {% endblock content %}
