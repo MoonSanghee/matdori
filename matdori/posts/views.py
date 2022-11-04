@@ -74,7 +74,7 @@ def detail(request, pk):
         points = round(points/len(reviews), 1)
     context = {
         'post':post,
-        'reviews':post.review_set.all(),
+        'reviews':post.review_set.order_by('-pk'),
         'reviewsform':reviewsform,
         'points': points
     }

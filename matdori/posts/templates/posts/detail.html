@@ -54,7 +54,6 @@
           {% if post.user.profile_image %}
           <img src="{{ post.user.profile_image.url }}" style="width: 120px; height: 120px; border-radius: 50%;">
           {% else %}
-          
           <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg"
             style="width: 120px; height: 120px; border-radius: 50%;">
           {% endif %}
@@ -97,10 +96,19 @@
       <h1>리뷰</h1>
       {% for review in reviews %}
       <div class="row border-bottom border-3 py-3">
-        <div class="col-11">
-          <div>
+        <div class="col-1">
+          {% if post.user.profile_image %}
+          <img class="mx-auto" src="{{ post.user.profile_image.url }}" style="width: 100%; border-radius: 50%;">
+          {% else %}
+          <img class="mx-auto" src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg"
+            style="width: 100%; border-radius: 50%;">
+          {% endif %}
+          <div class="text-center">
             {{ review.user.nickname }}
-            |
+          </div>
+        </div>
+        <div class="col-10">
+          <div>
             평점 : {{ review.glade }}
           </div>
           <div>
