@@ -136,14 +136,15 @@ def review_create(request, pk):
     return render(request, 'posts/form.html', context)
 
 @login_required
-def review_delete(request, post_pk, review_pk):
+def review_delete(request, review_pk):
     review = Review.objects.get(pk=review_pk)
     if review.user == request.user:
+        post_pk = review.post.pk
         review.delete()
         return redirect('posts:detail', post_pk)
     else:
         messages.warning(request, '작성자만 삭제할 수 있습니다.')
-    return redirect('posts:detail', post_pk)
+    return redirect('posts:detail', review.post.pk)
 
 def search(requset):
     searched = requset.GET.get('searched', False)

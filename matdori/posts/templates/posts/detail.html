@@ -26,12 +26,12 @@
           <!-- 좋아요 -->
           {% if request.user.is_authenticated %}
           {% if request.user in post.like_user.all %}
-          <i id="like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart-fill likes_color""></i>
-        {% else %}
-        <i id=" like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart likes_color""></i>
-        {% endif %}
-        {% else %}
-        <i class=" bi bi-balloon-heart likes_color"></i>
+          <i id="like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart-fill likes_color"></i>
+          {% else %}
+          <i id="like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart likes_color"></i>
+          {% endif %}
+          {% else %}
+          <i class=" bi bi-balloon-heart likes_color"></i>
           {% endif %}
           <a class="ms-3" href="{% url 'posts:review_create' post.pk%}">리뷰작성</a>
         </span>
@@ -85,12 +85,9 @@
           <div class="mb-3">평점 :
             {{ points }}</div>
         {% else %}
-
-        <div class="col-1">
-          <a class="text-decoration-none text-danger" href="{% url 'posts:review_delete' post.pk review.pk %}"
-            aria-disabled="true">삭제</a>
-        </div>
-
+          <div class="mb-3">
+            평점 : 아직 평가가 없어요. 
+          </div>
         {% endif %}
         {% if post.phonenumber %}
           <div class="mb-3">전화번호 :
@@ -102,6 +99,7 @@
       <!-- 리뷰 -->
       <div class="my-5">
         <h1>리뷰</h1>
+        {% if points != 0 %}
         {% for review in page_obj %}
           <div class="row border-bottom border-3 py-3">
             <div class="col-11">
@@ -116,17 +114,18 @@
             </div>
             {% if request.user == review.user %}
               <div class="col-1">
-                <a class="text-decoration-none text-danger" href="{% url 'posts:review_delete' post.pk review.pk %}">삭제</a>
+                <a class="text-decoration-none text-danger" href="{% url 'posts:review_delete' review.pk %}">삭제</a>
               </div>
             {% else %}
               <div class="col-1">
-                <a class="text-decoration-none text-danger" href="{% url 'posts:review_delete' post.pk review.pk %}" aria-disabled="true">삭제</a>
+                <a class="text-decoration-none text-danger" href="{% url 'posts:review_delete' review.pk %}" aria-disabled="true">삭제</a>
               </div>
             {% endif %}
           </div>
         {% empty %}
-      <p>아직 작성된 리뷰가 없어요.ㅜ</p>
-      {% endfor %}
+        <p>아직 작성된 리뷰가 없어요.ㅜ</p>
+        {% endfor %}
+        {% endif %}
       </div>
 
       <!--===========페이지네이션============-->
@@ -226,5 +225,18 @@
         }
       })
     })
+
+    function delete_review(id) {
+      let param ={
+        'replyId':id
+      }
+      axios({
+        url:`${id}/delete`,
+        method: 'get'
+      })
+      .then ( response => {
+        event.target.delete()
+      })
+    }
   </script>
 {% endblock content %}
