@@ -62,7 +62,7 @@ def delete(request, pk):
         return redirect('posts:index')
     else:
         messages.warning(request, '작성자만 삭제할 수 있습니다.')
-        return redirect('reviews:detail', post.pk)
+        return redirect('posts:detail', pk)
 
 def detail(request, pk):
     post = Post.objects.get(pk=pk)
