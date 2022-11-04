@@ -29,35 +29,9 @@
   </div>
 </div>
 <!-- 추천 영역 -->
+<br><br><br>
 <div class="container">
-
-  {% for post in posts%}
-
-  {% endfor %}
-  <div class="row">
-    <div class="col-12 my-4">
-      <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" style="height: 75px; border-radius: 50%;" alt="">
-      맛도리 추천
-    </div>
-    <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
-      <a class="text-decoration-none text-black" href="">베이커리</a>
-    </div>
-    <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
-      <a class="text-decoration-none text-black" href="">베이커리</a>
-    </div>
-    <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
-      <a class="text-decoration-none text-black" href="">베이커리</a>
-    </div>
-    <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
-      <a class="text-decoration-none text-black" href="">베이커리</a>
-    </div>
-    <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
-      <a class="text-decoration-none text-black" href="">베이커리</a>
-    </div>
-    <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
-      <a class="text-decoration-none text-black" href="">베이커리</a>
-    </div>
-  </div>
+  
 {% comment %} 슬라이드 적용 {% endcomment %}
 <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
@@ -66,41 +40,69 @@
     <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
   </div>
   <div class="carousel-inner">
-    <div class="carousel-item active" data-bs-interval="10000">
-      {% comment %} 6개로 나뉘는부분 시작 {% endcomment %}
+    <div class="carousel-item active" data-bs-interval="100000">
+      {% comment %} 1페이지 6개로 나뉘는부분 시작 {% endcomment %}
       <div class="row">
-        <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
+        <div class="col-4 my-5 d-flex justify-content-center align-items-center p-4" style="height: 300px;">
           <a class="navbar-brand fw-bold" href="{% url 'posts:index' %}">
-            <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" alt="matdori" width="350" height="300">
-            {% comment %} <span class="imtext">
-              <h3>slide label</h3>
-              <p>representative placeholder co.</p>
-            </span> {% endcomment %}
+            <table>
+            <tr><td></td>
+              <td rowspan=2>
+              <img style="width=100%;"
+               src="https://i.esdrop.com/d/t/bvRLlOwptP/rIigbwaH96.jpg" alt="matdori">
+              
+            </td></tr><tr>
+                <td colspan=2 style="font-size:60px; text-align:center; color:beige; 
+                text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;">라멘맛집</td>
+              </tr>
+            </table>  
           </a>
         </div>
-        <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
+        <div class="col-4 my-5 d-flex justify-content-center align-items-center p-4" style="height: 300px;">
           <a class="navbar-brand fw-bold" href="{% url 'posts:index' %}">
-            <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" alt="matdori" width="350" height="300">
+            <table>
+            <tr><td></td>
+              <td rowspan=2>
+              <img style="width=100%;" 
+              src="https://i.esdrop.com/d/t/bvRLlOwptP/WfzxSKCzWs.jpg" 
+              alt="matdori">
+            </td></tr><tr>
+                <td colspan=2 style="font-size:60px; text-align:center; color:beige; 
+                text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;">버거맛집</td>
+              </tr>
+            </table>  
           </a>
         </div>
-        <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
+        <div class="col-4 my-5 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
           <a class="navbar-brand fw-bold" href="{% url 'posts:index' %}">
-            <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" alt="matdori" width="350" height="300">
+            <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" alt="matdori" width="100%">
+            <span class="imtext">
+              <p>라멘맛집</p>
+            </span>
           </a>
         </div>
-        <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
+        <div class="col-4 my-5 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
           <a class="navbar-brand fw-bold" href="{% url 'posts:index' %}">
-            <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" alt="matdori" width="350" height="300">
+            <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" alt="matdori" width="100%">
+            <span class="imtext">
+              <p>라멘맛집</p>
+            </span>
           </a>
         </div>
-        <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
+        <div class="col-4 my-5 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
           <a class="navbar-brand fw-bold" href="{% url 'posts:index' %}">
-            <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" alt="matdori" width="350" height="300">
+            <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" alt="matdori" width="100%">
+            <span class="imtext">
+              <p>라멘맛집</p>
+            </span>
           </a>
         </div>
-        <div class="col-4 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
+        <div class="col-4 my-5 d-flex justify-content-center align-items-center p-4" style="height: 320px;">
           <a class="navbar-brand fw-bold" href="{% url 'posts:index' %}">
-            <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" alt="matdori" width="350" height="300">
+            <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg" alt="matdori" width="100%">
+            <span class="imtext">
+              <p>라멘맛집</p>
+            </span>
           </a>
         </div>
       </div>
@@ -211,4 +213,5 @@
 
   </div>
 </div>
+
 {% endblock content %}
