@@ -1,128 +1,130 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 
-
 {% block content %}
-<div class="row">
-  <form class="d-flex col-4 my-3" role="search" method='GET' action="{% url 'posts:search' %}">
-    <select class="select border rounded" aria-label="Default select example" name='field'>
-      <option value="1">전체</option>
-      <option value="2">가게 이름</option>
-      <option value="3">주소</option>
-      <option value="4">음식 종류</option>
-      <option value="5">특징</option>
-    </select>
-    <input class="form-control me-2" type="search" placeholder="게시글 검색" name='searched'>
-    <button class="btn btn-outline-success me-2" type="submit" style="width: 7rem;">검색</button>
-  </form>
-</div>
-<div class="row">
-  <!-- 왼쪽 구역 -->
-  <div class="col-7">
-    <h1 class="d-flex">{{ post.title }}
-      <span class="ms-auto">
-        <!-- 좋아요 -->
-        {% if request.user.is_authenticated %}
-        {% if request.user in post.like_user.all %}
-        <i id="like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart-fill likes_color""></i>
-        {% else %}
-        <i id="like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart likes_color""></i>
-        {% endif %}
-        {% else %}
-        <i class="bi bi-balloon-heart likes_color"></i>
-        {% endif %}
-        <a class="ms-3" href="{% url 'posts:review_create' post.pk%}">리뷰작성</a>
-      </span>
-    </h1>
 
-    <div>
-      <span>리뷰</span>
-      <span>{{ post.review_set.count }}</span>
-      <i class="bi bi-balloon-heart"></i>
-      <span id="like-count" class="mt-3">{{ post.like_user.count }}</span>
-    </div>
-    <div class="">
-      {% if post.image %}
-      <img src="{{ post.image.url }}" alt="{{ post.image }}" class="detail_image">
-      {% else %}
-      <img src="https://img.apti.co.kr/aptHome/images/sub/album_noimg.gif" class="detail_image">
-      {% endif %}
-
-      <!-- 글쓴이 정보 -->
-      <div class="mt-3" style="display: flex;align-items: center;">
-        {% if post.user.profile_image %}
-        <img src="{{ post.user.profile_image.url }}" style="width: 120px; height: 120px; border-radius: 50%;">
+<div class="container">
+  <div class="row">
+    <form class="d-flex col-4 my-3" role="search" method='GET' action="{% url 'posts:search' %}">
+      <select class="select border rounded" aria-label="Default select example" name='field'>
+        <option value="1">전체</option>
+        <option value="2">가게 이름</option>
+        <option value="3">주소</option>
+        <option value="4">음식 종류</option>
+        <option value="5">특징</option>
+      </select>
+      <input class="form-control me-2" type="search" placeholder="게시글 검색" name='searched'>
+      <button class="btn btn-outline-success me-2" type="submit" style="width: 7rem;">검색</button>
+    </form>
+  </div>
+  <div class="row">
+    <!-- 왼쪽 구역 -->
+    <div class="col-7">
+      <h1 class="d-flex">{{ post.title }}
+        <span class="ms-auto">
+          <!-- 좋아요 -->
+          {% if request.user.is_authenticated %}
+          {% if request.user in post.like_user.all %}
+          <i id="like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart-fill likes_color""></i>
         {% else %}
-
-        <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg"
-          style="width: 120px; height: 120px; border-radius: 50%;">
+        <i id=" like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart likes_color""></i>
         {% endif %}
-        <a class="fs-3 ms-3 text-decoration-none text-black" href="{% url 'accounts:detail' post.user.pk %}">
-          {{ post.user.nickname }}
-        </a>
-        <!-- 팔로우 -->
-        {% if request.user != post.user %}
-        {% if request.user in post.user.followers.all %}
-        <div id="follow-btn" data-post-id="{{ post.user.pk }}" class="ms-3 btn btn-danger" type="submit">팔로우 취소</div>
         {% else %}
-        <div id="follow-btn" data-post-id="{{ post.user.pk }}" class="ms-3 btn btn-primary" type="submit">팔로우</div>
-        {% endif %}
-        {% endif %}
+        <i class=" bi bi-balloon-heart likes_color"></i>
+          {% endif %}
+          <a class="ms-3" href="{% url 'posts:review_create' post.pk%}">리뷰작성</a>
+        </span>
+      </h1>
+
+      <div>
+        <span>리뷰</span>
+        <span>{{ post.review_set.count }}</span>
+        <i class="bi bi-balloon-heart"></i>
+        <span id="like-count" class="mt-3">{{ post.like_user.count }}</span>
       </div>
-    </div>
-  </div>
-  <!-- 오른쪽 구역 -->
-  <div class="col-5">
-    <div class="text-end">
-      <a class="my-3 mx-2 btn btn-primary" href="{% url 'posts:update' post.pk %}">가게 정보 수정</a>
-      <a class="my-3 mx-2 btn btn-danger" href="{% url 'posts:delete' post.pk %}">삭제</a>
-    </div>
-    <img class="my-3" src="https://img.apti.co.kr/aptHome/images/sub/album_noimg.gif"
-      style="width: 520px; height: 400px;" alt="지도">
-    <div class="mb-3">주소 : {{ post.address }}</div>
-    {% if post.review_set.count %}
-    <div class="mb-3">평점 : {{ points }}</div>
-    {% else %}
-    <div class="mb-3">평점 : 아직 평가가 없습니다.</div>
-    {% endif %}
-    {% if post.phonenumber %}
-    <div class="mb-3">전화번호 : {{ post.phonenumber }}</div>
-    {% endif %}
-    <div class="mb-3">음식 종류 : {{ post.sectors }}</div>
-  </div>
-  <!-- 리뷰 -->
-  <div class="my-5">
-    <h1>리뷰</h1>
-    {% for review in reviews %}
-    <div class="row border-bottom border-3 py-3">
-      <div class="col-11">
-        <div>
-          {{ review.user.nickname }}
-          |
-          평점 : {{ review.glade }}
-        </div>
-        <div>
-          {{ review.content }}
+      <div class="">
+        {% if post.image %}
+        <img src="{{ post.image.url }}" alt="{{ post.image }}" class="detail_image">
+        {% else %}
+        <img src="https://img.apti.co.kr/aptHome/images/sub/album_noimg.gif" class="detail_image">
+        {% endif %}
+
+        <!-- 글쓴이 정보 -->
+        <div class="mt-3" style="display: flex;align-items: center;">
+          {% if post.user.profile_image %}
+          <img src="{{ post.user.profile_image.url }}" style="width: 120px; height: 120px; border-radius: 50%;">
+          {% else %}
+          
+          <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg"
+            style="width: 120px; height: 120px; border-radius: 50%;">
+          {% endif %}
+          
+          <a class="fs-3 ms-3 text-decoration-none text-black" href="{% url 'accounts:detail' post.user.pk %}">
+            {{ post.user.nickname }}
+          </a>
+          <!-- 팔로우 -->
+          {% if request.user != post.user %}
+          {% if request.user in post.user.followers.all %}
+          <div id="follow-btn" data-post-id="{{ post.user.pk }}" class="ms-3 btn btn-danger" type="submit">팔로우 취소</div>
+          {% else %}
+          <div id="follow-btn" data-post-id="{{ post.user.pk }}" class="ms-3 btn btn-primary" type="submit">팔로우</div>
+          {% endif %}
+          {% endif %}
         </div>
       </div>
-      {% if request.user == review.user %}
-      <div class="col-1">
-        <a class="text-decoration-none text-danger" href="{% url 'posts:review_delete' post.pk review.pk %}">삭제</a>
+    </div>
+    <!-- 오른쪽 구역 -->
+    <div class="col-5">
+      <div class="text-end">
+        <a class="my-3 mx-2 btn btn-primary" href="{% url 'posts:update' post.pk %}">가게 정보 수정</a>
+        <a class="my-3 mx-2 btn btn-danger" href="{% url 'posts:delete' post.pk %}">삭제</a>
       </div>
+      <img class="my-3" src="https://img.apti.co.kr/aptHome/images/sub/album_noimg.gif"
+        style="width: 520px; height: 400px;" alt="지도">
+      <div class="mb-3">주소 : {{ post.address }}</div>
+      {% if post.review_set.count %}
+      <div class="mb-3">평점 : {{ points }}</div>
       {% else %}
-      <div class="col-1">
-        <a class="text-decoration-none text-danger" href="{% url 'posts:review_delete' post.pk review.pk %}"
-          aria-disabled="true">삭제</a>
-      </div>
-
+      <div class="mb-3">평점 : 아직 평가가 없습니다.</div>
       {% endif %}
+      {% if post.phonenumber %}
+      <div class="mb-3">전화번호 : {{ post.phonenumber }}</div>
+      {% endif %}
+      <div class="mb-3">음식 종류 : {{ post.sectors }}</div>
+    </div>
+    <!-- 리뷰 -->
+    <div class="my-5">
+      <h1>리뷰</h1>
+      {% for review in reviews %}
+      <div class="row border-bottom border-3 py-3">
+        <div class="col-11">
+          <div>
+            {{ review.user.nickname }}
+            |
+            평점 : {{ review.glade }}
+          </div>
+          <div>
+            {{ review.content }}
+          </div>
+        </div>
+        {% if request.user == review.user %}
+        <div class="col-1">
+          <a class="text-decoration-none text-danger" href="{% url 'posts:review_delete' post.pk review.pk %}">삭제</a>
+        </div>
+        {% else %}
+        <div class="col-1">
+          <a class="text-decoration-none text-danger" href="{% url 'posts:review_delete' post.pk review.pk %}"
+            aria-disabled="true">삭제</a>
+        </div>
+
+        {% endif %}
+      </div>
     </div>
     {% empty %}
     <p>아직 작성된 리뷰가 없어요.ㅜ</p>
     {% endfor %}
   </div>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <!-- 좋아요 -->
 <script>
@@ -137,43 +139,60 @@
         console.log(response)
         console.log(response.data)
         if (response.data.isLiked === true) {
-          event.target.classList.add('bi-balloon-heart-fill')
-          event.target.classList.remove('bi-balloon-heart')
+          event
+            .target
+            .classList
+            .add('bi-balloon-heart-fill')
+          event
+            .target
+            .classList
+            .remove('bi-balloon-heart')
         } else {
-          event.target.classList.add('bi-balloon-heart')
-          event.target.classList.remove('bi-balloon-heart-fill')
+          event
+            .target
+            .classList
+            .add('bi-balloon-heart')
+          event
+            .target
+            .classList
+            .remove('bi-balloon-heart-fill')
         }
         const likeCount = document.querySelector('#like-count')
         likeCount.innerText = response.data.likeCount
       })
-  })
-
-
-</script>
-
-<!-- 팔로우 -->
-<script>
-  const followBtn = document.querySelector('#follow-btn')
-  followBtn.addEventListener('click', function (event) {
-    console.log(event.target.dataset)
-    axios({
-      method: 'get',
-      url: `/accounts/follow/${event.target.dataset.postId}/`
     })
-      .then(response => {
+  </script>
+
+  <!-- 팔로우 -->
+  <script>
+    const followBtn = document.querySelector('#follow-btn')
+    followBtn.addEventListener('click', function (event) {
+      console.log(event.target.dataset)
+      axios({method: 'get', url: `/accounts/follow/${event.target.dataset.postId}/`}).then(response => {
         console.log(event.target.dataset)
         console.log(response.data)
         if (response.data.is_followed === true) {
-          event.target.classList.add('btn-danger')
-          event.target.classList.remove('btn-primary')
+          event
+            .target
+            .classList
+            .add('btn-danger')
+          event
+            .target
+            .classList
+            .remove('btn-primary')
           followBtn.innerText = "팔로우 취소"
         } else {
-          event.target.classList.add('btn-primary')
-          event.target.classList.remove('btn-danger')
+          event
+            .target
+            .classList
+            .add('btn-primary')
+          event
+            .target
+            .classList
+            .remove('btn-danger')
           followBtn.innerText = "팔로우"
         }
       })
-  })
-
-</script>
+    })
+  </script>
 {% endblock content %}

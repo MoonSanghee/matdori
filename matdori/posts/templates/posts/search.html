@@ -4,33 +4,132 @@
 
 {% block content %}
 {% if not posts %}
-<div class="wrapper">
-  <div class="login-wrap">
-    <div class="my-5 d-flex flex-column">
-      <h1 class="text-center post-color pb-4">게시물이 없습니다.</h1>
-      <div>
-        <form class="search-box d-flex col-4 my-3" role="search" method='GET' action="{% url 'posts:search' %}">
-          <select class="post-color select border rounded mx-1" aria-label="Default select example" name='field'>
-            <option value="1">전체</option>
-            <option value="2">가게 이름</option>
-            <option value="3">주소</option>
-            <option value="4">음식 종류</option>
-            <option value="5">특징</option>
-          </select>
-          <input class="form-control me-2" type="search" placeholder="게시글 검색" name='searched'>
-          <button class="btn" type="submit"
-            style="background-color: rgb(245, 132, 12); color: white; width: 7rem;">검색</button>
-        </form>
+<div
+  style="background-image: linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) ), url('https://i.esdrop.com/d/t/bvRLlOwptP/PZUlrsk4ah.jpg'); background-size:cover; height:25rem; width: 100%; background-color:bisque;display: flex;align-items: center;justify-content: center;">
+  <div class="d=flex search-box-index">
+    <div>
+      <h1 class="" style="color:rgb(245, 132, 12); text-align:center;">{{ searched }} 베스트 맛집이 없습니다</h1><br>
+    </div>
+    <div style="height: 55px;">
+      <form style="height: 100%;" class="search-box d-flex col-4 my-3" role="search" method='GET'
+        action="{% url 'posts:search' %}">
+        <select class="post-color select_boder mx-1" aria-label="Default select example" name='field'>
+          <option value="1">전체</option>
+          <option value="2">가게 이름</option>
+          <option value="3">주소</option>
+          <option value="4">음식 종류</option>
+          <option value="5">특징</option>
+        </select>
+        <input class="form-control me-1" type="search" placeholder="게시글 검색" name='searched'>
+        <button class="btn button_boder" type="submit"
+          style="background-color: rgb(245, 132, 12); color: white; width: 7rem;">검색</button>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="wrapper_search">
+</div>
+
+{% else %}
+<div
+  style="background-image: linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) ), url('https://i.esdrop.com/d/t/bvRLlOwptP/PZUlrsk4ah.jpg'); background-size:cover; height:25rem; width: 100%; background-color:bisque;display: flex;align-items: center;justify-content: center;">
+  <div class="d=flex search-box-index">
+    <div>
+      <h1 class="" style="color:rgb(245, 132, 12); text-align:center;">{{ searched }} 베스트 맛집</h1><br>
+    </div>
+    <div style="height: 55px;">
+      <form style="height: 100%;" class="search-box d-flex col-4 my-3" role="search" method='GET'
+        action="{% url 'posts:search' %}">
+        <select class="post-color select_boder mx-1" aria-label="Default select example" name='field'>
+          <option value="1">전체</option>
+          <option value="2">가게 이름</option>
+          <option value="3">주소</option>
+          <option value="4">음식 종류</option>
+          <option value="5">특징</option>
+        </select>
+        <input class="form-control me-1" type="search" placeholder="게시글 검색" name='searched'>
+        <button class="btn button_boder" type="submit"
+          style="background-color: rgb(245, 132, 12); color: white; width: 7rem;">검색</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% if posts.count == 1%}
+<div class="wrapper_search">
+  <div class="mt-3 mb-5">
+    <div class="d-flex justify-content-center">
+      <div class="ul_com" list-style="none">
+        {% for post in posts%}
+        <div class="li_com">
+          <div class="py-0 my-0">
+            <a class="posts_search_img" href="{% url 'posts:detail' post.pk %}">
+              <div class="card mb-3 d-flex">
+                <div class="row g-0" style="width: 800px;">
+                  <div class="col-md-4">
+                    {% if post.thumbnail %}
+                    <img src="{{ post.thumbnail.url }}" class="img-fluid rounded-start"
+                      alt="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg">
+                    {% else %}
+                    <img src="https://img.apti.co.kr/aptHome/images/sub/album_noimg.gif"
+                      style="width: 265px; height: 160px;">
+                    {% endif %}
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body"><br>
+                      <h4 class="login-color card-title">{{ post.title }}</h4><br>
+                      <p class="card-text">{{ post.address}}>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+        {% endfor %}
       </div>
     </div>
   </div>
 </div>
-
+{% elif posts.count == 2%}
+<div class="wrapper_search">
+  <div class="mt-3 mb-5">
+    <div class="d-flex justify-content-center">
+      <div class="ul_com" list-style="none">
+        {% for post in posts%}
+        <div class="li_com">
+          <div class="py-0 my-0">
+            <a class="posts_search_img" href="{% url 'posts:detail' post.pk %}">
+              <div class="card mb-3 d-flex">
+                <div class="row g-0" style="width: 800px;">
+                  <div class="col-md-4">
+                    {% if post.thumbnail %}
+                    <img src="{{ post.thumbnail.url }}" class="img-fluid rounded-start"
+                      alt="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg">
+                    {% else %}
+                    <img src="https://img.apti.co.kr/aptHome/images/sub/album_noimg.gif"
+                      style="width: 265px; height: 160px;">
+                    {% endif %}
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body"><br>
+                      <h4 class="login-color card-title">{{ post.title }}</h4><br>
+                      <p class="card-text">{{ post.address}}>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
 {% else %}
-
-
-<div class="my-5">
-  <h1 class="login-color" style="text-align:center" margin="50px"><br>맛도리검색</h1><br>
+<div class="mt-3 mb-5">
   <div class="d-flex justify-content-center">
     <div class="ul_com" list-style="none">
       {% for post in posts%}
@@ -61,23 +160,10 @@
         </div>
       </div>
       {% endfor %}
-      <div>
-        <form class="search-box d-flex col-4 my-3" role="search" method='GET' action="{% url 'posts:search' %}">
-          <select class="post-color select border rounded mx-1" aria-label="Default select example" name='field'>
-            <option value="1">전체</option>
-            <option value="2">가게 이름</option>
-            <option value="3">주소</option>
-            <option value="4">음식 종류</option>
-            <option value="5">특징</option>
-          </select>
-          <input class="form-control me-2" type="search" placeholder="게시글 검색" name='searched'>
-          <button class="btn" type="submit"
-            style="background-color: rgb(245, 132, 12); color: white; width: 7rem;">검색</button>
-        </form>
-      </div>
     </div>
   </div>
 </div>
+{% endif %}
 {% endif %}
 
 {% endblock content %}
