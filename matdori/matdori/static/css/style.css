@@ -295,3 +295,101 @@ a {
   border-bottom-right-radius: 1.5rem;
   border-top-right-radius: 1.5rem;
 }
+
+
+
+.card_title {
+  width: 215px;
+}
+
+.result_title {
+  color: black;
+  font-size: 32px;
+  font-weight: bold;
+  height: 50px;
+  margin-bottom: 0px;
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 400px;
+}
+
+.result_adress {
+  color: rgb(135, 129, 129);
+  font-size: 16px;
+  height: 80px;
+
+}
+
+.card_like {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card_large {
+  display: flex;
+  flex-direction: row-reverse;
+  color: rgb(165, 161, 161);
+}
+
+
+.card_large_like {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 50px;
+  height: 50px;
+
+}
+
+.bi-balloon-heart-fill {
+  font-size: 38px;
+  line-height: 38px;
+}
+
+.bi-balloon-heart {
+  font-size: 38px;
+  line-height: 38px;
+}
+
+.img_text_1{
+  position: absolute;
+  top: 25%;
+  left: 17%;
+  transform: translate(-50%, -50%);
+}
+
+.img_text_2{
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.img_text_3{
+  position: absolute;
+  top: 25%;
+  left: 83%;
+  transform: translate(-50%, -50%);
+}
+.img_text_4{
+  position: absolute;
+  top: 75%;
+  left: 17%;
+  transform: translate(-50%, -50%);
+}
+.img_text_5{
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.img_text_6{
+  position: absolute;
+  top: 75%;
+  left: 83%;
+  transform: translate(-50%, -50%);
+}
+
