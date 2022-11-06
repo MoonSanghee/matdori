@@ -88,7 +88,7 @@ def detail(request, pk):
     # =============페이지========
     points = 0
     for review in reviews:
-        points += review.glade
+        points += review.grade
     if len(reviews):
         points = round(points / len(reviews), 1)
     context = {
@@ -160,7 +160,7 @@ def search(requset):
     elif field == "2":
         posts = Post.objects.filter(Q(title__contains=searched)).order_by("-pk")
     elif field == "3":
-        posts = Post.objects.filter(Q(adress__contains=searched)).order_by("-pk")
+        posts = Post.objects.filter(Q(address__contains=searched)).order_by("-pk")
     elif field == "4":
         posts = Post.objects.filter(Q(sectors__contains=searched)).order_by("-pk")
     elif field == "5":

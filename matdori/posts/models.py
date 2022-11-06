@@ -38,7 +38,7 @@ class Post(models.Model):
 class Review(models.Model):
     content = models.TextField()
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    glade = models.IntegerField(
+    grade = models.IntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(5)], default=None
     )
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
