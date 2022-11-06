@@ -96,7 +96,7 @@ def follow(request, pk):
 # 내가 팔로잉하고 있는 사람들 목록
 def following(request, pk):
     user = get_object_or_404(get_user_model(), pk=pk)
-    users = user.followings.order_by("-pk")
+    users = user.followings.order_by("pk")
     context = {
         "user": user,  # 해당유저
         "users": users,  # 해당 유저가 follow하고 있는 사람들
@@ -108,7 +108,7 @@ def following(request, pk):
 # 나를 팔로잉하고 있는 사람들 목록
 def follower(request, pk):
     user = get_object_or_404(get_user_model(), pk=pk)
-    users = user.followers.order_by("-pk")
+    users = user.followers.order_by("pk")
     context = {
         "user": user,  # 해당유저
         "users": users,  # 해당유저를 follow하고 있는 사람들

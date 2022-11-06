@@ -44,15 +44,7 @@
                   <a href="{% url 'accounts:detail' user.pk %}">{{ user.username }}</a>
                 </h4>
               {% endif %}
-              {% if request.user != user %}
-                <div style="float:right;">
-                  {% if request.user in user.followers.all %}
-                    <button id="{{ user.pk }}" onclick="following(this.id)" data-user-id="{{ user.pk }}" class="btn btn-danger">팔로우 취소</button>
-                  {% else %}
-                    <button id="{{ user.pk }}" onclick="following(this.id)" data-user-id="{{ user.pk }}" class="btn btn-primary">팔로우</button>
-                  {% endif %}
-                </div>
-              {% endif %}
+
             </div>
             {% if request.user != user %}
               <hr>{% endif %}
@@ -62,16 +54,5 @@
       {% endif %}
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script>
-    function following(id) {
-      axios({
-        method: 'get',
-        url:`/accounts/follow/${event.target.dataset.userId}/`})
-        .then(response => {
-        // if response.data
-        })
-    }
-  </script>
 
 {% endblock content %}
