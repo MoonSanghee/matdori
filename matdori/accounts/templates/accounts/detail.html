@@ -39,29 +39,28 @@
     </div>
     <div class='mypage_btn'>
       {% if request.user != user %}
-        {% csrf_token %}
         <form id="follow-form" data-user-id="{{ user.pk }}">
+          {% csrf_token %}
           {% if request.user in user.followers.all %}
             <button id="follow-btn" class="btn btn-primary form-control" type="submit" style='width:10%'>팔로우 취소</button>
           {% else %}
             <button id="follow-btn" class="btn btn-outline-primary form-control" type="submit" style='width:10%'>팔로우</button>
           {% endif %}
 
-    </form>
-    {% else %}
-    <button type="button" class="btn" style="width:10%; background-color: rgb(245, 132, 12);">
-      <div class="title">
-        <a href="{%url 'accounts:update' %}">프로필 수정</a>
-      </div>
-    </button>
-    {% endif %}
-  </div>
-  <hr>
-  <div>
-    <h3>작성글</h3>
-    <p>{{ user.review_set.count }}개를 작성했습니다.</p>
-    {% for review in reviews %}
-
+        </form>
+      {% else %}
+        <button type="button" class="btn" style="width:10%; background-color: rgb(245, 132, 12);">
+          <div class="title">
+            <a href="{%url 'accounts:update' %}">프로필 수정</a>
+          </div>
+        </button>
+      {% endif %}
+    </div>
+    <hr>
+    <div>
+      <h3>작성글</h3>
+      <p>{{ user.review_set.count }}개를 작성했습니다.</p>
+      {% for review in reviews %}
 
         <div class='mypage_review'>
           <div class='mypage_review_title'>

@@ -61,12 +61,10 @@
       {% endif %}
     </div>
   </div>
-
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
     const followBtn = document.querySelector('#follow-btn')
     followBtn.addEventListener('click', function (event) {
-      console.log(event.target.dataset)
       axios({method: 'get', url: `/accounts/follow/${event.target.dataset.userId}/`}).then(response => {
         console.log(event.target.dataset)
         console.log(response.data)

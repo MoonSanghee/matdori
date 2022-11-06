@@ -3,39 +3,38 @@
 
 {% block content %}
 
-
-<div class="container">
-  <div class="row">
-    <form class="d-flex col-4 my-3" role="search" method='GET' action="{% url 'posts:search' %}">
-      <select class="select border rounded" aria-label="Default select example" name='field'>
-        <option value="1">전체</option>
-        <option value="2">가게 이름</option>
-        <option value="3">주소</option>
-        <option value="4">음식 종류</option>
-        <option value="5">특징</option>
-      </select>
-      <input class="form-control me-2" type="search" placeholder="게시글 검색" name='searched'>
-      <button class="btn btn-outline-success me-2" type="submit" style="width: 7rem;">검색</button>
-    </form>
-  </div>
-  <div class="row">
-    <!-- 왼쪽 구역 -->
-    <div class="col-7">
-      <h1 class="d-flex">{{ post.title }}
-        <span class="ms-auto">
-          <!-- 좋아요 -->
-          {% if request.user.is_authenticated %}
-          {% if request.user in post.like_user.all %}
-          <i id="like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart-fill likes_color""></i>
-        {% else %}
-        <i id=" like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart likes_color""></i>
-        {% endif %}
-        {% else %}
-        <i class=" bi bi-balloon-heart likes_color"></i>
-          {% endif %}
-          <a class="ms-3" href="{% url 'posts:review_create' post.pk%}">리뷰작성</a>
-        </span>
-      </h1>
+  <div class="container">
+    <div class="row">
+      <form class="d-flex col-4 my-3" role="search" method='GET' action="{% url 'posts:search' %}">
+        <select class="select border rounded" aria-label="Default select example" name='field'>
+          <option value="1">전체</option>
+          <option value="2">가게 이름</option>
+          <option value="3">주소</option>
+          <option value="4">음식 종류</option>
+          <option value="5">특징</option>
+        </select>
+        <input class="form-control me-2" type="search" placeholder="게시글 검색" name='searched'>
+        <button class="btn btn-outline-success me-2" type="submit" style="width: 7rem;">검색</button>
+      </form>
+    </div>
+    <div class="row">
+      <!-- 왼쪽 구역 -->
+      <div class="col-7">
+        <h1 class="d-flex">{{ post.title }}
+          <span class="ms-auto">
+            <!-- 좋아요 -->
+            {% if request.user.is_authenticated %}
+              {% if request.user in post.like_user.all %}
+                <i id="like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart-fill likes_color" "></i>
+              {% else %}
+                <i id=" like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart likes_color" "></i>
+              {% endif %}
+            {% else %}
+              <i class=" bi bi-balloon-heart likes_color"></i>
+            {% endif %}
+            <a class="ms-3" href="{% url 'posts:review_create' post.pk%}">리뷰작성</a>
+          </span>
+        </h1>
         <div>
           <span>리뷰</span>
           <span>{{ post.review_set.count }}</span>
@@ -84,13 +83,6 @@
         {% if post.review_set.count %}
           <div class="mb-3">평점 :
             {{ points }}</div>
-        {% else %}
-
-        <div class="col-1">
-          <a class="text-decoration-none text-danger" href="{% url 'posts:review_delete' post.pk review.pk %}"
-            aria-disabled="true">삭제</a>
-        </div>
-
         {% endif %}
         {% if post.phonenumber %}
           <div class="mb-3">전화번호 :
@@ -124,9 +116,9 @@
               </div>
             {% endif %}
           </div>
-        {% empty %}
-      <p>아직 작성된 리뷰가 없어요.ㅜ</p>
-      {% endfor %}
+          {% empty %}
+          <p>아직 작성된 리뷰가 없어요.ㅜ</p>
+        {% endfor %}
       </div>
 
       <!--===========페이지네이션============-->
