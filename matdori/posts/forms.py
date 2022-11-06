@@ -37,13 +37,13 @@ class PostForm(forms.ModelForm):
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
-        fields = ["content", "glade", "image"]
+        fields = ["content", "grade", "image"]
         labels = {
             "content": "리뷰내용",
-            "glade": "맛점수",
+            "grade": "맛점수",
             "sectors": "이미지",
         }
 
         widgets = {
-            "glade": forms.Select(choices=REVIEW_POINT_CHOICE),
+            "grade": forms.Select(choices=REVIEW_POINT_CHOICE),
         }
