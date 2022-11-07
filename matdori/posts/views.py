@@ -177,9 +177,11 @@ def search(requset):
     context = {"posts": posts, "text": text, "searched": searched, "field": field}
     return render(requset, "posts/search.html", context)
 
+
 def review_detail(request, review_pk):
     review = Review.objects.get(pk=review_pk)
     context = {
         'review': review,
     }
     return render(request, 'posts/review_detail.html', context)
+
