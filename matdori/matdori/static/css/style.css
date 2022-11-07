@@ -23,9 +23,11 @@
   width: 120px;
   height: 70px;
 }
-.nav-link{
-  color:white
+
+.nav-link {
+  color: white
 }
+
 .nav-link:hover {
   color: rgb(245, 132, 12);
 }
@@ -352,41 +354,54 @@ a {
   line-height: 38px;
 }
 
-.img_text_1{
+.img_text_1 {
   position: absolute;
   top: 25%;
   left: 17%;
   transform: translate(-50%, -50%);
 }
 
-.img_text_2{
+.img_text_2 {
   position: absolute;
   top: 25%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.img_text_3{
+
+.img_text_3 {
   position: absolute;
   top: 25%;
   left: 83%;
   transform: translate(-50%, -50%);
 }
-.img_text_4{
+
+.img_text_4 {
   position: absolute;
   top: 75%;
   left: 17%;
   transform: translate(-50%, -50%);
 }
-.img_text_5{
+
+.img_text_5 {
   position: absolute;
   top: 75%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.img_text_6{
+
+.img_text_6 {
   position: absolute;
   top: 75%;
   left: 83%;
   transform: translate(-50%, -50%);
 }
 
+
+.login-a {
+  color: rgba(204, 18, 18, 0.108);
+  font-size: 16px;
+}
+
+.login-a:hover {
+  color: rgb(245, 132, 12);
+}
