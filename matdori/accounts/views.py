@@ -10,23 +10,25 @@ from django.http import JsonResponse
 
 
 def login(request):
-    if request.method == "POST":
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            auth_login(request, form.get_user())
-            return redirect("posts:index")
+    if request.user.is_authenticated:
+        return redirect("posts:index")
     else:
-        form = AuthenticationForm()
-    context = {
-        "form": form,
-    }
-    return render(request, "accounts/login.html", context)
-
+        if request.method == "POST":
+            form = AuthenticationForm(request, data=request.POST)
+            if form.is_valid():
+                auth_login(request, form.get_user())
+                return redirect(request.GET.get("next") or "posts:index")
+        else:
+            form = AuthenticationForm()
+        context = {
+            "form": form,
+        }
+        return render(request, "accounts/login.html", context)
 
 
 def signup(request):
     if request.method == "POST":
-        form = CustomUserCreationForm(request.POST,request.FILES)
+        form = CustomUserCreationForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save()
             auth_login(request, user)  # 자동 로그인
@@ -41,7 +43,7 @@ def signup(request):
 def update(request):
     # 유효성 검사
     if request.method == "POST":
-        form = CustomUserChangeForm(request.POST,request.FILES ,instance=request.user)
+        form = CustomUserChangeForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
             return redirect("accounts:detail", request.user.pk)
@@ -55,10 +57,10 @@ def update(request):
 
 def detail(request, pk):
     user = get_object_or_404(get_user_model(), pk=pk)
-    reviews = user.review_set.order_by('-pk')
+    reviews = user.review_set.order_by("-pk")
     context = {
         "user": user,
-        "reviews":reviews,
+        "reviews": reviews,
     }
     return render(request, "accounts/detail.html", context)
 
@@ -85,10 +87,10 @@ def follow(request, pk):
         user.followers.add(request.user)
         is_followed = True
     context = {
-                'is_followed': is_followed,
-                'followers_count': user.followers.count(),
-                'followings_count': user.followings.count(),
-            }
+        "is_followed": is_followed,
+        "followers_count": user.followers.count(),
+        "followings_count": user.followings.count(),
+    }
     return JsonResponse(context)
 
 
@@ -115,6 +117,7 @@ def follower(request, pk):
     }
     return render(request, "accounts/follower.html", context)
 
+
 # 비밀번호 변경
 @login_required
 def change_password(request):
@@ -123,7 +126,7 @@ def change_password(request):
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, form.user)
-            messages.success(request, '비밀번호를 변경했습니다.')
+            messages.success(request, "비밀번호를 변경했습니다.")
             return redirect("posts:index")
         else:
             messages.error(request, "비밀번호 변경에 실패했습니다.")
@@ -133,6 +136,7 @@ def change_password(request):
         "form": form,
     }
     return render(request, "accounts/change_password.html", context)
+
 
 # 회원탈퇴
 @login_required
