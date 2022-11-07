@@ -2,7 +2,7 @@
 {% load django_bootstrap5 %}
 
 {% block content %}
-<div class="wrapper">
+
   <div class="post-wrap d-flex flex-column">
     <div style="width: 32%;" class="my-5">
       {% if request.resolver_match.url_name == 'create' %}
@@ -46,5 +46,5 @@
     </div>
   </div>
 </div>
-</div>
+
 {% endblock %}
