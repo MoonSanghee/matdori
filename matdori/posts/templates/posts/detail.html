@@ -22,7 +22,7 @@
     <!-- 왼쪽 구역 -->
     <div class="col-7">
       <br><br><br>
-      <h1 class="d-flex">{{ post.title }}
+      <h1 class="d-flex"><span id="post_title">{{ post.title }}</span>
         <span class="ms-auto">
           <!-- 좋아요 -->
           {% if request.user.is_authenticated %}
@@ -84,9 +84,10 @@
           <a class="my-3 mx-2 btn btn-danger" href="{% url 'posts:delete' post.pk %}">삭제</a>
         </div>
         <br><br><br><br><br>
+        <div id="map" style="width:500px;height:400px;"></div>
         {% comment %} <img class="my-3" src="https://img.apti.co.kr/aptHome/images/sub/album_noimg.gif" style="width: 520px; height: 400px;" alt="지도"> {% endcomment %}
         <div class="mb-3" style="font-size:1.5em">주소 :
-          {{ post.address }}</div>
+          <span id="post_address">{{ post.address }}</span></div>
         {% if post.review_set.count %}
           <div class="mb-3" style="font-size:1.5em">평점 :
             {{ points }}</div>
@@ -166,27 +167,72 @@
 
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <!-- 좋아요 -->
+
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b0e997cd023dad73f9cca61b4b9481e9&libraries=services"></script>
   <script>
-    const likeBtn = document.querySelector('#like-btn')
-    likeBtn.addEventListener('click', function (event) {
-      console.log(event.target.dataset)
-      axios({method: 'get', url: `/posts/${event.target.dataset.postId}/likes/`}).then(response => {
-        console.log(response)
-        console.log(response.data)
-        if (response.data.isLiked === true) {
-          event.target.classList.add('bi-balloon-heart-fill')
-          event.target.classList.remove('bi-balloon-heart')
-        } else {
-          event.target.classList.add('bi-balloon-heart')
-          event.target.classList.remove('bi-balloon-heart-fill')
-        }
-        const likeCount = document.querySelector('#like-count')
-        likeCount.innerText = response.data.likeCount
-      })
-  })
-</script>
+  var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+      mapOption = {
+          center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+          level: 3 // 지도의 확대 레벨
+      };  
+
+  // 지도를 생성합니다    
+  var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+  // 주소-좌표 변환 객체를 생성합니다
+  var geocoder = new kakao.maps.services.Geocoder();
+  
+  // 검색할 주소, 출력할 가게이름
+  var post_title = document.querySelector('#post_title').innerText
+  var post_address = document.querySelector('#post_address').innerText
+
+  // 주소로 좌표를 검색합니다
+  geocoder.addressSearch(`${post_address}`, function(result, status) {
+
+      // 정상적으로 검색이 완료됐으면 
+      if (status === kakao.maps.services.Status.OK) {
+
+          var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+          // 결과값으로 받은 위치를 마커로 표시합니다
+          var marker = new kakao.maps.Marker({
+              map: map,
+              position: coords
+          });
+
+          // 인포윈도우로 장소에 대한 설명을 표시합니다
+          var infowindow = new kakao.maps.InfoWindow({
+              content: `<div style="width:150px;text-align:center;padding:6px 0;">${post_title}</div>`
+          });
+          infowindow.open(map, marker);
+
+          // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+          map.setCenter(coords);
+      } 
+  });    
+  </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- 좋아요 -->
+    <script>
+      const likeBtn = document.querySelector('#like-btn')
+      likeBtn.addEventListener('click', function (event) {
+        console.log(event.target.dataset)
+        axios({method: 'get', url: `/posts/${event.target.dataset.postId}/likes/`}).then(response => {
+          console.log(response)
+          console.log(response.data)
+          if (response.data.isLiked === true) {
+            event.target.classList.add('bi-balloon-heart-fill')
+            event.target.classList.remove('bi-balloon-heart')
+          } else {
+            event.target.classList.add('bi-balloon-heart')
+            event.target.classList.remove('bi-balloon-heart-fill')
+          }
+          const likeCount = document.querySelector('#like-count')
+          likeCount.innerText = response.data.likeCount
+        })
+    })
+  </script>
 
 <!-- 팔로우 -->
 <script>
