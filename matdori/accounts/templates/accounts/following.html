@@ -44,15 +44,6 @@
                   <a href="{% url 'accounts:detail' user.pk %}">{{ user.username }}</a>
                 </h4>
               {% endif %}
-              {% if request.user != user %}
-                <div style="float:right;">
-                  {% if request.user in user.followers.all %}
-                    <div id="follow-btn" data-user-id="{{ user.pk }}" class="btn btn-danger" type="submit">팔로우 취소</div>
-                  {% else %}
-                    <div id="follow-btn" data-user-id="{{ user.pk }}" class="btn btn-primary" type="submit">팔로우</div>
-                  {% endif %}
-                </div>
-              {% endif %}
             </div>
             {% if request.user != user %}
               <hr>{% endif %}
@@ -61,36 +52,5 @@
       {% endif %}
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script>
-    const followBtn = document.querySelector('#follow-btn')
-    followBtn.addEventListener('click', function (event) {
-      axios({method: 'get', url: `/accounts/follow/${event.target.dataset.userId}/`}).then(response => {
-        console.log(event.target.dataset)
-        console.log(response.data)
-        if (response.data.is_followed === true) {
-          event
-            .target
-            .classList
-            .add('btn-danger')
-          event
-            .target
-            .classList
-            .remove('btn-primary')
-          followBtn.innerText = "팔로우 취소"
-        } else {
-          event
-            .target
-            .classList
-            .add('btn-primary')
-          event
-            .target
-            .classList
-            .remove('btn-danger')
-          followBtn.innerText = "팔로우"
-        }
-      })
-    })
-  </script>
 
 {% endblock content %}

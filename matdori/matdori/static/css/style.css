@@ -406,3 +406,21 @@ a {
   color: rgb(245, 132, 12);
 }
 
+.review_detail{
+  display: flex;
+  flex-direction: column;
+  margin: 60px auto 10px;
+  width: 60%;
+  background-color: rgb(245, 132, 12);
+  border-radius: 100px / 80px;
+  padding: 10px;
+}
+.review_detail2{
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 100%;
+  background-color: white;
+  border-radius: 100px / 80px;
+  padding: 40px;
+}
