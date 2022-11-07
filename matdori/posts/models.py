@@ -47,3 +47,5 @@ class Review(models.Model):
         blank=True,
         format="JPEG",
     )
+    def summary(self):
+        return self.content[:50]  

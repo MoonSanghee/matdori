@@ -71,12 +71,13 @@
             </h3>
             <p class='mypage_score'>
               평점 :
-              {{review.glade}}
+              {{review.grade}}
             </p>
           </div>
-          <a href="{% url 'posts:detail' review.post.pk %}">{{ review.content }}</a>
+          {{ review.summary }}
+          <a href="{% url 'posts:review_detail' review.pk %}">...자세히 보기</a>
         </div>
-        
+
       {% endfor %}
     </div>
   </div>

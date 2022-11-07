@@ -146,7 +146,9 @@
           <img class="my-3" src="{{ review.image.url }}" style="height: 180px;">
           {% endif %}
           <div>
-            {{ review.content }}
+            <!--===========자세히 보기============-->
+            {{ review.summary }} <a href="{%url 'posts:review_detail' review.pk%}">...자세히 보기</a>
+            <!--===========자세히 보기============-->
           </div>
         </div>
         {% if request.user == review.user %}
