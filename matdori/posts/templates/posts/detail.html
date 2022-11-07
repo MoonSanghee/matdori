@@ -6,8 +6,9 @@
 
 <div class="container">
   <div class="row">
-
+    
   </div>
+  <a href="{% url 'posts:most_reviews' %}">리뷰순</a>
   <div class="row">
     <!-- 왼쪽 구역 -->
     <div class="col-7">
@@ -108,6 +109,9 @@
                 | 평점 :
                 {{ review.grade }}
               </div>
+              {% if review.image %}
+                <img class="my-3" src="{{ review.image.url }}" style="height: 180px;">
+              {% endif %}
               <div>
                 {{ review.content }}
               </div>

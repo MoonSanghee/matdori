@@ -62,7 +62,7 @@
       <p>{{ user.review_set.count }}개를 작성했습니다.</p>
       {% for review in reviews %}
 
-        <div class='mypage_review'>
+        <div class='mypage_review my-4'>
           <div class='mypage_review_title'>
             <h3>
               <a href="{%url 'posts:detail' review.post.pk %}">
@@ -76,7 +76,7 @@
           </div>
           <a href="{% url 'posts:detail' review.post.pk %}">{{ review.content }}</a>
         </div>
-        <hr>
+        
       {% endfor %}
     </div>
   </div>
