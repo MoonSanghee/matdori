@@ -11,7 +11,7 @@
   <div class="row">
     <!-- 왼쪽 구역 -->
     <div class="col-7">
-      <br><br><br>
+      <br><br>
       <h1 class="d-flex"><span id="post_title">{{ post.title }}</span>
         <span class="ms-auto">
           <!-- 좋아요 -->
@@ -26,18 +26,19 @@
           <i class=" bi bi-balloon-heart likes_color"></i>
 
           {% endif %}
-          <a class="ms-3" href="{% url 'posts:review_create' post.pk%}">리뷰작성</a>
+          
+          <button type="button submit" class="btn" style="margin:30px; background-color: rgb(245, 132, 12);  width: 7rem;"><a class href="{% url 'posts:review_create' post.pk%}" style="color:white;">리뷰작성</a></button>
         </span>
       </h1>
-        <div>
-          <span>리뷰</span>
-          <span>{{ post.review_set.count }}</span>
+        <div class="d-flex">
+          <h4>리뷰: </h4>
+          <h4>{{ post.review_set.count }}</h4><br>
           <i class="bi bi-balloon-heart"></i>
-          <span id="like-count" class="mt-3">{{ post.like_user.count }}</span>
+          <h4 id="like-count" >{{ post.like_user.count }}</h4>
         </div>
         <div class="">
           {% if post.image %}
-            <img src="{{ post.image.url }}" alt="{{ post.image }}" style="width: 720px; height: 480px;">
+            <img src="{{ post.image.url }}" alt="{{ post.image }}" style="width: 700px; height: 460px;">
 
           {% else %}
 
@@ -70,27 +71,29 @@
       <!-- 오른쪽 구역 -->
       <div class="col-5">
         <div class="text-end">
-          <a class="my-3 mx-2 btn btn-primary" href="{% url 'posts:update' post.pk %}">가게 정보 수정</a>
+          <button type="button submit" class="btn" style="background-color: rgb(245, 132, 12);  width:9rem;"><a href="{% url 'posts:update' post.pk %}" style="color:white; width:20px">가게 정보 수정</a></button>
+        
           <a class="my-3 mx-2 btn btn-danger" href="{% url 'posts:delete' post.pk %}">삭제</a>
         </div>
         <br><br><br><br><br>
         <div id="map" style="width:500px;height:400px;"></div>
         {% comment %} <img class="my-3" src="https://img.apti.co.kr/aptHome/images/sub/album_noimg.gif" style="width: 520px; height: 400px;" alt="지도"> {% endcomment %}
-        <div class="mb-3" style="font-size:1.5em">주소 :
+        <br>
+        <div class="mb-3" style="font-size:1.4em">주소 :
           <span id="post_address">{{ post.address }}</span></div>
         {% if post.review_set.count %}
-          <div class="mb-3" style="font-size:1.5em">평점 :
+          <div class="mb-3" style="font-size:1.4em">평점 :
             {{ points }}</div>
         {% else %}
-          <div class="mb-3" style="font-size:1.5em">
+          <div class="mb-3" style="font-size:1.4em">
             평점 : 아직 평가가 없어요. 
           </div>
         {% endif %}
         {% if post.phonenumber %}
-          <div class="mb-3" style="font-size:1.5em">전화번호 :
+          <div class="mb-3" style="font-size:1.4em">전화번호 :
             {{ post.phonenumber }}</div>
         {% endif %}
-        <div class="mb-3" style="font-size:1.5em">음식 종류 :
+        <div class="mb-3" style="font-size:1.4em">음식 종류 :
           {{ post.sectors }}</div>
       </div>
       <!-- 리뷰 -->
