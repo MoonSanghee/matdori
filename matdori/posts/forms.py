@@ -2,12 +2,26 @@ from django import forms
 from .models import Post, Review
 
 
+REVIEW_CHR_CHOICE = (
+    ("라멘 맛집", "라멘 맛집"),
+    ("버거 맛집", "버거 맛집"),
+    ("피자 맛집", "피자 맛집"),
+    ("스테이크 맛집", "스테이크 맛집"),
+    ("뷰 맛집", "뷰 맛집"),
+    ("칵테일 맛집", "칵테일 맛집"),
+    ("국밥 맛집", "국밥 맛집"),
+    ("연어 맛집", "연어 맛집"),
+    ("케이크 맛집", "케이크 맛집"),
+    ("피자 맛집", "피자 맛집"),
+    ("피자 맛집", "피자 맛집"),
+)
+
 REVIEW_POINT_CHOICE = (
-    ("1", 1),
-    ("2", 2),
-    ("3", 3),
-    ("4", 4),
-    ("5", 5),
+    (1, "★"),
+    (2, "★★"),
+    (3, "★★★"),
+    (4, "★★★★"),
+    (5, "★★★★★"),
 )
 
 
@@ -28,9 +42,12 @@ class PostForm(forms.ModelForm):
             "address": "주소",
             "sectors": "음식 종류",
             "phonenumber": "전화번호",
-            "characteristic": "특징",
+            "characteristic": "태그",
             "image": "이미지",
             "thumbnail": "썸네일",
+        }
+        widgets = {
+            "characteristic": forms.CheckboxSelectMultiple(choices=REVIEW_CHR_CHOICE)
         }
 
 
