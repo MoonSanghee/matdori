@@ -4,7 +4,7 @@
 {% block content %}
 
 
-<div class="container">
+<div class="container my-5">
   <div class="row">
 
   </div>
@@ -12,30 +12,11 @@
     <!-- 왼쪽 구역 -->
     <div class="col-7">
       <br><br>
-      <h1 class="d-flex"><span id="post_title">{{ post.title }}</span>
-        <span class="ms-auto">
-          <!-- 좋아요 -->
-          {% if request.user.is_authenticated %}
-          {% if request.user in post.like_user.all %}
-          <i id="like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart-fill likes_color"></i>
-          {% else %}
-          <i id="like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart likes_color"></i>
-          {% endif %}
-          {% else %}
-
-          <i class=" bi bi-balloon-heart likes_color"></i>
-
-          {% endif %}
-
-          <button type="button submit" class="btn"
-            style="margin:30px; background-color: rgb(245, 132, 12);  width: 7rem;"><a class
-              href="{% url 'posts:review_create' post.pk%}" style="color:white;">리뷰작성</a></button>
-        </span>
-      </h1>
-      <div class="d-flex">
+      <h1 class="d-flex"><span class="font_color" id="post_title">{{ post.title }}</span></h1>
+      <div class="d-flex my-4">
         <h4>리뷰: </h4>
         <h4>{{ post.review_set.count }}</h4><br>
-        <i class="bi bi-balloon-heart"></i>
+        <i class="bi bi-balloon-heart likes_color mx-1"></i>
         <h4 id="like-count">{{ post.like_user.count }}</h4>
       </div>
       <div class="">
@@ -57,7 +38,7 @@
             style="width: 120px; height: 120px; border-radius: 50%;">
           {% endif %}
 
-          <a class="fs-3 ms-3 text-decoration-none text-black" href="{% url 'accounts:detail' post.user.pk %}">
+          <a class="fs-3 ms-3 text-decoration-none font_color" href="{% url 'accounts:detail' post.user.pk %}">
             {{ post.user.nickname }}
           </a>
           <!-- 팔로우 -->
@@ -68,6 +49,21 @@
           <div id="follow-btn" data-post-id="{{ post.user.pk }}" class="ms-3 btn btn-primary" type="submit">팔로우</div>
           {% endif %}
           {% endif %}
+          <span class="detail_like">
+            <!-- 좋아요 -->
+            {% if request.user.is_authenticated %}
+            {% if request.user in post.like_user.all %}
+            <i id="like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart-fill likes_color"></i>
+            {% else %}
+            <i id="like-btn" data-post-id="{{ post.pk }}" class="bi bi-balloon-heart likes_color"></i>
+            {% endif %}
+            {% else %}
+            <i class=" bi bi-balloon-heart likes_color"></i>
+            {% endif %}
+            <button type="button submit" class="btn"
+              style="margin:10px; background-color: rgb(245, 132, 12);  width: 7rem;"><a class
+                href="{% url 'posts:review_create' post.pk%}" style="color:white;">리뷰작성</a></button>
+          </span>
         </div>
       </div>
     </div>
@@ -110,7 +106,16 @@
       <div class="row border-bottom border-3 py-3">
         <div class="col-11">
           <div class="d-flex">
-            <a href="{%url 'accounts:detail' review.user.pk%}">{{ review.user.nickname }}</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+            {% if review.user.profile_image %}
+            <img src="{{ review.user.profile_image.url }}" style="width: 28px; height: 28px; border-radius: 50%;">
+            {% else %}
+
+            <img src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg"
+              style="width: 28px; height: 28px; border-radius: 50%;">
+            {% endif %}
+
+            <a class="detail-a" href="{%url 'accounts:detail' review.user.pk%}">{{ review.user.nickname }}</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;
             <div>
               {% if review.grade == 1 %}
               <p> 내 평점 <i style="color:rgb(255, 86, 86);" class="hart bi bi-star-fill"></i> <i
@@ -147,7 +152,7 @@
           {% endif %}
           <div>
             <!--===========자세히 보기============-->
-            {{ review.summary }} <a href="{%url 'posts:review_detail' review.pk%}">...자세히 보기</a>
+            {{ review.summary }} <a class="detail-a" href="{%url 'posts:review_detail' review.pk%}">...자세히 보기</a>
             <!--===========자세히 보기============-->
           </div>
         </div>
@@ -268,14 +273,14 @@
   })
 </script>
 
-  
+
 
 <!-- 팔로우 -->
 <script>
   const followBtn = document.querySelector('#follow-btn')
   followBtn.addEventListener('click', function (event) {
     console.log(event.target.dataset)
-    axios({ method: 'get', url: `/accounts/follow/${event.target.dataset.postId}/`}).then(response => {
+    axios({ method: 'get', url: `/accounts/follow/${event.target.dataset.postId}/` }).then(response => {
       console.log(event.target.dataset)
       console.log(response.data)
       if (response.data.is_followed === true) {

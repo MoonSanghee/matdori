@@ -2,135 +2,135 @@
 {% load django_bootstrap5 %}
 {% load static %}
 {% block content %}
-  <div class="container">
-    <div class="mypage">
-      <div class='mypage_profile'>
-        <div class='mypage_img'>
-          {% if user.profile_image %}
-            <div class="box">
-              <img class="profile" src="{{ user.profile_image.url }}">
-            </div>
-          {% else %}
-            <div class="profile-box">
-              <img class="profile" src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg">
-            </div>
-          {% endif %}
+<div class="container my-5">
+  <div class="mypage">
+    <div class='mypage_profile'>
+      <div class='mypage_img'>
+        {% if user.profile_image %}
+        <div class="box">
+          <img class="profile" src="{{ user.profile_image.url }}">
         </div>
-        <div>
-          <h3>
-            {{user.username}}
-            님의 프로필</h3>
-          <p>이메일 :
-            {{user.email}}</p>
-          <p>닉네임 :
-            {{user.nickname}}</p>
+        {% else %}
+        <div class="profile-box">
+          <img class="profile" src="https://i.esdrop.com/d/f/bvRLlOwptP/ioSr1p9iMx.jpg">
         </div>
+        {% endif %}
       </div>
-      <div class="mypage_follow">
-        <p>팔로잉
-          <a id="following-count" href="{% url 'accounts:following' user.pk%}">
-            {{user.followings.count}}</a>
-        </p>
-        <p>팔로워
-          <a id="follower-count" href="{% url 'accounts:follower' user.pk%}">
-            {{user.followers.count}}</a>
-        </p>
+      <div>
+        <h3>
+          {{user.username}}
+          님의 프로필</h3>
+        <p>이메일 :
+          {{user.email}}</p>
+        <p>닉네임 :
+          {{user.nickname}}</p>
       </div>
     </div>
-    <div class='mypage_btn'>
-      {% if request.user != user %}
-        <form id="follow-form" data-user-id="{{ user.pk }}">
-          {% csrf_token %}
-          {% if request.user in user.followers.all %}
-            <button id="follow-btn" class="btn btn-primary form-control" type="submit" style='width:10%'>팔로우 취소</button>
-          {% else %}
-            <button id="follow-btn" class="btn btn-outline-primary form-control" type="submit" style='width:10%'>팔로우</button>
-          {% endif %}
-
-        </form>
-      {% else %}
-        <button type="button" class="btn" style="width:10%; background-color: rgb(245, 132, 12);">
-          <div class="title">
-            <a href="{%url 'accounts:update' %}">프로필 수정</a>
-          </div>
-        </button>
-      {% endif %}
-    </div>
-    <hr>
-    <div>
-      <h3>작성글</h3>
-      <p>{{ user.review_set.count }}개를 작성했습니다.</p>
-      {% for review in reviews %}
-
-        <div class='mypage_review my-4'>
-          <div class='mypage_review_title'>
-            <h3>
-              <a href="{%url 'posts:detail' review.post.pk %}">
-                {{review.post.title}}</a>
-              |
-            </h3>
-            <p class='mypage_score'>
-              평점 :
-              {{review.grade}}
-            </p>
-          </div>
-          {{ review.summary }}
-          <a href="{% url 'posts:review_detail' review.pk %}">...자세히 보기</a>
-        </div>
-
-      {% endfor %}
+    <div class="mypage_follow">
+      <p>팔로잉
+        <a id="following-count" href="{% url 'accounts:following' user.pk%}">
+          {{user.followings.count}}</a>
+      </p>
+      <p>팔로워
+        <a id="follower-count" href="{% url 'accounts:follower' user.pk%}">
+          {{user.followers.count}}</a>
+      </p>
     </div>
   </div>
+  <div class='mypage_btn'>
+    {% if request.user != user %}
+    <form id="follow-form" data-user-id="{{ user.pk }}">
+      {% csrf_token %}
+      {% if request.user in user.followers.all %}
+      <button id="follow-btn" class="btn btn-primary form-control" type="submit" style='width:10%'>팔로우 취소</button>
+      {% else %}
+      <button id="follow-btn" class="btn btn-outline-primary form-control" type="submit" style='width:10%'>팔로우</button>
+      {% endif %}
 
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script>
-    const followUrl = "{% url 'accounts:follow' user.pk %}";
-  </script>
-  <script>
-    const followForm = document.querySelector("#follow-form")
-    const csrftoken = document
-      .querySelector('[name=csrfmiddlewaretoken]')
-      .value
-      followForm
-      .addEventListener("submit", function (event) {
-        event.preventDefault()
-        axios({
-          method: "POST",
-          url: followUrl,
-          headers: {
-            'X-CSRFToken': csrftoken
+    </form>
+    {% else %}
+    <button type="button" class="btn" style="width:10%; background-color: rgb(245, 132, 12);">
+      <div class="title">
+        <a href="{%url 'accounts:update' %}">프로필 수정</a>
+      </div>
+    </button>
+    {% endif %}
+  </div>
+  <hr>
+  <div>
+    <h3>작성글</h3>
+    <p>{{ user.review_set.count }}개를 작성했습니다.</p>
+    {% for review in reviews %}
+
+    <div class='mypage_review my-4'>
+      <div class='mypage_review_title'>
+        <h3>
+          <a style="color: rgb(245, 132, 12);" href="{%url 'posts:detail' review.post.pk %}">
+            {{review.post.title}}</a>
+          |
+        </h3>
+        <p class='mypage_score'>
+          평점 :
+          {{review.grade}}
+        </p>
+      </div>
+      {{ review.summary }}
+      <a class="detail-a" href="{% url 'posts:review_detail' review.pk %}">...자세히 보기</a>
+    </div>
+
+    {% endfor %}
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  const followUrl = "{% url 'accounts:follow' user.pk %}";
+</script>
+<script>
+  const followForm = document.querySelector("#follow-form")
+  const csrftoken = document
+    .querySelector('[name=csrfmiddlewaretoken]')
+    .value
+  followForm
+    .addEventListener("submit", function (event) {
+      event.preventDefault()
+      axios({
+        method: "POST",
+        url: followUrl,
+        headers: {
+          'X-CSRFToken': csrftoken
+        }
+      })
+        .then(response => {
+          const isFollowed = response.data.is_followed
+          const followBtn = document.querySelector('#follow-form > #follow-btn')
+          const followerCountTag = document.querySelector('#follower-count')
+          const followingCountTag = document.querySelector('#following-count')
+
+          if (isFollowed) {
+            followBtn
+              .classList
+              .add("btn-primary")
+            followBtn
+              .classList
+              .remove("btn-outline-primary")
+            followBtn.innerText = "팔로우 취소"
+          } else {
+            followBtn
+              .classList
+              .add("btn-outline-primary")
+            followBtn
+              .classList
+              .remove("btn-primary")
+            followBtn.innerText = "팔로우"
           }
+          followerCountTag.innerText = response.data.followers_count
+          followingCountTag.innerText = response.data.followings_count
         })
-          .then(response => {
-            const isFollowed = response.data.is_followed
-            const followBtn = document.querySelector('#follow-form > #follow-btn')
-            const followerCountTag = document.querySelector('#follower-count')
-            const followingCountTag = document.querySelector('#following-count')
-
-            if (isFollowed) {
-              followBtn
-                .classList
-                .add("btn-primary")
-              followBtn
-                .classList
-                .remove("btn-outline-primary")
-              followBtn.innerText = "팔로우 취소"
-            } else {
-              followBtn
-                .classList
-                .add("btn-outline-primary")
-              followBtn
-                .classList
-                .remove("btn-primary")
-              followBtn.innerText = "팔로우"
-            }
-            followerCountTag.innerText = response.data.followers_count
-            followingCountTag.innerText = response.data.followings_count
-          })
-          .catch(error => {
-            console.log(error.response)
-          })
+        .catch(error => {
+          console.log(error.response)
         })
-  </script>
+    })
+</script>
 
 {% endblock content %}

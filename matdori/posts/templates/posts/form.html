@@ -3,48 +3,49 @@
 
 {% block content %}
 
-  <div class="post-wrap d-flex flex-column">
-    <div style="width: 32%;" class="my-5">
+<div class="post-wrap d-flex flex-column">
+  <div style="width: 32%;" class="my-5">
+    {% if request.resolver_match.url_name == 'create' %}
+    <h1 class="text-center post-color pb-4">
+      맛 등록
+    </h1>
+    {% elif request.resolver_match.url_name == 'update' %}
+    <h1 class="text-center post-color">
+      맛 수정
+    </h1>
+    {% else %}
+    <h1 class="text-center post-color">
+      리뷰 등록
+    </h1>
+    {% endif %}
+    {% if request.resolver_match.url_name == 'review_create' %}
+    <form action="" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% bootstrap_form post_form %}
+      <div class="d-grid gap-2">
+        <button type="submit" class="btn" style="background-color: rgb(245, 132, 12); color: white;">리뷰 등록
+        </button>
+      </div>
+    </form>
+    {% else %}
+    <form action="" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% bootstrap_form post_form %}
       {% if request.resolver_match.url_name == 'create' %}
-      <h1 class="text-center post-color pb-4">
-        맛 등록
-      </h1>
-      {% elif request.resolver_match.url_name == 'update' %}
-      <h1 class="text-center post-color">
-        맛 수정
-      </h1>
+      <div class="d-grid gap-2">
+        <button type="submit" class="btn" style="background-color: rgb(245, 132, 12); color: white;">맛 등록하기
+        </button>
+      </div>
       {% else %}
-      <h1 class="text-center post-color">
-        리뷰 등록
-      </h1>
+      <div class="d-grid gap-2">
+        <button type="submit" class="btn" style="background-color: rgb(245, 132, 12); color: white;">맛 수정하기
+        </button>
+      </div>
       {% endif %}
-      {% if request.resolver_match.url_name == 'review_create' %}
-      <form action="" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% bootstrap_form post_form %}
-        <div class="text-end">
-          <input type="submit" value="완료" class="btn btn-primary btn-md">
-        </div>
-      </form>
-      {% else %}
-      <form action="" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% bootstrap_form post_form %}
-        {% if request.resolver_match.url_name == 'create' %}
-        <div class="d-grid gap-2">
-          <button type="submit" class="btn" style="background-color: rgb(245, 132, 12); color: white;">맛 등록하기
-          </button>
-        </div>
-        {% else %}
-        <div class="d-grid gap-2">
-          <button type="submit" class="btn" style="background-color: rgb(245, 132, 12); color: white;">맛 수정하기
-          </button>
-        </div>
-        {% endif %}
-      </form>
-      {% endif %}
-    </div>
+    </form>
+    {% endif %}
   </div>
+</div>
 </div>
 
 {% endblock %}

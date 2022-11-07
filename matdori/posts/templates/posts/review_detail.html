@@ -1,59 +1,62 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 {% block content %}
+<div class="my-5">
   <div class='review_detail'>
     <div class='review_detail2'>
       <h2>{{review.user.nickname}}님의 리뷰
       </h2>
-      {% if review.image %}
-        <img class="my-3" src="{{ review.image.url}}">
-      {% endif %}
+      <div class="d-flex justify-content-center">
+        {% if review.image %}
+        <img style="width: 500px; height:500px" class="my-3" src="{{ review.image.url}}">
+        {% endif %}
+      </div>
       <p>
         {% if review.grade == 1 %}
-          {{review.user.nickname}}
-          님의 평점
-          <i style="color:rgb(255, 86, 86);" class="hart bi bi-star-fill"></i>
-          <i style="color:rgb(255, 86, 86);" class="hart bi bi-star"></i>
-          <i style="color:rgb(255, 86, 86);" class="hart bi bi-star"></i>
-          <i style="color:rgb(255, 86, 86);" class="hart bi bi-star"></i>
-          <i style="color:rgb(255, 86, 86);" class="hart bi bi-star"></i>
+        {{review.user.nickname}}
+        님의 평점
+        <i style="color:rgb(255, 86, 86);" class="hart bi bi-star-fill"></i>
+        <i style="color:rgb(255, 86, 86);" class="hart bi bi-star"></i>
+        <i style="color:rgb(255, 86, 86);" class="hart bi bi-star"></i>
+        <i style="color:rgb(255, 86, 86);" class="hart bi bi-star"></i>
+        <i style="color:rgb(255, 86, 86);" class="hart bi bi-star"></i>
 
         {% elif review.grade == 2 %}
-          {{review.user.nickname}}
-          님의 평점
-          <i style="color:rgb(255, 86, 86);" class="hart bi bi-star-fill"></i>
-          <i style="color:rgb(255, 86, 86);" class="hart bi bi-star-fill"></i>
-          <i style="color:rgb(255, 86, 86);" class="hart bi bi-star"></i>
-          <i style="color:rgb(255, 86, 86);" class="hart bi bi-star"></i>
-          <i style="color:rgb(255, 86, 86);" class="hart bi bi-star"></i>
+        {{review.user.nickname}}
+        님의 평점
+        <i style="color:rgb(255, 86, 86);" class="hart bi bi-star-fill"></i>
+        <i style="color:rgb(255, 86, 86);" class="hart bi bi-star-fill"></i>
+        <i style="color:rgb(255, 86, 86);" class="hart bi bi-star"></i>
+        <i style="color:rgb(255, 86, 86);" class="hart bi bi-star"></i>
+        <i style="color:rgb(255, 86, 86);" class="hart bi bi-star"></i>
 
         {% elif review.grade == 3 %}
-          {{review.user.nickname}}
-          님의 평점
-          <i style="color:rgb(255, 86, 86);" class="hart bi bi-star-fill"></i>
-          <i style="color:rgb(255, 86, 86);" class="hart bi bi-star-fill"></i>
-          <i style="color:rgb(255, 86, 86);" class="hart bi bi-star-fill"></i>
-          <i style="color:rgb(255, 86, 86);" class="hart bi bi-star"></i>
-          <i style="color:rgb(255, 86, 86);" class="hart bi bi-star"></i>
+        {{review.user.nickname}}
+        님의 평점
+        <i style="color:rgb(255, 86, 86);" class="hart bi bi-star-fill"></i>
+        <i style="color:rgb(255, 86, 86);" class="hart bi bi-star-fill"></i>
+        <i style="color:rgb(255, 86, 86);" class="hart bi bi-star-fill"></i>
+        <i style="color:rgb(255, 86, 86);" class="hart bi bi-star"></i>
+        <i style="color:rgb(255, 86, 86);" class="hart bi bi-star"></i>
 
         {% elif review.grade == 4 %}
-          {{review.user.nickname}}
-          님의 평점
-          <i style="color:rgb(255, 86, 86);" class="hart bi bi-star-fill"></i>
-          <i style="color:rgb(255, 86, 86);" class="hart bi bi-star-fill"></i>
-          <i style="color:rgb(255, 86, 86);" class="hart bi bi-star-fill"></i>
-          <i style="color:rgb(255, 86, 86);" class="hart bi bi-star-fill"></i>
-          <i style="color:rgb(255, 86, 86);" class="hart bi bi-star"></i>
+        {{review.user.nickname}}
+        님의 평점
+        <i style="color:rgb(255, 86, 86);" class="hart bi bi-star-fill"></i>
+        <i style="color:rgb(255, 86, 86);" class="hart bi bi-star-fill"></i>
+        <i style="color:rgb(255, 86, 86);" class="hart bi bi-star-fill"></i>
+        <i style="color:rgb(255, 86, 86);" class="hart bi bi-star-fill"></i>
+        <i style="color:rgb(255, 86, 86);" class="hart bi bi-star"></i>
 
         {% elif review.grade == 5 %}
 
-          {{review.user.nickname}}
-          님의 평점
-          <i style="color:rgb(255, 86, 86);" class="hart bi bi-star-fill"></i>
-          <i style="color:rgb(255, 86, 86);" class="hart bi bi-star-fill"></i>
-          <i style="color:rgb(255, 86, 86);" class="hart bi bi-star-fill"></i>
-          <i style="color:rgb(255, 86, 86);" class="hart bi bi-star-fill"></i>
-          <i style="color:rgb(255, 86, 86);" class="hart bi bi-star-fill"></i>
+        {{review.user.nickname}}
+        님의 평점
+        <i style="color:rgb(255, 86, 86);" class="hart bi bi-star-fill"></i>
+        <i style="color:rgb(255, 86, 86);" class="hart bi bi-star-fill"></i>
+        <i style="color:rgb(255, 86, 86);" class="hart bi bi-star-fill"></i>
+        <i style="color:rgb(255, 86, 86);" class="hart bi bi-star-fill"></i>
+        <i style="color:rgb(255, 86, 86);" class="hart bi bi-star-fill"></i>
         {% endif %}
       </p>
       <p>{{review.content}}</p>
@@ -61,4 +64,5 @@
     </div>
 
   </div>
+</div>
 {% endblock content %}
