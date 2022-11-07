@@ -176,3 +176,4 @@ def search(requset):
         text = ""
     context = {"posts": posts, "text": text, "searched": searched, "field": field}
     return render(requset, "posts/search.html", context)
+
