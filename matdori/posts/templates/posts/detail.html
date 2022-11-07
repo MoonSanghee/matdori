@@ -230,12 +230,14 @@
     })
   </script>
 
+  
+
 <!-- 팔로우 -->
 <script>
   const followBtn = document.querySelector('#follow-btn')
   followBtn.addEventListener('click', function (event) {
     console.log(event.target.dataset)
-    axios({ method: 'get', url: `/accounts/follow/${event.target.dataset.postId}/` }).then(response => {
+    axios({ method: 'get', url: `/accounts/follow/${event.target.dataset.postId}/`}).then(response => {
       console.log(event.target.dataset)
       console.log(response.data)
       if (response.data.is_followed === true) {
