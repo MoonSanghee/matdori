@@ -68,7 +68,7 @@ def detail(request, pk):
     reviews = post.review_set.all().order_by('-pk')
     # =============페이지========
     page = request.GET.get('page',1)
-    paginator=Paginator(reviews,4)
+    paginator=Paginator(reviews,5)
     page_obj=paginator.page(page)
     try:
         page_obj = paginator.page(page)     

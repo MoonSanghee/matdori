@@ -6,7 +6,7 @@
 
 <div class="container">
   <div class="row">
-
+    
   </div>
   <div class="row">
     <!-- 왼쪽 구역 -->
@@ -32,15 +32,15 @@
               href="{% url 'posts:review_create' post.pk%}" style="color:white;">리뷰작성</a></button>
         </span>
       </h1>
-      <div class="d-flex">
-        <h4>리뷰: </h4>
-        <h4>{{ post.review_set.count }}</h4><br>
-        <i class="bi bi-balloon-heart"></i>
-        <h4 id="like-count">{{ post.like_user.count }}</h4>
-      </div>
-      <div class="">
-        {% if post.image %}
-        <img src="{{ post.image.url }}" alt="{{ post.image }}" style="width: 700px; height: 460px;">
+        <div class="d-flex">
+          <h4>리뷰: </h4>
+          <h4>{{ post.review_set.count }}</h4><br>
+          <i class="bi bi-balloon-heart"></i>
+          <h4 id="like-count" >{{ post.like_user.count }}</h4>
+        </div>
+        <div class="">
+          {% if post.image %}
+            <img src="{{ post.image.url }}" alt="{{ post.image }}" style="width: 640px; height: 440px;">
 
         {% else %}
 
@@ -102,36 +102,38 @@
       <div class="mb-3" style="font-size:1.4em">음식 종류 :
         {{ post.sectors }}</div>
     </div>
-    <!-- 리뷰 -->
-    <div class="my-5">
-      <h1>리뷰</h1>
-      {% if points != 0 %}
-      {% for review in page_obj %}
-      <div class="row border-bottom border-3 py-3">
-        <div class="col-11">
-          <div>
-            <a href="{%url 'accounts:detail' review.user.pk%}">{{ review.user.nickname }}</a>
-            | 평점 :
-            {{ review.grade }}
+      <!-- 리뷰 -->
+      <div class="my-5">
+        <h1>리뷰</h1>
+        {% if points != 0 %}
+        {% for review in page_obj %}
+          <div class="row border-bottom border-3 py-3">
+            <div class="col-11">
+              <div>
+                <a href="{%url 'accounts:detail' review.user.pk%}">{{ review.user.nickname }}</a>
+                | 평점 :
+                {{ review.grade }}
+              </div>
+              {% if review.image %}
+                <img class="my-3" src="{{ review.image.url }}" style="height: 180px;">
+              {% endif %}
+              <div>
+                {{ review.content }}
+              </div>
+            </div>
+            {% if request.user == review.user %}
+              <div class="col-1">
+                <a class="text-decoration-none text-danger" href="{% url 'posts:review_delete' review.pk %}">삭제</a>
+              </div>
+            {% else %}
+              <div class="col-1">
+                <a class="text-decoration-none text-danger" href="{% url 'posts:review_delete' review.pk %}" aria-disabled="true">삭제</a>
+              </div>
+            {% endif %}
           </div>
-          <div>
-            {{ review.content }}
-          </div>
-        </div>
-        {% if request.user == review.user %}
-        <div class="col-1">
-          <a class="text-decoration-none text-danger" href="{% url 'posts:review_delete' review.pk %}">삭제</a>
-        </div>
-        {% else %}
-        <div class="col-1">
-          <a class="text-decoration-none text-danger" href="{% url 'posts:review_delete' review.pk %}"
-            aria-disabled="true">삭제</a>
-        </div>
-        {% endif %}
-      </div>
-      {% empty %}
-      <p>아직 작성된 리뷰가 없어요.ㅜ</p>
-      {% endfor %}
+        {% empty %}
+        <p>아직 작성된 리뷰가 없어요.ㅜ</p>
+        {% endfor %}
       {% endif %}
     </div>
 
